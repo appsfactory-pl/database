@@ -2,12 +2,12 @@ html, body {    width: 100%;    height: 100%;}
 /*Bootstrap-overlay*/
 
 body {
- overflow-x: hidden;
- margin-top: -10px;  font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
+    overflow-x: hidden;
+    margin-top: -10px;  font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;
 }
 a{color:#666;}
 a:hover, a:focus {
- text-decoration: none; color:#28b779;
+    text-decoration: none; color:#28b779;
 }
 .dropdown-menu .divider{ margin:4px 0px;}
 .dropdown-menu{ min-width:180px;}
@@ -56,12 +56,25 @@ body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
 #loginbox .control-group{ padding:20px 0; margin-bottom:0px;}
 .form-vertical, .form-actions {  margin-bottom: 0; background:none; border-top:1px solid #3f4954; }
 #loginbox .normal_text{ padding:15px 10px; text-align:center; font-size:14px; line-height:20px; background:#2E363F; color:#fff; }
+.remember {
+    padding: 0 0 15px 15px !important;
+}
+.remember input[type=checkbox]{
+    width: auto !important;
+    float: left;
+}
+.remember label {
+    float: left;
+    width: auto;
+    line-height: 37px;
+    padding-left: 15px;
+}
 @media (max-width:800px){
-#logo { width: 60%; }
-#loginbox{ width:80%}
+    #logo { width: 60%; }
+    #loginbox{ width:80%}
 }
 @media (max-width: 480px){
-#logo { width: 40%; }
-#loginbox{ width:90%}
-#loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
+    #logo { width: 40%; }
+    #loginbox{ width:90%}
+    #loginbox .control-group{ padding:8px 0; margin-bottom:0px;}
 }
