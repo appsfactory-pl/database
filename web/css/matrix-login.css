@@ -75,6 +75,9 @@ body { background-color:#2E363F;    padding: 0;    margin-top:10%;}
 p {
     color: #fff;
 }
+.hide-label label {
+    display: none;
+}
 @media (max-width:800px){
     #logo { width: 60%; }
     #loginbox{ width:80%}
