@@ -1,8 +1,47 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+{#{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+{{ form_widget(form) }}
+<div>
+    <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" class="btn btn-success"/>
+</div>
+{{ form_end(form) }}#}
+
+
+<form name="fos_user_resetting_form" method="post" action="/app_dev.php/resetting/reset/{{ token }}" class="fos_user_resetting_reset">
+    <div class="control-group normal_text"> <h3><img src="img/logo.png" alt="Logo" /></h3></div>
+    <div id="fos_user_resetting_form">
+        {#        <div>
+                    <label for="fos_user_resetting_form_plainPassword_first" class="required">New password</label>
+                    <input type="password" id="fos_user_resetting_form_plainPassword_first" name="fos_user_resetting_form[plainPassword][first]" required="required">
+                </div>
+                <div>
+                    <label for="fos_user_resetting_form_plainPassword_second" class="required">Repeat new password</label>
+                    <input type="password" id="fos_user_resetting_form_plainPassword_second" name="fos_user_resetting_form[plainPassword][second]" required="required">
+                </div>
+        #}
+        <div class="control-group">
+            <div class="controls">
+                <div class="main_input_box">
+                    <span class="add-on bg_ly"><i class="icon-lock"></i></span>
+                    <input type="password" id="password" name="os_user_resetting_form[plainPassword][first]" required="required" placeholder="New password" />
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <div class="main_input_box">
+                    <span class="add-on bg_ly"><i class="icon-lock"></i></span>
+                    <input type="password" id="password" name="os_user_resetting_form[plainPassword][second]" required="required" placeholder="Repeat new password" />
+                </div>
+            </div>
+        </div>
+        {% if csrf_token is defined %}
+            {#        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />#}
+            <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]" value="{{ csrf_token }}">
+        {% endif %}
     </div>
-{{ form_end(form) }}
+    <div>
+        <input type="submit" value="Change password" class="btn btn-success">
+    </div>
+</form>
