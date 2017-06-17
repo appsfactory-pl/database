@@ -1534,6 +1534,13 @@ body {
 }
 #sidebar .content{ display:none;}
 }
+.form-horizontal .controls input[type=text],
+.form-horizontal .controls input[type=email],
+.form-horizontal .controls input[type=password],
+.form-horizontal .controls textarea
+{
+    width: 90%;
+}
 @media (max-width: 600px) {
 .widget-title .buttons {
 	float: left;

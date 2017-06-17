@@ -31,11 +31,13 @@
                                 <td>{{ user.lastLogin|date("F jS \\a\\t g:ia") }}</td>
                                 <td>
                                     <a href="{{ path('app_user_edit',{'id':user.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
-                                    <a href="{{ path('app_user_delete',{'id':user.id}) }}" class="btn btn-danger btn-xs"><i class="icon icon-remove"></i></a>
-
-{#                                    {{ user.id }}#}
+                                        {% if user.enabled %}
+                                        <a href="{{ path('app_user_delete',{'id':user.id}) }}" class="btn btn-danger btn-xs"><i class="icon icon-remove"></i></a>
+                                        {% else %}
+                                        <a href="{{ path('app_user_activate',{'id':user.id}) }}" class="btn btn-success btn-xs"><i class="icon icon-check"></i></a>
+                                        {% endif %}
                                 </td>
-                                {% endfor %}
+                            {% endfor %}
                     </tbody>
                 </table>
             </div>

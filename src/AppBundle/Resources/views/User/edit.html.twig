@@ -1,7 +1,58 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:User:edit{% endblock %}
+{% block title %}User edit{% endblock %}
+{% block header %}User edit{% endblock %}
 
 {% block body %}
-<h1>Welcome to the User:edit page</h1>
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>User edit</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                        <div class="control-group">
+                            {{ form_label(form.username,'User Name',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.username,{'attr':{'placeholder':'User Name','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.email,'User Email',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.email,{'attr':{'placeholder':'User Email','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.roles,'Roles',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.roles,{'attr':{}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.plainPassword,'New Password',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.plainPassword, {'attr':{'placeholder':'Leave this field empty if you don\'t want to change password'}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.enabled,'Enabled',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.enabled,{'attr':{'class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            {{ form_widget(form.save,{'attr':{'class':'btn btn-success'}}) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
