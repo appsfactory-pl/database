@@ -29,6 +29,15 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+#    acme_user.login:
+#        class: AppBundle\EventListener\LoginListener
+#        arguments: ['@container']
+#        tags:
+#            - { name: kernel.event_subscriber }
+           
+
+#    AppBundle\EventListener\LoginListener:
+#        arguments: [@container]
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

@@ -68,7 +68,7 @@ class UserController extends Controller {
             }
         }
         return $this->render('AppBundle:User:add.html.twig', array(
-            'form' => $form->createView(),
+                    'form' => $form->createView(),
                         // ...
         ));
     }
@@ -98,7 +98,7 @@ class UserController extends Controller {
             $user->setEmail($form->get('email')->getData());
             $user->setEnabled($form->get('enabled')->getData());
             $password = $form->get('plainPassword')->getData();
-            if(!empty($password)){
+            if (!empty($password)) {
                 $user->setPlainPassword($password);
             }
 
@@ -156,6 +156,16 @@ class UserController extends Controller {
     public function indexAction() {
         return $this->render('AppBundle:User:index.html.twig', array(
                         // ...
+        ));
+    }
+
+    /**
+     * @Route("/user/show-log")
+     */
+    public function showLogAction(EntityManagerInterface $em) {
+        $events = $em->getRepository('AppBundle:UserLog')->createQueryBuilder('u')->orderBy('u.loginDate','DESC')->getQuery()->getResult();
+        return $this->render('AppBundle:User:show-log.html.twig', array(
+                    'events' => $events,
         ));
     }
 

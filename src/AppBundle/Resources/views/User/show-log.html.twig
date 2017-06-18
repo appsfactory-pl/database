@@ -1,0 +1,37 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Users{% endblock %}
+{% block header %}Users{% endblock %}
+
+{% block body %}
+    {% if events is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>IP Address</th>
+                            <th>Last login</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                            <tr>
+                                <td>{{ event.id }}</td>
+                                <td>{{ event.user.username }}</td>
+                                <td>{{ event.user.email }}</td>
+                                <td>{{ event.ipAddress }}</td>
+                                <td>{{ event.loginDate|date("F jS \\a\\t g:ia") }}</td>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
