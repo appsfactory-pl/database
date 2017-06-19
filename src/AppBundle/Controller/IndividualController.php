@@ -6,66 +6,62 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use AppBundle\Entity\PersonTypes;
+use AppBundle\Form\PersonTypesType;
 
-class IndividualController extends Controller
-{
+class IndividualController extends Controller {
+
     /**
      * @Route("/individual")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         return $this->render('AppBundle:Individual:index.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/individual/add")
      */
-    public function addAction()
-    {
+    public function addAction() {
         return $this->render('AppBundle:Individual:add.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/individual/edit/{id}")
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         return $this->render('AppBundle:Individual:edit.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/individual/list")
      */
-    public function listAction()
-    {
+    public function listAction() {
         return $this->render('AppBundle:Individual:list.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/individual/show/{id}")
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         return $this->render('AppBundle:Individual:show.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
     /**
      * @Route("/individual/import")
      */
-    public function importAction()
-    {
+    public function importAction() {
         return $this->render('AppBundle:Individual:import.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
@@ -73,32 +69,58 @@ class IndividualController extends Controller
      * 
      * @Route("/individual/types")
      */
-    public function typesAction(EntityManagerInterface $em)
-    {
+    public function typesAction(EntityManagerInterface $em) {
+        $repository = $em->getRepository('AppBundle:PersonTypes');
+        $types = $repository->findAll();
         return $this->render('AppBundle:Individual:types.html.twig', array(
-            // ...
+                    'types' => $types,
+                        // ...
         ));
     }
-    
+
     /**
      * 
      * @Route("/individual/add-type")
      */
-    public function addTypeAction(Request $request){
+    public function addTypeAction(Request $request) {
+        $form = $this->createForm(PersonTypesType::class);
+        $em = $this->getDoctrine()->getManager();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $type = new PersonTypes();
+            $type->setName($form->get('name')->getData());
+            $em->persist($type);
+            $em->flush();
+            return $this->redirectToRoute('app_individual_types');
+        }
         return $this->render('AppBundle:Individual:add-type.html.twig', array(
-            // ...
+                    'form' => $form->createView(),
+                        // ...
         ));
     }
-    
+
     /**
      * 
      * @param Request $request
      * @param type $id
      * @Route("/individual/edit-type/{id}")
      */
-    public function editTypeAction(Request $request,$id){
+    public function editTypeAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:PersonTypes');
+        $type = $repository->find($id);
+        $form = $this->createForm(PersonTypesType::class,$type);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $type->setName($form->get('name')->getData());
+            $em->persist($type);
+            $em->flush();
+            return $this->redirectToRoute('app_individual_types');
+        }
         return $this->render('AppBundle:Individual:edit-type.html.twig', array(
-            // ...
+                    'form' => $form->createView(),
+                        // ...
         ));
     }
+
 }

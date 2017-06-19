@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BusinessType extends AbstractType
 {
@@ -24,9 +25,7 @@ class BusinessType extends AbstractType
                 ->add('epaye')
                 ->add('accoff')
                 ->add('account')
-                ->add('notes')
-                ->add('owner')
-                ->add('director')
+                ->add('notes', TextareaType::class,['attr'=>['class'=>'textarea_editor span12']])
                 ;
     }
     

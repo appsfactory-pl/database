@@ -13,9 +13,15 @@
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="css/uniform.css" />
     <link rel="stylesheet" href="css/select2.css" />
+    
+    <link rel="stylesheet" href="css/colorpicker.css" />
+    <link rel="stylesheet" href="css/datepicker.css" />
+
+    
     <link rel="stylesheet" href="css/fullcalendar.css" />
     <link rel="stylesheet" href="css/matrix-style.css" />
     <link rel="stylesheet" href="css/matrix-media.css" />
+    <link rel="stylesheet" href="css/bootstrap-wysihtml5.css" />
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -57,16 +63,16 @@
     <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard2</a>
         <ul>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <li class="submenu">
-                <a href="#">
-                    <i class="icon icon-user" aria-hidden="true"></i> <span>Users</span> 
-                </a>
-                <ul>
-                    <li><a href="{{ path('app_user_list') }}">List</a></li>
-                    <li><a href="{{ path('app_user_add') }}">Add new</a></li>
-                    <li><a href="{{ path('app_user_showlog') }}">Show logins</a></li>
-                </ul>
-            </li>
+                <li class="submenu">
+                    <a href="#">
+                        <i class="icon icon-user" aria-hidden="true"></i> <span>Users</span> 
+                    </a>
+                    <ul>
+                        <li><a href="{{ path('app_user_list') }}">List</a></li>
+                        <li><a href="{{ path('app_user_add') }}">Add new</a></li>
+                        <li><a href="{{ path('app_user_showlog') }}">Show logins</a></li>
+                    </ul>
+                </li>
             {% endif %}
             <li class="submenu">
                 <a href="#">
@@ -132,6 +138,11 @@
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.tables.js"></script> 
 <script src="js/matrix.interface.js"></script> 
+
+<script src="js/matrix.form_common.js"></script> 
+<script src="js/wysihtml5-0.3.0.js"></script> 
+<script src="js/jquery.peity.min.js"></script> 
+<script src="js/bootstrap-wysihtml5.js"></script> 
 <script type="text/javascript">
     // This function is called from the pop-up menus to transfer to
     // a different page. Ignore if the value returned is a null string:
@@ -155,6 +166,7 @@
     function resetMenu() {
         document.gomenu.selector.selectedIndex = 2;
     }
+    $('.textarea_editor').wysihtml5();
 </script>
 </body>
 </html>

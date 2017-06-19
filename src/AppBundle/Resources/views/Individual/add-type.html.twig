@@ -1,7 +1,35 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Individual:add{% endblock %}
+{% block title %}Add Type{% endblock %}
+{% block header %}Add Type{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Individual:add page</h1>
+
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Add Type</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                        <div class="control-group">
+                            {{ form_label(form.name,'Type Name',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.name,{'attr':{'placeholder':'Type Name','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" class="btn btn-success" value="Save">
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

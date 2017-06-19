@@ -1,7 +1,36 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Individual:add{% endblock %}
+{% block title %}Types{% endblock %}
+{% block header %}Types{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Individual:add page</h1>
+    {% if types is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type in types %}
+                            <tr>
+                                <td>{{ type.id }}</td>
+                                <td>{{ type.name }}</td>
+                                <td>
+                                    <a href="{{ path('app_individual_edittype',{'id':type.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                </td>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
