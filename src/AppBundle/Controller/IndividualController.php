@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class IndividualController extends Controller
 {
@@ -67,4 +69,36 @@ class IndividualController extends Controller
         ));
     }
 
+    /**
+     * 
+     * @Route("/individual/types")
+     */
+    public function typesAction(EntityManagerInterface $em)
+    {
+        return $this->render('AppBundle:Individual:types.html.twig', array(
+            // ...
+        ));
+    }
+    
+    /**
+     * 
+     * @Route("/individual/add-type")
+     */
+    public function addTypeAction(Request $request){
+        return $this->render('AppBundle:Individual:add-type.html.twig', array(
+            // ...
+        ));
+    }
+    
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/individual/edit-type/{id}")
+     */
+    public function editTypeAction(Request $request,$id){
+        return $this->render('AppBundle:Individual:edit-type.html.twig', array(
+            // ...
+        ));
+    }
 }

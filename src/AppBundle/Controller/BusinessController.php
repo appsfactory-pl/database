@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Form\BusinessType;
+use Symfony\Component\HttpFoundation\Request;
 
 class BusinessController extends Controller
 {
@@ -40,9 +42,12 @@ class BusinessController extends Controller
     /**
      * @Route("/business/add")
      */
-    public function addAction()
+    public function addAction(Request $request)
     {
+        $form = $this->createForm(BusinessType::class);
+        $form->handleRequest($request);
         return $this->render('AppBundle:Business:add.html.twig', array(
+            'form' => $form->createView(),
             // ...
         ));
     }

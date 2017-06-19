@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="individual")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IndividualRepository")
  */
-class Individual
-{
+class Individual {
+
     /**
      * @var int
      *
@@ -120,20 +120,37 @@ class Individual
     private $created;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
+     */
+    protected $createdBy;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
+     */
+    protected $updatedBy;
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="notes", type="text")
+     */
+    private $notes;
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -144,8 +161,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -156,8 +172,7 @@ class Individual
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -168,8 +183,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setForename($forename)
-    {
+    public function setForename($forename) {
         $this->forename = $forename;
 
         return $this;
@@ -180,8 +194,7 @@ class Individual
      *
      * @return string
      */
-    public function getForename()
-    {
+    public function getForename() {
         return $this->forename;
     }
 
@@ -192,8 +205,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setMiddlename($middlename)
-    {
+    public function setMiddlename($middlename) {
         $this->middlename = $middlename;
 
         return $this;
@@ -204,8 +216,7 @@ class Individual
      *
      * @return string
      */
-    public function getMiddlename()
-    {
+    public function getMiddlename() {
         return $this->middlename;
     }
 
@@ -216,8 +227,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setLastname($lastname)
-    {
+    public function setLastname($lastname) {
         $this->lastname = $lastname;
 
         return $this;
@@ -228,8 +238,7 @@ class Individual
      *
      * @return string
      */
-    public function getLastname()
-    {
+    public function getLastname() {
         return $this->lastname;
     }
 
@@ -240,8 +249,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setDob($dob)
-    {
+    public function setDob($dob) {
         $this->dob = $dob;
 
         return $this;
@@ -252,8 +260,7 @@ class Individual
      *
      * @return \DateTime
      */
-    public function getDob()
-    {
+    public function getDob() {
         return $this->dob;
     }
 
@@ -264,8 +271,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
 
         return $this;
@@ -276,8 +282,7 @@ class Individual
      *
      * @return string
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
@@ -288,8 +293,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setPhone2($phone2)
-    {
+    public function setPhone2($phone2) {
         $this->phone2 = $phone2;
 
         return $this;
@@ -300,8 +304,7 @@ class Individual
      *
      * @return string
      */
-    public function getPhone2()
-    {
+    public function getPhone2() {
         return $this->phone2;
     }
 
@@ -312,8 +315,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setMaidenname($maidenname)
-    {
+    public function setMaidenname($maidenname) {
         $this->maidenname = $maidenname;
 
         return $this;
@@ -324,8 +326,7 @@ class Individual
      *
      * @return string
      */
-    public function getMaidenname()
-    {
+    public function getMaidenname() {
         return $this->maidenname;
     }
 
@@ -336,8 +337,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -348,8 +348,7 @@ class Individual
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -360,8 +359,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
 
         return $this;
@@ -372,8 +370,7 @@ class Individual
      *
      * @return string
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -384,8 +381,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setPostcode($postcode)
-    {
+    public function setPostcode($postcode) {
         $this->postcode = $postcode;
 
         return $this;
@@ -396,8 +392,7 @@ class Individual
      *
      * @return string
      */
-    public function getPostcode()
-    {
+    public function getPostcode() {
         return $this->postcode;
     }
 
@@ -408,8 +403,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setNin($nin)
-    {
+    public function setNin($nin) {
         $this->nin = $nin;
 
         return $this;
@@ -420,8 +414,7 @@ class Individual
      *
      * @return string
      */
-    public function getNin()
-    {
+    public function getNin() {
         return $this->nin;
     }
 
@@ -432,8 +425,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setUtr($utr)
-    {
+    public function setUtr($utr) {
         $this->utr = $utr;
 
         return $this;
@@ -444,8 +436,7 @@ class Individual
      *
      * @return string
      */
-    public function getUtr()
-    {
+    public function getUtr() {
         return $this->utr;
     }
 
@@ -456,8 +447,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setCreated($created)
-    {
+    public function setCreated($created) {
         $this->created = $created;
 
         return $this;
@@ -468,9 +458,26 @@ class Individual
      *
      * @return \DateTime
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
+    }
+
+    /**
+     * 
+     * @param type $createdBy
+     * @return $this
+     */
+    public function setCreatedBy($createdBy) {
+        $this->createdBy = $createdBy;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getCreatedBy() {
+        return $this->createdBy;
     }
 
     /**
@@ -480,8 +487,7 @@ class Individual
      *
      * @return Individual
      */
-    public function setUpdated($updated)
-    {
+    public function setUpdated($updated) {
         $this->updated = $updated;
 
         return $this;
@@ -492,9 +498,52 @@ class Individual
      *
      * @return \DateTime
      */
-    public function getUpdated()
-    {
+    public function getUpdated() {
         return $this->updated;
     }
-}
 
+    /**
+     * 
+     * @param type $updatedBy
+     * @return $this
+     */
+    public function setUpdatedBy($updatedBy) {
+        $this->updatedBy = $updatedBy;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getUpdatedBy() {
+        return $this->updatedBy;
+    }
+
+    /**
+     * 
+     * @param type $notes
+     * @return $this
+     */
+    public function setNotes($notes) {
+        $this->notes = $notes;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getNotes(){
+        return $this->notes;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function __toString(){
+        return 'ID: '.$this->id.' '.$this->forename.' '.$this->lastname.' '.$this->email;
+    }
+
+}

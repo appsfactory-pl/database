@@ -13,7 +13,21 @@ class BusinessType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('address')->add('postcode')->add('doi')->add('cno')->add('utr')->add('vat')->add('epaye')->add('accoff')->add('account')->add('notes');
+        $builder
+                ->add('name')
+                ->add('address')
+                ->add('postcode')
+                ->add('doi')
+                ->add('cno')
+                ->add('utr')
+                ->add('vat')
+                ->add('epaye')
+                ->add('accoff')
+                ->add('account')
+                ->add('notes')
+                ->add('owner')
+                ->add('director')
+                ;
     }
     
     /**

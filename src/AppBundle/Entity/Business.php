@@ -98,7 +98,6 @@ class Business
      */
     private $notes;
 
-
     /**
      * Get id
      *
@@ -371,6 +370,10 @@ class Business
     public function getNotes()
     {
         return $this->notes;
+    }
+    
+    public function __toString() {
+        return 'ID: '.$this->id.' '.$this->name;
     }
 }
 

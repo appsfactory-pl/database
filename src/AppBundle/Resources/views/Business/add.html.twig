@@ -1,7 +1,9 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Business:add{% endblock %}
-
+{% block title %}Add Company{% endblock %}
+{% block header %}Add Company{% endblock %}
 {% block body %}
-<h1>Welcome to the Business:add page</h1>
+
+    {{ form(form) }}
+
 {% endblock %}
