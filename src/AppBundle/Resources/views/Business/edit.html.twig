@@ -1,7 +1,105 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Business:edit{% endblock %}
-
+{% block title %}Edit Company{% endblock %}
+{% block header %}Edit Company{% endblock %}
 {% block body %}
-<h1>Welcome to the Business:edit page</h1>
+
+    {#    {{ form(form) }}#}
+
+
+    <div class="container-fluid">
+{#        <hr>#}
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Edit Company</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                        <div class="control-group">
+                            {{ form_label(form.name,'Company Name',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.name,{'attr':{'placeholder':'Company Name','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.address,'Company Address',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.address,{'attr':{'placeholder':'Company Address','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.postcode,'Postcode',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.postcode,{'attr':{'placeholder':'Postcode','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.doi,'DOI',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.doi,{'attr':{'placeholder':'DOI','class':'datepicker'}}) }}
+{#                                    <span class="add-on"><i class="icon-th"></i></span> #}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            {{ form_label(form.cno,'CNO',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.cno,{'attr':{'placeholder':'CNO','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.utr,'UTR',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.utr,{'attr':{'placeholder':'UTR','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.vat,'VAT',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.vat,{'attr':{'placeholder':'VAT','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.epaye,'Epaye',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.epaye,{'attr':{'placeholder':'Epaye','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.accoff,'Accoff',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.accoff,{'attr':{'placeholder':'Accoff','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.account,'Account',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.account,{'attr':{'placeholder':'Account','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group" style="height: 280px;">
+                            {{ form_label(form.notes,'Notes',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.notes,{'attr':{'placeholder':'Type Text...','style':'height:180px;'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="submit" class="btn btn-success" value="Save">
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

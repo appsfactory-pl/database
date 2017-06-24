@@ -1,7 +1,40 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Business:list{% endblock %}
+{% block title %}Business List{% endblock %}
+{% block header %}Business List{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Business:list page</h1>
+    {% if business is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Postcode</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in business %}
+                            <tr>
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.address }}</td>
+                                <td>{{ item.postcode }}</td>
+                                <td>
+                                    <a href="{{ path('app_business_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                    <a href="{{ path('app_business_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i class="icon icon-file"></i></a>
+                                </td>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

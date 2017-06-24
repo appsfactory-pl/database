@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Entity\PersonTypes;
 use AppBundle\Form\PersonTypesType;
+use AppBundle\Form\IndividualType;
 
 class IndividualController extends Controller {
 
@@ -23,9 +24,25 @@ class IndividualController extends Controller {
     /**
      * @Route("/individual/add")
      */
-    public function addAction() {
+    public function addAction(Request $request) {
+        $form = $this->createForm(IndividualType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $individual = $form->getData();
+            $user = $this->getUser();
+            $individual->setCreated(new \DateTime());
+            $individual->setCreatedBy($user);
+            $individual->setUpdated(new \DateTime());
+            $individual->setUpdatedBy($user);
+            $em->persist($individual);
+            $em->flush();
+            return $this->redirectToRoute('app_individual_list');
+
+        }
         return $this->render('AppBundle:Individual:add.html.twig', array(
-                        // ...
+                    // ...
+                    'form' => $form->createView(),
         ));
     }
 
@@ -109,9 +126,9 @@ class IndividualController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:PersonTypes');
         $type = $repository->find($id);
-        $form = $this->createForm(PersonTypesType::class,$type);
+        $form = $this->createForm(PersonTypesType::class, $type);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $type->setName($form->get('name')->getData());
             $em->persist($type);
             $em->flush();

@@ -138,7 +138,9 @@
 <script src="js/jquery.dataTables.min.js"></script> 
 <script src="js/matrix.tables.js"></script> 
 <script src="js/matrix.interface.js"></script> 
-
+<script src="js/bootstrap-datepicker.js"></script> 
+<script src="js/jquery.toggle.buttons.js"></script> 
+<script src="js/masked.js"></script> 
 <script src="js/matrix.form_common.js"></script> 
 <script src="js/wysihtml5-0.3.0.js"></script> 
 <script src="js/jquery.peity.min.js"></script> 
@@ -166,7 +168,10 @@
     function resetMenu() {
         document.gomenu.selector.selectedIndex = 2;
     }
-    $('.textarea_editor').wysihtml5();
+    $('.textarea_editor').wysihtml5({
+        
+    });
+    $('.datepicker').datepicker();
 </script>
 </body>
 </html>

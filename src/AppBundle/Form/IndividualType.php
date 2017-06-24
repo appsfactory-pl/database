@@ -5,6 +5,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class IndividualType extends AbstractType
 {
@@ -13,7 +16,22 @@ class IndividualType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('forename')->add('middlename')->add('lastname')->add('maidenname')->add('dob')->add('phone')->add('phone2')->add('email')->add('address')->add('postcode')->add('nin')->add('utr')->add('created')->add('updated');
+        $builder
+                ->add('title')
+                ->add('forename')
+                ->add('middlename')
+                ->add('lastname')
+                ->add('maidenname')
+                ->add('dob', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "yyyy-mm-dd"]])
+                ->add('phone')
+                ->add('phone2')
+                ->add('email', EmailType::class)
+                ->add('address')
+                ->add('postcode')
+                ->add('nin')
+                ->add('utr')
+                ->add('notes', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12']])
+                ;
     }
     
     /**

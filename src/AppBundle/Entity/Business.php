@@ -189,7 +189,7 @@ class Business
      */
     public function setDoi($doi)
     {
-        $this->doi = $doi;
+        $this->doi = new \DateTime($doi);
 
         return $this;
     }
@@ -201,7 +201,10 @@ class Business
      */
     public function getDoi()
     {
-        return $this->doi;
+        if(!empty($this->doi)){
+            return $this->doi->format('Y-m-d');
+        }
+        return null;
     }
 
     /**

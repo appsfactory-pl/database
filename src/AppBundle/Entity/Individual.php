@@ -250,7 +250,7 @@ class Individual {
      * @return Individual
      */
     public function setDob($dob) {
-        $this->dob = $dob;
+        $this->dob = new \DateTime($dob);
 
         return $this;
     }
@@ -261,7 +261,10 @@ class Individual {
      * @return \DateTime
      */
     public function getDob() {
-        return $this->dob;
+        if (!empty($this->dob)) {
+            return $this->dob->format('Y-m-d');
+        }
+        return null;
     }
 
     /**
@@ -447,7 +450,7 @@ class Individual {
      *
      * @return Individual
      */
-    public function setCreated($created) {
+    public function setCreated(\DateTime $created = null) {
         $this->created = $created;
 
         return $this;
@@ -487,7 +490,7 @@ class Individual {
      *
      * @return Individual
      */
-    public function setUpdated($updated) {
+    public function setUpdated(\DateTime $updated = null) {
         $this->updated = $updated;
 
         return $this;
@@ -529,21 +532,21 @@ class Individual {
         $this->notes = $notes;
         return $this;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getNotes(){
+    public function getNotes() {
         return $this->notes;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function __toString(){
-        return 'ID: '.$this->id.' '.$this->forename.' '.$this->lastname.' '.$this->email;
+    public function __toString() {
+        return 'ID: ' . $this->id . ' ' . $this->forename . ' ' . $this->lastname . ' ' . $this->email;
     }
 
 }
