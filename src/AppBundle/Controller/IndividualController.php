@@ -49,8 +49,24 @@ class IndividualController extends Controller {
     /**
      * @Route("/individual/edit/{id}")
      */
-    public function editAction($id) {
+    public function editAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Individual');
+        $individual = $repo->find($id);
+        $form = $this->createForm(IndividualType::class,$individual);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $user = $this->getUser();
+            $individual = $form->getData();
+            $individual->setUpdated(new \DateTime());
+            $individual->setUpdatedBy($user);
+            $em->persist($individual);
+            $em->flush();
+            return $this->redirectToRoute('app_individual_list');
+
+        }
         return $this->render('AppBundle:Individual:edit.html.twig', array(
+            'form' => $form->createView(),
                         // ...
         ));
     }
@@ -58,8 +74,11 @@ class IndividualController extends Controller {
     /**
      * @Route("/individual/list")
      */
-    public function listAction() {
+    public function listAction(EntityManagerInterface $em) {
+        $repo = $em->getRepository('AppBundle:Individual');
+        $individuals = $repo->createQueryBuilder('i')->orderBy('i.id','DESC')->getQuery()->getResult();
         return $this->render('AppBundle:Individual:list.html.twig', array(
+            'individuals' => $individuals,
                         // ...
         ));
     }
