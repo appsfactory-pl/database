@@ -1,7 +1,137 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Business:show{% endblock %}
+{% block title %}{{ business.name }}{% endblock %}
+{% block header %}{{ business.name }}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Business:show page</h1>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                    <h5>Business data</h5>
+                </div>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="">ID</td>
+                            <td class="">{{ business.getId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Business Name</td>
+                            <td class="">{{ business.getName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Address</td>
+                            <td class="">{{ business.getAddress }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Business Name</td>
+                            <td class="">{{ business.getName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Date of Incorporation</td>
+                            <td class="">{{ business.getDoi }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Company number</td>
+                            <td class="">{{ business.getCno }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">UTR</td>
+                            <td class="">{{ business.getUtr }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">VAT</td>
+                            <td class="">{{ business.getVat }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Employer PAYE Ref</td>
+                            <td class="">{{ business.getEpaye }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Accounts Office Ref</td>
+                            <td class="">{{ business.getAccoff }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Bank account details</td>
+                            <td class="">{{ business.getAccount }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Notes</td>
+                            <td class="">{{ business.getNotes }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                    <h5>Persons</h5>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Postcode</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if individuals is not empty %}
+                            {% for individual in individuals %}
+                                <tr>
+                                    <td>{{ individual.getIndividual.getId }}</td>
+                                    <td>{{ individual.getIndividual.getForename }} {{ individual.getIndividual.getMiddlename }} {{ individual.getIndividual.getLastname }}</td>
+                                    <td>{{ individual.getIndividual.getAddress }}</td>
+                                    <td>{{ individual.getIndividual.getPostcode }}</td>
+                                    <td>{{ individual.getType }}</td>
+                                    <td>
+                                        <a href="{{ path('app_individual_show',{'id':individual.getIndividual.getId}) }}" class="btn btn-success btn-xs">
+                                            <i class="icon icon-file"></i>
+                                        </a>
+                                        <a href="{{ path('app_business_removeindividual',{'id':individual.getId}) }}" class="btn btn-danger btn-xs">
+                                            <i class="icon icon-remove"></i>
+                                        </a>
+                                        
+{#                                        {{ individual.getId }}#}
+                                    </td>
+                                </tr>                            
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div class="widget-content nopadding">
+                    <h3>Add individual</h3>
+                    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                    <div class="control-group">
+                        {{ form_label(form.business,'Business',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(form.business,{'attr':{'placeholder':'Business','class':''}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.individual,'Individual',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(form.individual,{'attr':{'placeholder':'Individual','class':''}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.type,'Type',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(form.type,{'attr':{'placeholder':'Type','class':''}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-success" value="Save">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

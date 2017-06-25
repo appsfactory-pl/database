@@ -91,7 +91,7 @@ class BusinessIndividual
      * @return $this
      */
     public function setType($type){
-        $this->type = $this;
+        $this->type = $type;
         return $this;
     }
     

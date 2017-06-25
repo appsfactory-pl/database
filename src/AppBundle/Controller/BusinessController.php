@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Form\BusinessType;
 use Symfony\Component\HttpFoundation\Request;
 use \Doctrine\ORM\EntityManagerInterface;
+use AppBundle\Form\BusinessIndividualType;
+use AppBundle\Entity\BusinessIndividual;
 
 class BusinessController extends Controller {
 
@@ -24,10 +26,10 @@ class BusinessController extends Controller {
      */
     public function listAction(EntityManagerInterface $em) {
         $repository = $em->getRepository('AppBundle:Business');
-        $business = $repository->createQueryBuilder('b')->orderBy('b.id','DESC')->getQuery()->getResult();
+        $business = $repository->createQueryBuilder('b')->orderBy('b.id', 'DESC')->getQuery()->getResult();
         return $this->render('AppBundle:Business:list.html.twig', array(
-                        // ...
-            'business'=>$business,
+                    // ...
+                    'business' => $business,
         ));
     }
 
@@ -75,10 +77,47 @@ class BusinessController extends Controller {
     /**
      * @Route("/business/show/{id}")
      */
-    public function showAction($id) {
+    public function showAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Business');
+        $business = $repo->find($id);
+        $businessIndividual = new BusinessIndividual();
+        $businessIndividual->setBusiness($business);
+        $form = $this->createForm(BusinessIndividualType::class, $businessIndividual);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = new BusinessIndividual();
+            $data->setType($form->get('type')->getData());
+            $data->setBusiness($form->get('business')->getData());
+            $data->setIndividual($form->get('individual')->getData());
+            $em->persist($data);
+            $em->flush();
+            $this->redirectToRoute('app_business_show', ['id' => $id]);
+        }
+        $repoIndividual = $em->getRepository('AppBundle:BusinessIndividual');
+        $individuals = $repoIndividual->findByBusiness($business);
         return $this->render('AppBundle:Business:show.html.twig', array(
-                        // ...
+                    // ...
+                    'business' => $business,
+                    'individuals' => $individuals,
+                    'form' => $form->createView(),
         ));
+    }
+    
+    /**
+     * 
+     * @Route("/business/remove-individual/{id}")
+     * @param Request $request
+     * @param type $id
+     */
+    public function removeIndividual(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $bi = $em->getRepository('AppBundle:BusinessIndividual')->find($id);
+        $business_id = $bi->getBusiness()->getId();
+        $em->remove($bi);
+        $em->flush();
+        return $this->redirectToRoute('app_business_show',['id'=>$business_id]);
     }
 
     /**
