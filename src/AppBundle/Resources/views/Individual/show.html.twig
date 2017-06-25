@@ -1,7 +1,144 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Individual:show{% endblock %}
+{% block title %}{{ individual.forename }} {{ individual.middlename }} {{ individual.lastname }}{% endblock %}
+{% block header %}{{ individual.forename }} {{ individual.middlename }} {{ individual.lastname }}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Individual:show page</h1>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                    <h5>Business data</h5>
+                </div>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="">ID</td>
+                            <td class="">{{ individual.getId }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">First Name</td>
+                            <td class="">{{ individual.getForename }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Middle Name</td>
+                            <td class="">{{ individual.getMiddlename }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Last Name</td>
+                            <td class="">{{ individual.getLastname }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Previous names</td>
+                            <td class="">{{ individual.getMaidenname }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Date of birth</td>
+                            <td class="">{{ individual.getDob }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Telephone</td>
+                            <td class="">{{ individual.getPhone }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Telephone 2</td>
+                            <td class="">{{ individual.getPhone2 }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Email</td>
+                            <td class="">{{ individual.getEmail }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Address</td>
+                            <td class="">{{ individual.getAddress }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Postcode</td>
+                            <td class="">{{ individual.getPostcode }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">NIN</td>
+                            <td class="">{{ individual.getNin }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">UTR</td>
+                            <td class="">{{ individual.getUtr }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Notes</td>
+                            <td class="">{{ individual.getNotes|raw }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                    <h5>Persons</h5>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Postcode</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if business is not empty %}
+                            {% for item in business %}
+                                <tr>
+                                    <td>{{ item.getBusiness.getId }}</td>
+                                    <td>{{ item.getBusiness.getName }}</td>
+                                    <td>{{ item.getBusiness.getAddress }}</td>
+                                    <td>{{ item.getBusiness.getPostcode }}</td>
+                                    <td>{{ item.getType }}</td>
+                                    <td>
+                                        <a href="{{ path('app_business_show',{'id':item.getBusiness.getId}) }}" class="btn btn-success btn-xs">
+                                            <i class="icon icon-file"></i>
+                                        </a>
+                                        <a href="{{ path('app_individual_removebusiness',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                            <i class="icon icon-remove"></i>
+                                        </a>
+                                        
+                                    </td>
+                                </tr>                            
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div class="widget-content nopadding">
+                    <h3>Add business</h3>
+                    {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                    <div class="control-group">
+                        {{ form_label(form.business,'Business',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(form.business,{'attr':{'placeholder':'Business','class':''}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.individual,'Individual',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(form.individual,{'attr':{'placeholder':'Individual','class':''}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(form.type,'Type',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(form.type,{'attr':{'placeholder':'Type','class':''}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-success" value="Save">
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

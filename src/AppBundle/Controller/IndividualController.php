@@ -9,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Entity\PersonTypes;
 use AppBundle\Form\PersonTypesType;
 use AppBundle\Form\IndividualType;
+use AppBundle\Entity\BusinessIndividual;
+use AppBundle\Form\BusinessIndividualType;
 
 class IndividualController extends Controller {
 
@@ -27,7 +29,7 @@ class IndividualController extends Controller {
     public function addAction(Request $request) {
         $form = $this->createForm(IndividualType::class);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $individual = $form->getData();
             $user = $this->getUser();
@@ -38,7 +40,6 @@ class IndividualController extends Controller {
             $em->persist($individual);
             $em->flush();
             return $this->redirectToRoute('app_individual_list');
-
         }
         return $this->render('AppBundle:Individual:add.html.twig', array(
                     // ...
@@ -53,9 +54,9 @@ class IndividualController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Individual');
         $individual = $repo->find($id);
-        $form = $this->createForm(IndividualType::class,$individual);
+        $form = $this->createForm(IndividualType::class, $individual);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->getUser();
             $individual = $form->getData();
             $individual->setUpdated(new \DateTime());
@@ -63,10 +64,9 @@ class IndividualController extends Controller {
             $em->persist($individual);
             $em->flush();
             return $this->redirectToRoute('app_individual_list');
-
         }
         return $this->render('AppBundle:Individual:edit.html.twig', array(
-            'form' => $form->createView(),
+                    'form' => $form->createView(),
                         // ...
         ));
     }
@@ -76,9 +76,9 @@ class IndividualController extends Controller {
      */
     public function listAction(EntityManagerInterface $em) {
         $repo = $em->getRepository('AppBundle:Individual');
-        $individuals = $repo->createQueryBuilder('i')->orderBy('i.id','DESC')->getQuery()->getResult();
+        $individuals = $repo->createQueryBuilder('i')->orderBy('i.id', 'DESC')->getQuery()->getResult();
         return $this->render('AppBundle:Individual:list.html.twig', array(
-            'individuals' => $individuals,
+                    'individuals' => $individuals,
                         // ...
         ));
     }
@@ -86,10 +86,47 @@ class IndividualController extends Controller {
     /**
      * @Route("/individual/show/{id}")
      */
-    public function showAction($id) {
+    public function showAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Individual');
+        $individual = $repo->find($id);
+
+        $businessIndividual = new BusinessIndividual();
+        $businessIndividual->setIndividual($individual);
+        $form = $this->createForm(BusinessIndividualType::class, $businessIndividual);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $em->persist($data);
+            $em->flush();
+            $this->redirectToRoute('app_individual_show', ['id' => $id]);
+        }
+
+        $repoBusiness = $em->getRepository('AppBundle:BusinessIndividual');
+        $business = $repoBusiness->findByIndividual($individual);
+
         return $this->render('AppBundle:Individual:show.html.twig', array(
-                        // ...
+                    // ...
+                    'individual' => $individual,
+                    'business' => $business,
+                    'form' => $form->createView(),
         ));
+    }
+    
+    /**
+     * 
+     * @Route("/business/remove-business/{id}")
+     * @param Request $request
+     * @param type $id
+     */
+    public function removeBusiness(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $bi = $em->getRepository('AppBundle:BusinessIndividual')->find($id);
+        $individual_id = $bi->getIndividual()->getId();
+        $em->remove($bi);
+        $em->flush();
+        return $this->redirectToRoute('app_individual_show',['id'=>$individual_id]);
     }
 
     /**
