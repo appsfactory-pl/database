@@ -22,7 +22,7 @@ class IndividualType extends AbstractType
                 ->add('middlename')
                 ->add('lastname')
                 ->add('maidenname')
-                ->add('dob', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "yyyy-mm-dd"]])
+                ->add('dob', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"]])
                 ->add('phone')
                 ->add('phone2')
                 ->add('email', EmailType::class)

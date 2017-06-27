@@ -18,7 +18,7 @@ class BusinessType extends AbstractType {
                 ->add('name')
                 ->add('address')
                 ->add('postcode')
-                ->add('doi', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "yyyy-mm-dd"]])
+                ->add('doi', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"]])
                 ->add('cno')
                 ->add('utr')
                 ->add('vat')

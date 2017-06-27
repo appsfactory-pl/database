@@ -260,6 +260,10 @@ class Individual {
      * @return Individual
      */
     public function setDob($dob) {
+        if(strstr($dob, '/')){
+            $date = explode('/', $dob);
+            $dob = $date[2].'-'.$date[1].'-'.$date[0];
+        } 
         $this->dob = new \DateTime($dob);
 
         return $this;
@@ -272,7 +276,7 @@ class Individual {
      */
     public function getDob() {
         if (!empty($this->dob)) {
-            return $this->dob->format('Y-m-d');
+            return $this->dob->format('d/m/Y');
         }
         return null;
     }

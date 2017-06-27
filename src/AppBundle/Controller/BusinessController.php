@@ -167,7 +167,7 @@ class BusinessController extends Controller {
                     $business->setEpaye($item['bepaye']);
                     $business->setAccoff($item['baccoff']);
                     $business->setAccount($item['baccount']);
-                    $business->setNotes($item['bnotes']);
+                    $business->setNotes(nl2br($item['bnotes']));
                     $em->persist($business);
 
                     $individual_id = $item['Bconnection_1'];
@@ -183,7 +183,7 @@ class BusinessController extends Controller {
                         $individual->setCreatedBy($user);
                         $individual->setUpdated(new \DateTime());
                         $individual->setUpdatedBy($user);
-                        $individual->setNotes($item['Bconnection_1_name']);
+                        $individual->setNotes(nl2br($item['Bconnection_1_name']));
                         $em->persist($individual);
                     }
                     $business_individual = $business_individual_repo->findOneBy([
