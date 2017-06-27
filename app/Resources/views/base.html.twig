@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="css/uniform.css" />
     <link rel="stylesheet" href="css/select2.css" />
-    
+
     <link rel="stylesheet" href="css/colorpicker.css" />
     <link rel="stylesheet" href="css/datepicker.css" />
 
-    
+
     <link rel="stylesheet" href="css/fullcalendar.css" />
     <link rel="stylesheet" href="css/matrix-style.css" />
     <link rel="stylesheet" href="css/matrix-media.css" />
@@ -102,6 +102,13 @@
         <div id="content-header">
             <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
             <h1>{% block header %}{% endblock %}</h1>
+            {% for label, messages in app.flashes(['warning', 'error', 'success']) %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
         </div>
         <div class="container-fluid">
             <hr>
@@ -169,7 +176,7 @@
         document.gomenu.selector.selectedIndex = 2;
     }
     $('.textarea_editor').wysihtml5({
-        
+
     });
     $('.datepicker').datepicker();
 </script>

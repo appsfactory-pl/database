@@ -1,7 +1,35 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Business:import{% endblock %}
-
+{% block title %}Import Business{% endblock %}
+{% block header %}Import Business{% endblock %}
 {% block body %}
-<h1>Welcome to the Business:import page</h1>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Import Business</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                        <div class="control-group">
+{#                            <label for="xls-file">Choose file</label>#}
+                            <div class="controls">
+                                <input type="file" name="xls-file" required="required">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="submit" class="btn btn-success" value="Import">
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

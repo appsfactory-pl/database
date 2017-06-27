@@ -153,6 +153,16 @@ class Individual {
     public function getId() {
         return $this->id;
     }
+    
+    /**
+     * 
+     * @param Int $id
+     * @return $this
+     */
+    public function setId($id){
+        $this->id=$id;
+        return $this;
+    }
 
     /**
      * Set title
