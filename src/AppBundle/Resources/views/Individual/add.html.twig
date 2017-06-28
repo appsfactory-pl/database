@@ -52,60 +52,67 @@
                                 </div>
                             </div>
                         </div>
-                                                <div class="control-group">
-                                                    {{ form_label(form.phone,'Telephone',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.phone,{'attr':{'placeholder':'Phone','class':''}}) }}
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    {{ form_label(form.phone2,'Telephone 2',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.phone2,{'attr':{'placeholder':'Phone 2','class':''}}) }}
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    {{ form_label(form.email,'email',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.email,{'attr':{'placeholder':'Email','class':''}}) }}
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    {{ form_label(form.address,'Address',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.address,{'attr':{'placeholder':'Address','class':''}}) }}
-                                                    </div>
-                                                </div>
-                        
-                                                <div class="control-group">
-                                                    {{ form_label(form.postcode,'Postcode',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.postcode,{'attr':{'placeholder':'Postcode'}}) }}
-                                                    </div>
-                                                </div>
-                        
-                        
-                                                <div class="control-group">
-                                                    {{ form_label(form.nin,'NIN',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.nin,{'attr':{'placeholder':'NIN'}}) }}
-                                                    </div>
-                                                </div>
-                        
-                                                <div class="control-group">
-                                                    {{ form_label(form.utr,'UTR',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.utr,{'attr':{'placeholder':'UTR','class':''}}) }}
-                                                    </div>
-                                                </div>
-                        
-                                                <div class="control-group" style="height: 280px;">
-                                                    {{ form_label(form.notes,'Notes',{'label_attr':{'class':'control-label'}}) }}
-                                                    <div class="controls">
-                                                        {{ form_widget(form.notes,{'attr':{'placeholder':'Type Text...','style':'height:180px;'}}) }}
-                                                    </div>
-                                                </div>
-                        
+                        <div class="control-group">
+                            {{ form_label(form.phone,'Telephone',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.phone,{'attr':{'placeholder':'Phone','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.phone2,'Telephone 2',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.phone2,{'attr':{'placeholder':'Phone 2','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.email,'email',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.email,{'attr':{'placeholder':'Email','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.address,'Address',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.address,{'attr':{'placeholder':'Address','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.postcode,'Postcode',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.postcode,{'attr':{'placeholder':'Postcode'}}) }}
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            {{ form_label(form.nin,'NIN',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.nin,{'attr':{'placeholder':'NIN'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.utr,'UTR',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.utr,{'attr':{'placeholder':'UTR','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group" style="height: 280px;">
+                            {{ form_label(form.notes,'Notes',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.notes,{'attr':{'placeholder':'Type Text...','style':'height:180px;'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group" style="height: 280px;">
+                            {{ form_label(form.notesChildren,'Children',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.notesChildren,{'attr':{'placeholder':'Children','style':'height:180px;'}}) }}
+                            </div>
+                        </div>
+
                         <div class="form-actions">
                             <input type="submit" class="btn btn-success" value="Save">
                         </div>

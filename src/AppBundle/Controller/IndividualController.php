@@ -11,6 +11,11 @@ use AppBundle\Form\PersonTypesType;
 use AppBundle\Form\IndividualType;
 use AppBundle\Entity\BusinessIndividual;
 use AppBundle\Form\BusinessIndividualType;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use AppBundle\Entity\Business;
+use AppBundle\Entity\Individual;
 
 class IndividualController extends Controller {
 
@@ -133,6 +138,88 @@ class IndividualController extends Controller {
      * @Route("/individual/import")
      */
     public function importAction() {
+
+        if (!empty($_FILES['xls-file']['tmp_name'])) {
+            $filename = $_SERVER['DOCUMENT_ROOT'] . '/import/' . $_FILES['xls-file']['name'];
+            $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            if ($ext == 'csv') {
+                $em = $this->getDoctrine()->getManager();
+                $business_repo = $em->getRepository('AppBundle:Business');
+                $business_individual_repo = $em->getRepository('AppBundle:BusinessIndividual');
+                $individual_repo = $em->getRepository('AppBundle:Individual');
+                $person_types_repo = $em->getRepository('AppBundle:PersonTypes');
+                move_uploaded_file($_FILES['xls-file']['tmp_name'], $filename);
+                $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+                $data = $serializer->decode(file_get_contents($filename), 'csv');
+                $user = $this->getUser();
+                foreach ($data as $k => $item) {
+                    var_dump($item); die;
+//                    $business_id = $item['ID_B'];
+//                    $business = $business_repo->find($business_id);
+//                    if (empty($business)) {
+//                        $business = new Business();
+//                        $business->setId($business_id);
+//                    }
+//                    if($item['bdoi'] == '0000-00-00'){
+//                       $item['bdoi'] = null;
+//                    }
+//                    $business->setName($item['bname']);
+//                    $business->setAddress($item['baddress']);
+//                    $business->setPostcode($item['bpostcode']);
+//                    $business->setDoi($item['bdoi']);
+//                    $business->setCno($item['bcno']);
+//                    $business->setUtr($item['butr']);
+//                    $business->setVat($item['bvat']);
+//                    $business->setEpaye($item['bepaye']);
+//                    $business->setAccoff($item['baccoff']);
+//                    $business->setAccount($item['baccount']);
+//                    $business->setNotes(nl2br($item['bnotes']));
+//                    $em->persist($business);
+//
+//                    $individual_id = $item['Bconnection_1'];
+//                    $individual = $individual_repo->find($individual_id);
+//                    if (empty($individual)) {
+//                        $individual = new Individual();
+//                        $individual->setId($individual_id);
+//                        $individual->setTitle('mr');
+//                        $individual->setForename($item['Bconnection_1_name']);
+//                        $individual->setLastname($item['Bconnection_1_name']);
+//                        $individual->setDob(null);
+//                        $individual->setCreated(new \DateTime());
+//                        $individual->setCreatedBy($user);
+//                        $individual->setUpdated(new \DateTime());
+//                        $individual->setUpdatedBy($user);
+//                        $individual->setNotes(nl2br($item['Bconnection_1_name']));
+//                        $em->persist($individual);
+//                    }
+//                    $business_individual = $business_individual_repo->findOneBy([
+//                        'individual' => $individual,
+//                        'business' => $business,
+//                    ]);
+//                    if(empty($business_individual)){
+//                        $type = $person_types_repo->findOneByName($item['Bconnection_1_type']);
+//                        if(empty($type)){
+//                            $type = new PersonTypes();
+//                            $type->setName($item['Bconnection_1_type']);
+//                            $em->persist($type);
+//                        }
+//                        $business_individual = new BusinessIndividual();
+//                        $business_individual->setBusiness($business);
+//                        $business_individual->setIndividual($individual);
+//                        $business_individual->setType($type);
+//                        $em->persist($business_individual);
+//                    }
+
+                    $em->flush();
+                }
+                $this->addFlash('success', 'Data imported successfuly.');
+                $this->redirectToRoute('app_individual_import');
+            } else {
+                $this->addFlash('error', 'Incorrect file type. You can import only CSV files.');
+                $this->redirectToRoute('app_individual_import');
+            }
+        }
+
         return $this->render('AppBundle:Individual:import.html.twig', array(
                         // ...
         ));

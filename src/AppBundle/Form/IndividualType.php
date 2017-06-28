@@ -31,6 +31,7 @@ class IndividualType extends AbstractType
                 ->add('nin')
                 ->add('utr')
                 ->add('notes', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12']])
+                ->add('notesChildren', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12']])
                 ;
     }
     
