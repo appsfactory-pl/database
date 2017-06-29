@@ -154,16 +154,10 @@ class IndividualController extends Controller {
                 $user = $this->getUser();
                 foreach ($data as $k => $item) {
                     $individual_id = $item['ID_I'];
-
-//  'I_connection_1' => string '' (length=0)
-//  'I_connection_1_type' => string '' (length=0)
-//  'I_connection_1_name' => string '' (length=0)
-//  'I_connection_2' => string '5' (length=1)
-//  'I_connection_2_type' => string 'Business' (length=8)
-//  'I_connection_2_name' => string 'Maja Polish Deli Limited' (length=24)
-//  'ID' => string '' (length=0)
-
-
+                    if (empty($individual_id)) {
+                        $this->addFlash('error', 'Incorrect file type. You can import only CSV files.');
+                        $this->redirectToRoute('app_individual_import');
+                    }
                     $individual = $individual_repo->findOneById2($individual_id);
                     if (empty($individual)) {
                         $individual = new Individual();
@@ -205,12 +199,6 @@ class IndividualController extends Controller {
                         $business->setPostcode($item['I_connection_2_name']);
                         $business->setDoi(null);
                         $business->setCno(1);
-//                        $business->setUtr($item['butr']);
-//                        $business->setVat($item['bvat']);
-//                        $business->setEpaye($item['bepaye']);
-//                        $business->setAccoff($item['baccoff']);
-//                        $business->setAccount($item['baccount']);
-//                        $business->setNotes(nl2br($item['bnotes']));
                         $em->persist($business);
                     }
 
