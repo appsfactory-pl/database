@@ -164,10 +164,10 @@ class IndividualController extends Controller {
 //  'ID' => string '' (length=0)
 
 
-                    $individual = $individual_repo->find($individual_id);
+                    $individual = $individual_repo->findOneById2($individual_id);
                     if (empty($individual)) {
                         $individual = new Individual();
-                        $individual->setId($individual_id);
+                        $individual->setId2($individual_id);
                     }
                     if ($item['dob'] == '0000-00-00') {
                         $item['dob'] = null;
@@ -196,10 +196,10 @@ class IndividualController extends Controller {
                     $em->persist($individual);
 
                     $business_id = $item['I_connection_2'];
-                    $business = $business_repo->find($item['I_connection_2']);
+                    $business = $business_repo->findOneById2($item['I_connection_2']);
                     if (empty($business)) {
                         $business = new Business();
-                        $business->setId($business_id);
+                        $business->setId2($business_id);
                         $business->setName($item['I_connection_2_name']);
                         $business->setAddress($item['I_connection_2_name']);
                         $business->setPostcode($item['I_connection_2_name']);

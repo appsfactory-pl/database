@@ -149,14 +149,19 @@ class BusinessController extends Controller {
                 $user = $this->getUser();
                 foreach ($data as $k => $item) {
                     $business_id = $item['ID_B'];
-                    $business = $business_repo->find($business_id);
+                    if (empty($business_id)) {
+                        $this->addFlash('error', 'Incorrect file type. You can import only CSV files.');
+                        $this->redirectToRoute('app_business_import');
+                    }
+                    $business = $business_repo->findOneById2($business_id);
+
 //                    var_dump($business,$business_id); die;
                     if (empty($business)) {
                         $business = new Business();
-                        $business->setId($business_id);
+                        $business->setId2($business_id);
                     }
-                    if($item['bdoi'] == '0000-00-00'){
-                       $item['bdoi'] = null;
+                    if ($item['bdoi'] == '0000-00-00') {
+                        $item['bdoi'] = null;
                     }
                     $business->setName($item['bname']);
                     $business->setAddress($item['baddress']);
@@ -173,10 +178,10 @@ class BusinessController extends Controller {
                     $em->flush();
 
                     $individual_id = $item['Bconnection_1'];
-                    $individual = $individual_repo->find($individual_id);
+                    $individual = $individual_repo->findOneById2($individual_id);
                     if (empty($individual)) {
                         $individual = new Individual();
-                        $individual->setId($individual_id);
+                        $individual->setId2($individual_id);
                         $individual->setTitle('mr');
                         $individual->setForename($item['Bconnection_1_name']);
                         $individual->setLastname($item['Bconnection_1_name']);
@@ -193,9 +198,9 @@ class BusinessController extends Controller {
                         'individual' => $individual,
                         'business' => $business,
                     ]);
-                    if(empty($business_individual)){
+                    if (empty($business_individual)) {
                         $type = $person_types_repo->findOneByName($item['Bconnection_1_type']);
-                        if(empty($type)){
+                        if (empty($type)) {
                             $type = new PersonTypes();
                             $type->setName($item['Bconnection_1_type']);
                             $em->persist($type);
