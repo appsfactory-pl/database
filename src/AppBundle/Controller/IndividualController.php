@@ -118,20 +118,20 @@ class IndividualController extends Controller {
                     'form' => $form->createView(),
         ));
     }
-    
+
     /**
      * 
      * @Route("/business/remove-business/{id}")
      * @param Request $request
      * @param type $id
      */
-    public function removeBusiness(Request $request, $id){
+    public function removeBusiness(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
         $bi = $em->getRepository('AppBundle:BusinessIndividual')->find($id);
         $individual_id = $bi->getIndividual()->getId();
         $em->remove($bi);
         $em->flush();
-        return $this->redirectToRoute('app_individual_show',['id'=>$individual_id]);
+        return $this->redirectToRoute('app_individual_show', ['id' => $individual_id]);
     }
 
     /**
@@ -153,62 +153,84 @@ class IndividualController extends Controller {
                 $data = $serializer->decode(file_get_contents($filename), 'csv');
                 $user = $this->getUser();
                 foreach ($data as $k => $item) {
-                    var_dump($item); die;
-//                    $business_id = $item['ID_B'];
-//                    $business = $business_repo->find($business_id);
-//                    if (empty($business)) {
-//                        $business = new Business();
-//                        $business->setId($business_id);
-//                    }
-//                    if($item['bdoi'] == '0000-00-00'){
-//                       $item['bdoi'] = null;
-//                    }
-//                    $business->setName($item['bname']);
-//                    $business->setAddress($item['baddress']);
-//                    $business->setPostcode($item['bpostcode']);
-//                    $business->setDoi($item['bdoi']);
-//                    $business->setCno($item['bcno']);
-//                    $business->setUtr($item['butr']);
-//                    $business->setVat($item['bvat']);
-//                    $business->setEpaye($item['bepaye']);
-//                    $business->setAccoff($item['baccoff']);
-//                    $business->setAccount($item['baccount']);
-//                    $business->setNotes(nl2br($item['bnotes']));
-//                    $em->persist($business);
-//
-//                    $individual_id = $item['Bconnection_1'];
-//                    $individual = $individual_repo->find($individual_id);
-//                    if (empty($individual)) {
-//                        $individual = new Individual();
-//                        $individual->setId($individual_id);
-//                        $individual->setTitle('mr');
-//                        $individual->setForename($item['Bconnection_1_name']);
-//                        $individual->setLastname($item['Bconnection_1_name']);
-//                        $individual->setDob(null);
-//                        $individual->setCreated(new \DateTime());
-//                        $individual->setCreatedBy($user);
-//                        $individual->setUpdated(new \DateTime());
-//                        $individual->setUpdatedBy($user);
-//                        $individual->setNotes(nl2br($item['Bconnection_1_name']));
-//                        $em->persist($individual);
-//                    }
-//                    $business_individual = $business_individual_repo->findOneBy([
-//                        'individual' => $individual,
-//                        'business' => $business,
-//                    ]);
-//                    if(empty($business_individual)){
-//                        $type = $person_types_repo->findOneByName($item['Bconnection_1_type']);
-//                        if(empty($type)){
-//                            $type = new PersonTypes();
-//                            $type->setName($item['Bconnection_1_type']);
-//                            $em->persist($type);
-//                        }
-//                        $business_individual = new BusinessIndividual();
-//                        $business_individual->setBusiness($business);
-//                        $business_individual->setIndividual($individual);
-//                        $business_individual->setType($type);
-//                        $em->persist($business_individual);
-//                    }
+                    $individual_id = $item['ID_I'];
+
+//  'I_connection_1' => string '' (length=0)
+//  'I_connection_1_type' => string '' (length=0)
+//  'I_connection_1_name' => string '' (length=0)
+//  'I_connection_2' => string '5' (length=1)
+//  'I_connection_2_type' => string 'Business' (length=8)
+//  'I_connection_2_name' => string 'Maja Polish Deli Limited' (length=24)
+//  'ID' => string '' (length=0)
+
+
+                    $individual = $individual_repo->find($individual_id);
+                    if (empty($individual)) {
+                        $individual = new Individual();
+                        $individual->setId($individual_id);
+                    }
+                    if ($item['dob'] == '0000-00-00') {
+                        $item['dob'] = null;
+                    }
+
+                    $individual->setTitle($item['title']);
+                    $individual->setForename($item['forename']);
+                    $individual->setMiddlename($item['middlename']);
+                    $individual->setLastname($item['lastname']);
+                    $individual->setMaidenname($item['maidenname']);
+                    $individual->setDob($item['dob']);
+                    $individual->setPhone($item['phone']);
+                    $individual->setPhone2($item['phone2']);
+                    $individual->setEmail($item['email']);
+                    $individual->setAddress($item['address']);
+                    $individual->setPostcode($item['postcode']);
+                    $individual->setNin($item['nin']);
+                    $individual->setUtr($item['utr']);
+
+                    $individual->setCreated(new \DateTime());
+                    $individual->setCreatedBy($user);
+                    $individual->setUpdated(new \DateTime());
+                    $individual->setUpdatedBy($user);
+                    $individual->setNotes(nl2br($item['notes']));
+                    $individual->setNotesChildren($item['notes wth children']);
+                    $em->persist($individual);
+
+                    $business_id = $item['I_connection_2'];
+                    $business = $business_repo->find($item['I_connection_2']);
+                    if (empty($business)) {
+                        $business = new Business();
+                        $business->setId($business_id);
+                        $business->setName($item['I_connection_2_name']);
+                        $business->setAddress($item['I_connection_2_name']);
+                        $business->setPostcode($item['I_connection_2_name']);
+                        $business->setDoi(null);
+                        $business->setCno(1);
+//                        $business->setUtr($item['butr']);
+//                        $business->setVat($item['bvat']);
+//                        $business->setEpaye($item['bepaye']);
+//                        $business->setAccoff($item['baccoff']);
+//                        $business->setAccount($item['baccount']);
+//                        $business->setNotes(nl2br($item['bnotes']));
+                        $em->persist($business);
+                    }
+
+                    $business_individual = $business_individual_repo->findOneBy([
+                        'individual' => $individual,
+                        'business' => $business,
+                    ]);
+                    if (empty($business_individual)) {
+                        $type = $person_types_repo->findOneByName($item['I_connection_2_type']);
+                        if (empty($type)) {
+                            $type = new PersonTypes();
+                            $type->setName($item['I_connection_2_type']);
+                            $em->persist($type);
+                        }
+                        $business_individual = new BusinessIndividual();
+                        $business_individual->setBusiness($business);
+                        $business_individual->setIndividual($individual);
+                        $business_individual->setType($type);
+                        $em->persist($business_individual);
+                    }
 
                     $em->flush();
                 }

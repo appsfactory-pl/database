@@ -15,6 +15,12 @@
                     <div class="widget-content nopadding">
                         {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
                         <div class="control-group">
+                            {{ form_label(form.id2,'ID 2',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.id2,{'attr':{'placeholder':'ID 2','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
                             {{ form_label(form.title,'Title',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 {{ form_widget(form.title,{'attr':{'placeholder':'Title','class':''}}) }}

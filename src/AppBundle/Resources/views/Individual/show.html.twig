@@ -17,6 +17,10 @@
                             <td class="">{{ individual.getId }}</td>
                         </tr>
                         <tr>
+                            <td class="">ID 2</td>
+                            <td class="">{{ individual.getId2 }}</td>
+                        </tr>
+                        <tr>
                             <td class="">First Name</td>
                             <td class="">{{ individual.getForename }}</td>
                         </tr>
@@ -70,7 +74,7 @@
                         </tr>
                         <tr>
                             <td class="">Children</td>
-                            <td class="">{{ individual.getNotesChildren|raw }}</td>
+                            <td class="">{{ individual.getNotesChildren|nl2br }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -22,6 +22,14 @@ class Business
     private $id;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id2", type="integer")
+     */
+    private $id2;
+
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -114,6 +122,24 @@ class Business
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * 
+     * @param type $id
+     */
+    public function setId2($id2){
+        $this->id2 = $id2;
+        return $this;
+    }
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId2()
+    {
+        return $this->id2;
     }
 
     /**

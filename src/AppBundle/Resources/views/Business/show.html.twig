@@ -17,6 +17,10 @@
                             <td class="">{{ business.getId }}</td>
                         </tr>
                         <tr>
+                            <td class="">ID 2</td>
+                            <td class="">{{ business.getId2 }}</td>
+                        </tr>
+                        <tr>
                             <td class="">Business Name</td>
                             <td class="">{{ business.getName }}</td>
                         </tr>
@@ -54,7 +58,7 @@
                         </tr>
                         <tr>
                             <td class="">Bank account details</td>
-                            <td class="">{{ business.getAccount }}</td>
+                            <td class="">{{ business.getAccount|raw}}</td>
                         </tr>
                         <tr>
                             <td class="">Notes</td>

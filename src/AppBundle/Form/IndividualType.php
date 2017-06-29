@@ -17,6 +17,7 @@ class IndividualType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+                ->add('id2')
                 ->add('title')
                 ->add('forename')
                 ->add('middlename')

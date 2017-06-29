@@ -150,6 +150,7 @@ class BusinessController extends Controller {
                 foreach ($data as $k => $item) {
                     $business_id = $item['ID_B'];
                     $business = $business_repo->find($business_id);
+//                    var_dump($business,$business_id); die;
                     if (empty($business)) {
                         $business = new Business();
                         $business->setId($business_id);
@@ -169,6 +170,7 @@ class BusinessController extends Controller {
                     $business->setAccount($item['baccount']);
                     $business->setNotes(nl2br($item['bnotes']));
                     $em->persist($business);
+                    $em->flush();
 
                     $individual_id = $item['Bconnection_1'];
                     $individual = $individual_repo->find($individual_id);
@@ -185,6 +187,7 @@ class BusinessController extends Controller {
                         $individual->setUpdatedBy($user);
                         $individual->setNotes(nl2br($item['Bconnection_1_name']));
                         $em->persist($individual);
+                        $em->flush();
                     }
                     $business_individual = $business_individual_repo->findOneBy([
                         'individual' => $individual,
@@ -202,9 +205,10 @@ class BusinessController extends Controller {
                         $business_individual->setIndividual($individual);
                         $business_individual->setType($type);
                         $em->persist($business_individual);
+                        $em->flush();
                     }
 
-                    $em->flush();
+//                    $em->flush();
                 }
                 $this->addFlash('success', 'Data imported successfuly.');
                 $this->redirectToRoute('app_business_import');

@@ -29,6 +29,13 @@ class Individual {
     private $title;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id2", type="integer")
+     */
+    private $id2;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="forename", type="string", length=64)
@@ -66,14 +73,14 @@ class Individual {
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=16, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone2", type="string", length=16, nullable=true)
+     * @ORM\Column(name="phone2", type="string", length=255, nullable=true)
      */
     private $phone2;
 
@@ -141,14 +148,14 @@ class Individual {
     /**
      * @var string
      * 
-     * @ORM\Column(name="notes", type="text")
+     * @ORM\Column(name="notes", type="text", nullable=true)
      */
     private $notes;
 
     /**
      * @var string
      * 
-     * @ORM\Column(name="notes_children", type="text")
+     * @ORM\Column(name="notes_children", type="text", nullable=true)
      */
     private $notesChildren;
 
@@ -168,6 +175,25 @@ class Individual {
      */
     public function setId($id){
         $this->id=$id;
+        return $this;
+    }
+
+    /**
+     * Get id2
+     *
+     * @return int
+     */
+    public function getId2() {
+        return $this->id2;
+    }
+    
+    /**
+     * 
+     * @param Int $id
+     * @return $this
+     */
+    public function setId2($id2){
+        $this->id2=$id2;
         return $this;
     }
 
