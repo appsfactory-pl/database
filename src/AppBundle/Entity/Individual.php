@@ -153,13 +153,6 @@ class Individual {
     private $notes;
 
     /**
-     * @var string
-     * 
-     * @ORM\Column(name="notes_children", type="text", nullable=true)
-     */
-    private $notesChildren;
-
-    /**
      * Get id
      *
      * @return int
@@ -586,24 +579,6 @@ class Individual {
      */
     public function getNotes() {
         return $this->notes;
-    }
-
-    /**
-     * 
-     * @param type $notes
-     * @return $this
-     */
-    public function setNotesChildren($notesChildren) {
-        $this->notesChildren = $notesChildren;
-        return $this;
-    }
-
-    /**
-     * 
-     * @return type
-     */
-    public function getNotesChildren() {
-        return $this->notesChildren;
     }
 
     /**

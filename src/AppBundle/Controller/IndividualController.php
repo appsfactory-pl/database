@@ -68,7 +68,7 @@ class IndividualController extends Controller {
             $individual->setUpdatedBy($user);
             $em->persist($individual);
             $em->flush();
-            return $this->redirectToRoute('app_individual_list');
+            return $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
         return $this->render('AppBundle:Individual:edit.html.twig', array(
                     'form' => $form->createView(),
@@ -163,18 +163,20 @@ class IndividualController extends Controller {
                         $individual = new Individual();
                         $individual->setId2($individual_id);
                     }
-                    if ($item['dob'] == '0000-00-00') {
+                    if (empty($item['dob']) || $item['dob'] == '0000-00-00') {
                         $item['dob'] = null;
                     }
-
+                    if (!isset($item['title']) || !isset($item['forename']) || !isset($item['email']) || !isset($item['notes'])) {
+                        continue;
+                    }
                     $individual->setTitle($item['title']);
                     $individual->setForename($item['forename']);
                     $individual->setMiddlename($item['middlename']);
                     $individual->setLastname($item['lastname']);
-                    $individual->setMaidenname($item['maidenname']);
+                    $individual->setMaidenname(empty($item['maidenname']) ? '' : $item['maidenname']);
                     $individual->setDob($item['dob']);
-                    $individual->setPhone($item['phone']);
-                    $individual->setPhone2($item['phone2']);
+                    $individual->setPhone(empty($item['phone']) ? '' : $item['phone']);
+                    $individual->setPhone2(empty($item['phone2']) ? '' : $item['phone2']);
                     $individual->setEmail($item['email']);
                     $individual->setAddress($item['address']);
                     $individual->setPostcode($item['postcode']);
@@ -186,10 +188,12 @@ class IndividualController extends Controller {
                     $individual->setUpdated(new \DateTime());
                     $individual->setUpdatedBy($user);
                     $individual->setNotes(nl2br($item['notes']));
-                    $individual->setNotesChildren($item['notes wth children']);
                     $em->persist($individual);
 
                     $business_id = $item['I_connection_2'];
+                    if (empty($business_id)) {
+                        continue;
+                    }
                     $business = $business_repo->findOneById2($item['I_connection_2']);
                     if (empty($business)) {
                         $business = new Business();

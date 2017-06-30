@@ -52,7 +52,7 @@ class BusinessController extends Controller {
             $business = $form->getData();
             $em->persist($business);
             $em->flush();
-            return $this->redirectToRoute('app_business_list');
+            return $this->redirectToRoute('app_business_show', ['id' => $id]);
         }
 
         return $this->render('AppBundle:Business:edit.html.twig', array(

@@ -7,8 +7,11 @@
     <div class="row-fluid">
         <div class="span6">
             <div class="widget-box">
-                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                    <h5>Business data</h5>
+                <div class="widget-title"> 
+                    <a href="{{ path('app_individual_edit',{'id':individual.id}) }}" class="btn btn-primary" style="float: left; margin: 3px;">
+                        <i class="icon icon-edit"></i>
+                    </a> 
+                    <h5>Individual data</h5>
                 </div>
                 <table class="table table-striped">
                     <tbody>
@@ -17,7 +20,7 @@
                             <td class="">{{ individual.getId }}</td>
                         </tr>
                         <tr>
-                            <td class="">ID 2</td>
+                            <td class="">Old ID</td>
                             <td class="">{{ individual.getId2 }}</td>
                         </tr>
                         <tr>
@@ -71,10 +74,6 @@
                         <tr>
                             <td class="">Notes</td>
                             <td class="">{{ individual.getNotes|raw }}</td>
-                        </tr>
-                        <tr>
-                            <td class="">Children</td>
-                            <td class="">{{ individual.getNotesChildren|nl2br }}</td>
                         </tr>
                     </tbody>
                 </table>

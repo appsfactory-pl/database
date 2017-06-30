@@ -7,7 +7,10 @@
     <div class="row-fluid">
         <div class="span6">
             <div class="widget-box">
-                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                <div class="widget-title"> 
+                    <a href="{{ path('app_business_edit',{'id':business.id}) }}" class="btn btn-primary" style="float: left; margin: 3px;">
+                        <i class="icon icon-edit"></i>
+                    </a> 
                     <h5>Business data</h5>
                 </div>
                 <table class="table table-striped">
@@ -17,7 +20,7 @@
                             <td class="">{{ business.getId }}</td>
                         </tr>
                         <tr>
-                            <td class="">ID 2</td>
+                            <td class="">Old ID</td>
                             <td class="">{{ business.getId2 }}</td>
                         </tr>
                         <tr>
@@ -29,8 +32,8 @@
                             <td class="">{{ business.getAddress }}</td>
                         </tr>
                         <tr>
-                            <td class="">Business Name</td>
-                            <td class="">{{ business.getName }}</td>
+                            <td class="">Postcode</td>
+                            <td class="">{{ business.getPostcode }}</td>
                         </tr>
                         <tr>
                             <td class="">Date of Incorporation</td>
