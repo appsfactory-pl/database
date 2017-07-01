@@ -16,6 +16,8 @@ use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use AppBundle\Entity\Business;
 use AppBundle\Entity\Individual;
+use AppBundle\Entity\IndividualIndividual;
+use AppBundle\Form\IndividualIndividualType;
 
 class IndividualController extends Controller {
 
@@ -108,20 +110,35 @@ class IndividualController extends Controller {
             $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
 
+        $individualIndividual = new IndividualIndividual();
+        $individualIndividual->setIndividual($individual);
+        $form2 = $this->createForm(IndividualIndividualType::class, $individualIndividual);
+        $form2->handleRequest($request);
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            $data = $form2->getData();
+            $em->persist($data);
+            $em->flush();
+            $this->redirectToRoute('app_individual_show', ['id' => $id]);
+        }
+
+
         $repoBusiness = $em->getRepository('AppBundle:BusinessIndividual');
         $business = $repoBusiness->findByIndividual($individual);
+        $individual2 = $em->getRepository('AppBundle:IndividualIndividual')->findByIndividual($individual);
 
         return $this->render('AppBundle:Individual:show.html.twig', array(
                     // ...
                     'individual' => $individual,
+                    'individual2' => $individual2,
                     'business' => $business,
                     'form' => $form->createView(),
+                    'form2' => $form2->createView(),
         ));
     }
 
     /**
      * 
-     * @Route("/business/remove-business/{id}")
+     * @Route("/individual/remove-business/{id}")
      * @param Request $request
      * @param type $id
      */
@@ -147,6 +164,7 @@ class IndividualController extends Controller {
                 $business_repo = $em->getRepository('AppBundle:Business');
                 $business_individual_repo = $em->getRepository('AppBundle:BusinessIndividual');
                 $individual_repo = $em->getRepository('AppBundle:Individual');
+                $individual_individual_repo = $em->getRepository('AppBundle:IndividualIndividual');
                 $person_types_repo = $em->getRepository('AppBundle:PersonTypes');
                 move_uploaded_file($_FILES['xls-file']['tmp_name'], $filename);
                 $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
@@ -166,7 +184,7 @@ class IndividualController extends Controller {
                     if (empty($item['dob']) || $item['dob'] == '0000-00-00') {
                         $item['dob'] = null;
                     }
-                    if (!isset($item['title']) || !isset($item['forename']) || !isset($item['email']) || !isset($item['notes'])) {
+                    if (!isset($item['title']) || !isset($item['forename']) || !isset($item['email']) || !isset($item['notes wth children'])) {
                         continue;
                     }
                     $individual->setTitle($item['title']);
@@ -187,8 +205,46 @@ class IndividualController extends Controller {
                     $individual->setCreatedBy($user);
                     $individual->setUpdated(new \DateTime());
                     $individual->setUpdatedBy($user);
-                    $individual->setNotes(nl2br($item['notes']));
+                    $individual->setNotes(nl2br($item['notes wth children']));
                     $em->persist($individual);
+
+                    $individual_id2 = $item['I_connection_1'];
+                    if (!empty($individual_id2)) {
+                        $individual2 = $individual_repo->findOneById2($individual_id2);
+                        if (empty($individual2)) {
+                            $individual2 = new Individual();
+                            $individual2->setId2($individual_id2);
+                            $individual2->setTitle('mr');
+                            $individual2->setForename($item['I_connection_1_name']);
+                            $individual2->setLastname($item['I_connection_1_name']);
+                            $individual2->setDob(null);
+                            $individual2->setCreated(new \DateTime());
+                            $individual2->setCreatedBy($user);
+                            $individual2->setUpdated(new \DateTime());
+                            $individual2->setUpdatedBy($user);
+                            $individual2->setNotes(nl2br($item['I_connection_1_name']));
+                            $em->persist($individual2);
+                            $em->flush();
+                        }
+                        $individual_individual = $individual_individual_repo->findOneBy([
+                            'individual' => $individual,
+                            'individual2' => $individual2,
+                        ]);
+                        if (empty($individual_individual)) {
+                            $type = $person_types_repo->findOneByName($item['I_connection_1_type']);
+                            if (empty($type)) {
+                                $type = new PersonTypes();
+                                $type->setName($item['I_connection_1_type']);
+                                $em->persist($type);
+                            }
+                            $individual_individual = new IndividualIndividual();
+                            $individual_individual->setIndividual($individual);
+                            $individual_individual->setIndividual2($individual2);
+                            $individual_individual->setType($type);
+                            $em->persist($individual_individual);
+                            $em->flush();
+                        }
+                    }
 
                     $business_id = $item['I_connection_2'];
                     if (empty($business_id)) {
@@ -295,6 +351,19 @@ class IndividualController extends Controller {
                     'form' => $form->createView(),
                         // ...
         ));
+    }
+
+    /**
+     * 
+     * @Route("/individual/remove-individual/{id}")
+     */
+    public function removeIndividualAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $ii = $em->getRepository("AppBundle:IndividualIndividual")->find($id);
+        $individual_id = $ii->getIndividual()->getId();
+        $em->remove($ii);
+        $em->flush();
+        return $this->redirectToRoute('app_individual_show', ['id' => $individual_id]);
     }
 
 }
