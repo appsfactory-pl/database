@@ -173,19 +173,24 @@ class IndividualController extends Controller {
                 foreach ($data as $k => $item) {
                     $individual_id = $item['ID_I'];
                     if (empty($individual_id)) {
-                        $this->addFlash('error', 'Incorrect file type. You can import only CSV files.');
+                        $this->addFlash('error', 'No individual ID. '. serialize($item));
                         $this->redirectToRoute('app_individual_import');
                     }
                     $individual = $individual_repo->findOneById2($individual_id);
                     if (empty($individual)) {
                         $individual = new Individual();
                         $individual->setId2($individual_id);
+                        $individual->setCreated(new \DateTime());
+                        $individual->setCreatedBy($user);
                     }
                     if (empty($item['dob']) || $item['dob'] == '0000-00-00') {
                         $item['dob'] = null;
                     }
-                    if (!isset($item['title']) || !isset($item['forename']) || !isset($item['email']) || !isset($item['notes wth children'])) {
+                    if (!isset($item['title']) || !isset($item['forename']) || !isset($item['email'])) {
                         continue;
+                    }
+                    if (!isset($item['notes wth children'])){
+                        $item['notes wth children'] = null;
                     }
                     $individual->setTitle($item['title']);
                     $individual->setForename($item['forename']);
@@ -201,13 +206,11 @@ class IndividualController extends Controller {
                     $individual->setNin($item['nin']);
                     $individual->setUtr($item['utr']);
 
-                    $individual->setCreated(new \DateTime());
-                    $individual->setCreatedBy($user);
                     $individual->setUpdated(new \DateTime());
                     $individual->setUpdatedBy($user);
                     $individual->setNotes(nl2br($item['notes wth children']));
                     $em->persist($individual);
-
+                    $em->flush();
                     $individual_id2 = $item['I_connection_1'];
                     if (!empty($individual_id2)) {
                         $individual2 = $individual_repo->findOneById2($individual_id2);
@@ -260,6 +263,7 @@ class IndividualController extends Controller {
                         $business->setDoi(null);
                         $business->setCno(1);
                         $em->persist($business);
+                        $em->flush();
                     }
 
                     $business_individual = $business_individual_repo->findOneBy([
@@ -278,9 +282,9 @@ class IndividualController extends Controller {
                         $business_individual->setIndividual($individual);
                         $business_individual->setType($type);
                         $em->persist($business_individual);
+                        $em->flush();
                     }
 
-                    $em->flush();
                 }
                 $this->addFlash('success', 'Data imported successfuly.');
                 $this->redirectToRoute('app_individual_import');
