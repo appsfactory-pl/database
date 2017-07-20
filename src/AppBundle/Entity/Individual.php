@@ -146,11 +146,68 @@ class Individual {
     protected $updatedBy;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Status")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     */
+    protected $status;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\MaritialStatus")
+     * @ORM\JoinColumn(name="maritial_status_id", referencedColumnName="id")
+     */
+    protected $maritialStatus;
+
+    /**
      * @var string
      * 
      * @ORM\Column(name="notes", type="text", nullable=true)
      */
     private $notes;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="date_moved_in", type="date", nullable=true) 
+     */
+    private $dateMovedIn;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="date_disengaged", type="date", nullable=true)
+     */
+    private $dateDisengaged;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DisengegementReason")
+     * @ORM\JoinColumn(name="disengegement_reason_id", referencedColumnName="id")
+     */
+    protected $disengegementReason;
+
+    /**
+     * @var string
+     * @ORM\Column(name="archived", type="date", nullable=true)
+     */
+    private $archived;
+
+    /**
+     *
+     * @var int
+     * @ORM\Column(name="archive_number",type="integer",nullable=true) 
+     */
+    private $archiveNumber;
+
+    /**
+     *
+     * @var string
+     * @ORM\Column(name="archive_note",type="string", length=255, nullable=true)
+     */
+    private $archiveNote;
 
     /**
      * Get id
@@ -160,14 +217,14 @@ class Individual {
     public function getId() {
         return $this->id;
     }
-    
+
     /**
      * 
      * @param Int $id
      * @return $this
      */
-    public function setId($id){
-        $this->id=$id;
+    public function setId($id) {
+        $this->id = $id;
         return $this;
     }
 
@@ -179,14 +236,14 @@ class Individual {
     public function getId2() {
         return $this->id2;
     }
-    
+
     /**
      * 
      * @param Int $id
      * @return $this
      */
-    public function setId2($id2){
-        $this->id2=$id2;
+    public function setId2($id2) {
+        $this->id2 = $id2;
         return $this;
     }
 
@@ -286,10 +343,10 @@ class Individual {
      * @return Individual
      */
     public function setDob($dob) {
-        if(strstr($dob, '/')){
+        if (strstr($dob, '/')) {
             $date = explode('/', $dob);
-            $dob = $date[2].'-'.$date[1].'-'.$date[0];
-        } 
+            $dob = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
         $this->dob = new \DateTime($dob);
 
         return $this;
@@ -579,6 +636,149 @@ class Individual {
      */
     public function getNotes() {
         return $this->notes;
+    }
+
+    /**
+     * 
+     * @param type $status
+     */
+    public function setStatus($status) {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getStatus() {
+        return $this->status;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getMaritialStatus() {
+        return $this->maritialStatus;
+    }
+
+    /**
+     * 
+     * @param type $maritialStatus
+     * @return $this
+     */
+    public function setMaritialStatus($maritialStatus) {
+        $this->maritialStatus = $maritialStatus;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDateMovedIn() {
+        return $this->dateMovedIn;
+    }
+
+    /**
+     * 
+     * @param type $dateMovedIn
+     * @return $this
+     */
+    public function setDateMovedIn($dateMovedIn) {
+        $this->dateMovedIn = $dateMovedIn;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDateDisengaged() {
+        return $this->dateDisengaged;
+    }
+
+    /**
+     * 
+     * @param type $dateDisengaged
+     * @return $this
+     */
+    public function setDateDisengaged($dateDisengaged) {
+        $this->dateDisengaged = $dateDisengaged;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $disengegementReason
+     * @return $this
+     */
+    public function setDisengegementReason($disengegementReason) {
+        $this->disengegementReason = $disengegementReason;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDisengegementReason() {
+        return $this->disengegementReason;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getArchived() {
+        return $this->archived;
+    }
+
+    /**
+     * 
+     * @param type $archived
+     * @return $this
+     */
+    public function setArchived($archived) {
+        $this->archived = $archived;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getArchiveNumber() {
+        return $this->archiveNumber;
+    }
+
+    /**
+     * 
+     * @param type $archiveNumber
+     * @return $this
+     */
+    public function setArchiveNumber($archiveNumber) {
+        $this->archiveNumber = $archiveNumber;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getArchiveNote(){
+        return $this->archiveNote;
+    }
+
+    /**
+     * 
+     * @param type $archiveNote
+     * @return $this
+     */
+    public function setArchiveNote($archiveNote){
+        $this->archiveNote = $archiveNote;
+        return $this;
     }
 
     /**

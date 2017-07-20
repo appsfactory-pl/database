@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Maritial Statuses List{% endblock %}
+{% block header %}Maritial Statuses List{% endblock %}
+
+{% block body %}
+    {% if statuses is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for status in statuses %}
+                            <tr>
+                                <td>{{ status.id }}</td>
+                                <td>{{ status.name }}</td>
+                                <td>
+                                    <a href="{{ path('app_library_maritial-status-edit',{'id':status.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                </td>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
