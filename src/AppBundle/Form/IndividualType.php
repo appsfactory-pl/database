@@ -18,6 +18,7 @@ class IndividualType extends AbstractType
     {
         $builder
                 ->add('id2')
+                ->add('status')
                 ->add('title')
                 ->add('forename')
                 ->add('middlename')
@@ -26,12 +27,19 @@ class IndividualType extends AbstractType
                 ->add('dob', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"]])
                 ->add('phone')
                 ->add('phone2')
+                ->add('maritialStatus')
                 ->add('email', EmailType::class)
                 ->add('address')
                 ->add('postcode')
+                ->add('dateMovedIn', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"]])
                 ->add('nin')
                 ->add('utr')
                 ->add('notes', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12']])
+                ->add('dateDisengaged', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"],'required'=>false])
+                ->add('disengegementReason')
+                ->add('archived', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"],'required'=>false])
+                ->add('archiveNumber')
+                ->add('archiveNote')
                 ;
     }
     

@@ -20,6 +20,10 @@
                             <td class="">{{ individual.getId }}</td>
                         </tr>
                         <tr>
+                            <td class="">Status</td>
+                            <td class="">{{ individual.getStatus.getName }}</td>
+                        </tr>
+                        <tr>
                             <td class="">Old ID</td>
                             <td class="">{{ individual.getId2 }}</td>
                         </tr>
@@ -44,6 +48,10 @@
                             <td class="">{{ individual.getDob }}</td>
                         </tr>
                         <tr>
+                            <td class="">MaritialStatus</td>
+                            <td class="">{{ individual.getMaritialStatus.getName }}</td>
+                        </tr>
+                        <tr>
                             <td class="">Telephone</td>
                             <td class="">{{ individual.getPhone }}</td>
                         </tr>
@@ -64,6 +72,10 @@
                             <td class="">{{ individual.getPostcode }}</td>
                         </tr>
                         <tr>
+                            <td class="">Date Moved In</td>
+                            <td class="">{{ individual.getDateMovedIn }}</td>
+                        </tr>
+                        <tr>
                             <td class="">NIN</td>
                             <td class="">{{ individual.getNin }}</td>
                         </tr>
@@ -74,6 +86,26 @@
                         <tr>
                             <td class="">Notes</td>
                             <td class="">{{ individual.getNotes|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Disengaged</td>
+                            <td class="">{{ individual.getDateDisengaged }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Disengagement Reason</td>
+                            <td class="">{{ individual.getDisengegementReason.getName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Archived</td>
+                            <td class="">{{ individual.getArchived }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Archive Number</td>
+                            <td class="">{{ individual.getArchiveNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Archive Note</td>
+                            <td class="">{{ individual.getArchiveNote }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -678,7 +678,10 @@ class Individual {
      * @return type
      */
     public function getDateMovedIn() {
-        return $this->dateMovedIn;
+        if (!empty($this->dateMovedIn)) {
+            return $this->dateMovedIn->format('d/m/Y');
+        }
+        return null;
     }
 
     /**
@@ -687,7 +690,11 @@ class Individual {
      * @return $this
      */
     public function setDateMovedIn($dateMovedIn) {
-        $this->dateMovedIn = $dateMovedIn;
+        if (strstr($dateMovedIn, '/')) {
+            $date = explode('/', $dateMovedIn);
+            $dateMovedIn = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->dateMovedIn = new \DateTime($dateMovedIn);
         return $this;
     }
 
@@ -696,7 +703,10 @@ class Individual {
      * @return type
      */
     public function getDateDisengaged() {
-        return $this->dateDisengaged;
+        if (!empty($this->dateDisengaged)) {
+            return $this->dateDisengaged->format('d/m/Y');
+        }
+        return null;
     }
 
     /**
@@ -705,7 +715,11 @@ class Individual {
      * @return $this
      */
     public function setDateDisengaged($dateDisengaged) {
-        $this->dateDisengaged = $dateDisengaged;
+        if (strstr($dateDisengaged, '/')) {
+            $date = explode('/', $dateDisengaged);
+            $dateDisengaged = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->dateDisengaged = new \DateTime($dateDisengaged);
         return $this;
     }
 
@@ -732,7 +746,10 @@ class Individual {
      * @return type
      */
     public function getArchived() {
-        return $this->archived;
+        if (!empty($this->archived)) {
+            return $this->archived->format('d/m/Y');
+        }
+        return null;
     }
 
     /**
@@ -741,7 +758,11 @@ class Individual {
      * @return $this
      */
     public function setArchived($archived) {
-        $this->archived = $archived;
+        if (strstr($archived, '/')) {
+            $date = explode('/', $archived);
+            $archived = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->archived = new \DateTime($archived);
         return $this;
     }
 

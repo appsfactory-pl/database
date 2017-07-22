@@ -15,6 +15,12 @@
                     <div class="widget-content nopadding">
                         {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
                         <div class="control-group">
+                            {{ form_label(form.status,'Status',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.status,{'attr':{'placeholder':'Status','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
                             {{ form_label(form.id2,'Old ID',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 {{ form_widget(form.id2,{'attr':{'placeholder':'Old ID','class':''}}) }}
@@ -59,6 +65,12 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            {{ form_label(form.maritialStatus,'Maritial Status',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.maritialStatus,{'attr':{'placeholder':'Maritial Status','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
                             {{ form_label(form.phone,'Telephone',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 {{ form_widget(form.phone,{'attr':{'placeholder':'Phone','class':''}}) }}
@@ -89,7 +101,14 @@
                                 {{ form_widget(form.postcode,{'attr':{'placeholder':'Postcode'}}) }}
                             </div>
                         </div>
-
+                        <div class="control-group">
+                            {{ form_label(form.dateMovedIn,'Date Moved In',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateMovedIn,{'attr':{'placeholder':'Date Moved In','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="control-group">
                             {{ form_label(form.nin,'NIN',{'label_attr':{'class':'control-label'}}) }}
@@ -111,6 +130,43 @@
                                 {{ form_widget(form.notes,{'attr':{'placeholder':'Type Text...','style':'height:180px;'}}) }}
                             </div>
                         </div>
+                            
+                        <div class="control-group">
+                            {{ form_label(form.dateDisengaged,'Client Disengaged',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateDisengaged,{'attr':{'placeholder':'Client Disengaged','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.disengegementReason,'Disengagement Reason',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.disengegementReason,{'attr':{'placeholder':'Disengagement Reason','class':''}}) }}
+                            </div>
+                        </div>
+                                
+                        <div class="control-group">
+                            {{ form_label(form.archived,'Client Archived',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.archived,{'attr':{'placeholder':'Client Archived','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.archiveNumber,'Archive Number',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.archiveNumber,{'attr':{'placeholder':'Archive Number','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.archiveNote,'Archive Note',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.archiveNote,{'attr':{'placeholder':'Archive Note','class':''}}) }}
+                            </div>
+                        </div>
+
 
                         <div class="form-actions">
                             <input type="submit" class="btn btn-success" value="Save">

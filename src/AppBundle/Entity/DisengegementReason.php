@@ -62,5 +62,9 @@ class DisengegementReason
     {
         return $this->name;
     }
+    
+    public function __toString() {
+        return $this->name;
+    }
 }
 
