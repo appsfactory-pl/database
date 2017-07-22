@@ -9,6 +9,7 @@ use AppBundle\Form\MaritialStatusType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\FileTypeType;
 use AppBundle\Form\StatusType;
+use AppBundle\Form\DisengegementReasonType;
 
 class LibraryController extends Controller {
 
@@ -160,10 +161,10 @@ class LibraryController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Status');
         $status = $repo->find($id);
-        if(empty($status)){
-                        return $this->redirectToRoute('app_library_status');
+        if (empty($status)) {
+            return $this->redirectToRoute('app_library_status');
         }
-        $form = $this->createForm(StatusType::class,$status);
+        $form = $this->createForm(StatusType::class, $status);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $status = $form->getData();
@@ -172,26 +173,40 @@ class LibraryController extends Controller {
             return $this->redirectToRoute('app_library_status');
         }
         return $this->render('AppBundle:Library:status_edit.html.twig', array(
-                        // ...
-            'form'=>$form->createView(),
+                    // ...
+                    'form' => $form->createView(),
         ));
     }
 
     /**
      * @Route("/library/disengegement-reason")
      */
-    public function disengegementReasonAction() {
+    public function disengegementReasonAction(EntityManagerInterface $em) {
+        $repo = $em->getRepository('AppBundle:DisengegementReason');
+        $reasons = $repo->findAll();
         return $this->render('AppBundle:Library:disengegement_reason.html.twig', array(
-                        // ...
+                    // ...
+                    'reasons' => $reasons,
         ));
     }
 
     /**
      * @Route("/library/disengegement-reason-add")
      */
-    public function disengegementReasonAddAction() {
+    public function disengegementReasonAddAction(Request $request) {
+        $form = $this->createForm(DisengegementReasonType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $reason = $form->getData();
+            var_dump($reason); die;
+            $em->persist($reason);
+            $em->flush();
+            return $this->redirectToRoute('app_library_disengegementreason');
+        }
         return $this->render('AppBundle:Library:disengegement_reason_add.html.twig', array(
                         // ...
+            'form'=>$form->createView(),
         ));
     }
 

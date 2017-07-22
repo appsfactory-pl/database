@@ -1,7 +1,36 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Library:disengegementReason{% endblock %}
+{% block title %}Disengegement Reasons List{% endblock %}
+{% block header %}Disengegement Reasons List{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Library:disengegementReason page</h1>
+    {% if reasons is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>ž
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reason in reasons %}
+                            <tr>
+                                <td>{{ reason.id }}</td>
+                                <td>{{ reason.name }}</td>
+                                <td>
+                                    <a href="{{ path('app_library_filetypeedit',{'id':reason.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
