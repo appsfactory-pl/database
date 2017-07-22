@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Disengegement Reasons List{% endblock %}
-{% block header %}Disengegement Reasons List{% endblock %}
+{% block title %}Disengagement Reasons List{% endblock %}
+{% block header %}Disengagement Reasons List{% endblock %}
 
 {% block body %}
     {% if reasons is not empty %}
@@ -11,7 +11,7 @@
             </div>
             <div class="widget-content nopadding">
                 <table class="table table-bordered data-table">
-                    <thead>ž
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -24,7 +24,7 @@
                                 <td>{{ reason.id }}</td>
                                 <td>{{ reason.name }}</td>
                                 <td>
-                                    <a href="{{ path('app_library_filetypeedit',{'id':reason.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                    <a href="{{ path('app_library_disengegementreasonedit',{'id':reason.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

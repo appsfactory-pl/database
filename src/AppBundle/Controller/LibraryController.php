@@ -196,26 +196,40 @@ class LibraryController extends Controller {
     public function disengegementReasonAddAction(Request $request) {
         $form = $this->createForm(DisengegementReasonType::class);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $reason = $form->getData();
-            var_dump($reason); die;
             $em->persist($reason);
             $em->flush();
             return $this->redirectToRoute('app_library_disengegementreason');
         }
         return $this->render('AppBundle:Library:disengegement_reason_add.html.twig', array(
-                        // ...
-            'form'=>$form->createView(),
+                    // ...
+                    'form' => $form->createView(),
         ));
     }
 
     /**
      * @Route("/library/disengegement-reason-edit/{id}")
      */
-    public function disengegementReasonEditAction($id) {
+    public function disengegementReasonEditAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:DisengegementReason');
+        $reason = $repo->find($id);
+        if (empty($reason)) {
+            return $this->redirectToRoute('app_library_disengegementreason');
+        }
+        $form = $this->createForm(DisengegementReasonType::class, $reason);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reason = $form->getData();
+            $em->persist($reason);
+            $em->flush();
+            return $this->redirectToRoute('app_library_disengegementreason');
+        }
         return $this->render('AppBundle:Library:disengegement_reason_edit.html.twig', array(
-                        // ...
+                    // ...
+                    'form' => $form->createView(),
         ));
     }
 
