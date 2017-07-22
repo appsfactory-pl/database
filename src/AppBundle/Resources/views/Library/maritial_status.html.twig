@@ -15,6 +15,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,7 +24,7 @@
                                 <td>{{ status.id }}</td>
                                 <td>{{ status.name }}</td>
                                 <td>
-                                    <a href="{{ path('app_library_maritial-status-edit',{'id':status.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                    <a href="{{ path('app_library_maritialstatusedit',{'id':status.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
                                 </td>
                             {% endfor %}
                     </tbody>

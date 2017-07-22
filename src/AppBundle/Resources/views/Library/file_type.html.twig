@@ -1,7 +1,35 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Library:fileType{% endblock %}
+{% block title %}File Types List{% endblock %}
+{% block header %}File Types List{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Library:fileType page</h1>
+    {% if types is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for type in types %}
+                            <tr>
+                                <td>{{ type.id }}</td>
+                                <td>{{ type.name }}</td>
+                                <td>
+                                    <a href="{{ path('app_library_filetypeedit',{'id':type.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                </td>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

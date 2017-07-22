@@ -73,6 +73,18 @@
                         <li><a href="{{ path('app_user_showlog') }}">Show logins</a></li>
                     </ul>
                 </li>
+
+                <li class="submenu">
+                    <a href="#">
+                        <i class="icon icon-user" aria-hidden="true"></i> <span>Library</span> 
+                    </a>
+                    <ul>
+                        <li><a href="{{ path('app_library_maritialstatus') }}">Maritial Statuses List</a></li>
+                        <li><a href="{{ path('app_library_maritialstatusadd') }}">Add Maritial Status</a></li>
+                        <li><a href="{{ path('app_library_filetype') }}">File Types List</a></li>
+                        <li><a href="{{ path('app_library_filetypeadd') }}">Add File Type</a></li>
+                    </ul>
+                </li>
             {% endif %}
             <li class="submenu">
                 <a href="#">
