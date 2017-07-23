@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="business")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BusinessRepository")
  */
-class Business
-{
+class Business {
+
     /**
      * @var int
      *
@@ -28,7 +28,6 @@ class Business
      */
     private $id2;
 
-    
     /**
      * @var string
      *
@@ -56,6 +55,13 @@ class Business
      * @ORM\Column(name="doi", type="date")
      */
     private $doi;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="doc", type="date", nullable=true)
+     */
+    private $doc;
 
     /**
      * @var string
@@ -107,20 +113,124 @@ class Business
     private $notes;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\LegalForm")
+     * @ORM\JoinColumn(name="legal_form_by", referencedColumnName="id")
+     */
+    protected $legalForm;
+
+    /**
+     *
+     * @var type 
+     * @ORM\Column(name="beta_page_link",type="string", length=64, nullable=true)
+     */
+    private $betaPageLink;
+
+    /**
+     *
+     * @var type 
+     * @ORM\Column(name="telephone",type="string", length=24, nullable=true)
+     */
+    private $telephone;
+
+    /**
+     *
+     * @var type 
+     * @ORM\Column(name="email",type="string", length=64, nullable=true)
+     */
+    private $email;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="accounts_office", type="string", length=255, nullable=true) 
+     */
+    private $accountsOffice;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="webfilling_email", type="string", length=64, nullable=true) 
+     */
+    private $webfillingEmail;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="webfilling_password", type="string", length=255, nullable=true) 
+     */
+    private $webfillingPassword;
+
+    
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="authentication_code", type="string", length=64, nullable=true) 
+     */
+    private $authenticationCode;
+
+    
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="date_disengaged", type="date", nullable=true)
+     */
+    private $dateDisengaged;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DisengegementReason")
+     * @ORM\JoinColumn(name="disengegement_reason_id", referencedColumnName="id")
+     */
+    protected $disengegementReason;
+
+    /**
+     * @var string
+     * @ORM\Column(name="archived", type="date", nullable=true)
+     */
+    private $archived;
+
+    /**
+     *
+     * @var int
+     * @ORM\Column(name="archive_number",type="integer",nullable=true) 
+     */
+    private $archiveNumber;
+
+    /**
+     *
+     * @var string
+     * @ORM\Column(name="archive_note",type="string", length=255, nullable=true)
+     */
+    private $archiveNote;
+
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="date_moved_in", type="date", nullable=true) 
+     */
+    private $dateMovedIn;
+
+    /**
      * 
      * @param type $id
      */
-    public function setId($id){
+    public function setId($id) {
         $this->id = $id;
         return $this;
     }
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -128,17 +238,17 @@ class Business
      * 
      * @param type $id
      */
-    public function setId2($id2){
+    public function setId2($id2) {
         $this->id2 = $id2;
         return $this;
     }
+
     /**
      * Get id
      *
      * @return int
      */
-    public function getId2()
-    {
+    public function getId2() {
         return $this->id2;
     }
 
@@ -149,8 +259,7 @@ class Business
      *
      * @return Business
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -161,8 +270,7 @@ class Business
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -173,8 +281,7 @@ class Business
      *
      * @return Business
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
 
         return $this;
@@ -185,8 +292,7 @@ class Business
      *
      * @return string
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -197,8 +303,7 @@ class Business
      *
      * @return Business
      */
-    public function setPostcode($postcode)
-    {
+    public function setPostcode($postcode) {
         $this->postcode = $postcode;
 
         return $this;
@@ -209,8 +314,7 @@ class Business
      *
      * @return string
      */
-    public function getPostcode()
-    {
+    public function getPostcode() {
         return $this->postcode;
     }
 
@@ -221,12 +325,11 @@ class Business
      *
      * @return Business
      */
-    public function setDoi($doi)
-    {
-        if(strstr($doi, '/')){
+    public function setDoi($doi) {
+        if (strstr($doi, '/')) {
             $date = explode('/', $doi);
-            $doi = $date[2].'-'.$date[1].'-'.$date[0];
-        } 
+            $doi = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
         $this->doi = new \DateTime($doi);
 
         return $this;
@@ -237,10 +340,37 @@ class Business
      *
      * @return \DateTime
      */
-    public function getDoi()
-    {
-        if(!empty($this->doi)){
+    public function getDoi() {
+        if (!empty($this->doi)) {
             return $this->doi->format('d/m/Y');
+        }
+        return null;
+    }
+    /**
+     * Set doi
+     *
+     * @param \DateTime $doi
+     *
+     * @return Business
+     */
+    public function setDoc($doc) {
+        if (strstr($doc, '/')) {
+            $date = explode('/', $doc);
+            $doc = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->doc = new \DateTime($doc);
+
+        return $this;
+    }
+
+    /**
+     * Get doi
+     *
+     * @return \DateTime
+     */
+    public function getDoc() {
+        if (!empty($this->doc)) {
+            return $this->doc->format('d/m/Y');
         }
         return null;
     }
@@ -252,8 +382,7 @@ class Business
      *
      * @return Business
      */
-    public function setCno($cno)
-    {
+    public function setCno($cno) {
         $this->cno = $cno;
 
         return $this;
@@ -264,8 +393,7 @@ class Business
      *
      * @return string
      */
-    public function getCno()
-    {
+    public function getCno() {
         return $this->cno;
     }
 
@@ -276,8 +404,7 @@ class Business
      *
      * @return Business
      */
-    public function setUtr($utr)
-    {
+    public function setUtr($utr) {
         $this->utr = $utr;
 
         return $this;
@@ -288,8 +415,7 @@ class Business
      *
      * @return string
      */
-    public function getUtr()
-    {
+    public function getUtr() {
         return $this->utr;
     }
 
@@ -300,8 +426,7 @@ class Business
      *
      * @return Business
      */
-    public function setVat($vat)
-    {
+    public function setVat($vat) {
         $this->vat = $vat;
 
         return $this;
@@ -312,8 +437,7 @@ class Business
      *
      * @return string
      */
-    public function getVat()
-    {
+    public function getVat() {
         return $this->vat;
     }
 
@@ -324,8 +448,7 @@ class Business
      *
      * @return Business
      */
-    public function setEpaye($epaye)
-    {
+    public function setEpaye($epaye) {
         $this->epaye = $epaye;
 
         return $this;
@@ -336,8 +459,7 @@ class Business
      *
      * @return string
      */
-    public function getEpaye()
-    {
+    public function getEpaye() {
         return $this->epaye;
     }
 
@@ -348,8 +470,7 @@ class Business
      *
      * @return Business
      */
-    public function setAccoff($accoff)
-    {
+    public function setAccoff($accoff) {
         $this->accoff = $accoff;
 
         return $this;
@@ -360,8 +481,7 @@ class Business
      *
      * @return string
      */
-    public function getAccoff()
-    {
+    public function getAccoff() {
         return $this->accoff;
     }
 
@@ -372,8 +492,7 @@ class Business
      *
      * @return Business
      */
-    public function setAccount($account)
-    {
+    public function setAccount($account) {
         $this->account = $account;
 
         return $this;
@@ -384,8 +503,7 @@ class Business
      *
      * @return string
      */
-    public function getAccount()
-    {
+    public function getAccount() {
         return $this->account;
     }
 
@@ -396,8 +514,7 @@ class Business
      *
      * @return Business
      */
-    public function setNotes($notes)
-    {
+    public function setNotes($notes) {
         $this->notes = $notes;
 
         return $this;
@@ -408,13 +525,213 @@ class Business
      *
      * @return string
      */
-    public function getNotes()
-    {
+    public function getNotes() {
         return $this->notes;
     }
-    
-    public function __toString() {
-        return 'ID: '.$this->id.' '.$this->name;
-    }
-}
 
+    public function setLegalForm($legalForm) {
+        $this->legalForm = $legalForm;
+        return $this;
+    }
+    
+    public function getLegalForm(){
+        return $this->legalForm;
+    }
+
+    public function __toString() {
+        return 'ID: ' . $this->id . ' ' . $this->name;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDateMovedIn() {
+        if (!empty($this->dateMovedIn)) {
+            return $this->dateMovedIn->format('d/m/Y');
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @param type $dateMovedIn
+     * @return $this
+     */
+    public function setDateMovedIn($dateMovedIn) {
+        if (strstr($dateMovedIn, '/')) {
+            $date = explode('/', $dateMovedIn);
+            $dateMovedIn = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->dateMovedIn = new \DateTime($dateMovedIn);
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDateDisengaged() {
+        if (!empty($this->dateDisengaged)) {
+            return $this->dateDisengaged->format('d/m/Y');
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @param type $dateDisengaged
+     * @return $this
+     */
+    public function setDateDisengaged($dateDisengaged) {
+        if (strstr($dateDisengaged, '/')) {
+            $date = explode('/', $dateDisengaged);
+            $dateDisengaged = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->dateDisengaged = new \DateTime($dateDisengaged);
+        return $this;
+    }
+
+    /**
+     * 
+     * @param type $disengegementReason
+     * @return $this
+     */
+    public function setDisengegementReason($disengegementReason) {
+        $this->disengegementReason = $disengegementReason;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getDisengegementReason() {
+        return $this->disengegementReason;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getArchived() {
+        if (!empty($this->archived)) {
+            return $this->archived->format('d/m/Y');
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * @param type $archived
+     * @return $this
+     */
+    public function setArchived($archived) {
+        if (strstr($archived, '/')) {
+            $date = explode('/', $archived);
+            $archived = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->archived = new \DateTime($archived);
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getArchiveNumber() {
+        return $this->archiveNumber;
+    }
+
+    /**
+     * 
+     * @param type $archiveNumber
+     * @return $this
+     */
+    public function setArchiveNumber($archiveNumber) {
+        $this->archiveNumber = $archiveNumber;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getArchiveNote(){
+        return $this->archiveNote;
+    }
+
+    /**
+     * 
+     * @param type $archiveNote
+     * @return $this
+     */
+    public function setArchiveNote($archiveNote){
+        $this->archiveNote = $archiveNote;
+        return $this;
+    }
+
+    public function getTelephone(){
+        return $this->telephone;
+    }
+    
+    public function setTelephone($telephone){
+        $this->telephone = $telephone;
+        return $this;
+    }
+    
+    public function getBetaPageLink(){
+        return $this->betaPageLink;
+    }
+    
+    public function setBetaPageLink($betaPageLink){
+        $this->betaPageLink = $betaPageLink;
+        return $this;
+    }
+    
+    public function getEmail(){
+        return $this->email;
+    }
+    
+    public function setEmail($email){
+        $this->email = $email;
+        return $this;
+    }
+    
+    public function getAccountsOffice(){
+        return $this->accountsOffice;
+    }
+    
+    public function setAccountsOffice($accuntsOffice){
+        $this->accountsOffice = $accuntsOffice;
+        return $this;
+    }
+    
+    public function getWebfillingEmail(){
+        return $this->webfillingEmail;
+    }
+    
+    public function setWebfillingEmail($webfillingEmail){
+        $this->webfillingEmail = $webfillingEmail;
+        return $this;
+    }
+    
+    public function getWebfillingPassword(){
+        return $this->webfillingPassword;
+    }
+    
+    public function setWebfillingPassword($webfillingPassword){
+        $this->webfillingPassword = $webfillingPassword;
+        return $this;
+    }
+    
+    public function getAuthenticationCode(){
+        return $this->authenticationCode;
+    }
+    
+    public function setAuthenticationCode($authenticationCode){
+        $this->authenticationCode = $authenticationCode;
+        return $this;
+    }
+    
+}

@@ -24,6 +24,12 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            {{ form_label(form.legalForm,'Legal Form',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.legalForm,{'attr':{'placeholder':'Legal Form','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
                             {{ form_label(form.name,'Company Name',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 {{ form_widget(form.name,{'attr':{'placeholder':'Company Name','class':''}}) }}
@@ -42,6 +48,14 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            {{ form_label(form.dateMovedIn,'Date Moved In',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateMovedIn,{'attr':{'placeholder':'Date Moved In','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
                             {{ form_label(form.doi,'Date of Incorporation',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 <div class="input-append date">
@@ -50,7 +64,33 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="control-group">
+                            {{ form_label(form.doc,'Date of Cessation',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.doc,{'attr':{'placeholder':'Date of Cessation','class':'datepicker'}}) }}
+{#                                    <span class="add-on"><i class="icon-th"></i></span> #}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.betaPageLink,'Beta Page Link',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.betaPageLink,{'attr':{'placeholder':'Beta Page Link','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.telephone,'Telephone',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.telephone,{'attr':{'placeholder':'Telephone','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.email,'Email',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.email,{'attr':{'placeholder':'Email','class':''}}) }}
+                            </div>
+                        </div>
 
                         <div class="control-group">
                             {{ form_label(form.cno,'Company Number',{'label_attr':{'class':'control-label'}}) }}
@@ -83,6 +123,34 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            {{ form_label(form.accountsOffice,'Accounts Office',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.accountOffice,{'attr':{'placeholder':'Accounts Office','class':''}}) }}
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            {{ form_label(form.webfillingEmail,'Webfilling Email',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.webfillingEmail,{'attr':{'placeholder':'Webfilling Email','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.webfillingPassword,'Webfilling Password',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.webfillingPassword,{'attr':{'placeholder':'Webfilling Password','class':''}}) }}
+                            </div>
+                        </div>
+
+                            <div class="control-group">
+                            {{ form_label(form.authenticationCode,'Authentication Code',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.authenticationCode,{'attr':{'placeholder':'Authentication Code','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
                             {{ form_label(form.account,'Bank account details',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 {{ form_widget(form.account,{'attr':{'placeholder':'Bank account details','class':''}}) }}
@@ -93,6 +161,42 @@
                             {{ form_label(form.notes,'Notes',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
                                 {{ form_widget(form.notes,{'attr':{'placeholder':'Type Text...','style':'height:180px;'}}) }}
+                            </div>
+                        </div>
+                            
+                        <div class="control-group">
+                            {{ form_label(form.dateDisengaged,'Client Disengaged',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateDisengaged,{'attr':{'placeholder':'Client Disengaged','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.disengegementReason,'Disengagement Reason',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.disengegementReason,{'attr':{'placeholder':'Disengagement Reason','class':''}}) }}
+                            </div>
+                        </div>
+                                
+                        <div class="control-group">
+                            {{ form_label(form.archived,'Client Archived',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.archived,{'attr':{'placeholder':'Client Archived','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.archiveNumber,'Archive Number',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.archiveNumber,{'attr':{'placeholder':'Archive Number','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.archiveNote,'Archive Note',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.archiveNote,{'attr':{'placeholder':'Archive Note','class':''}}) }}
                             </div>
                         </div>
 
