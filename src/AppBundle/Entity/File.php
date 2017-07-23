@@ -67,6 +67,19 @@ class File
      * @ORM\JoinColumn(name="individual_id", referencedColumnName="id")
      */
     protected $individual;
+    
+    /**
+     *
+     * @var type 
+     */
+    public $file;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FileType")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
+     */
+    protected $type;
 
     /**
      * Get id
@@ -195,8 +208,11 @@ class File
      */
     public function setDate($date)
     {
-        $this->date = $date;
-
+        if (strstr($date, '/')) {
+            $d = explode('/', $date);
+            $date = $d[2] . '-' . $d[1] . '-' . $d[0];
+        }
+        $this->date = new \DateTime($date);
         return $this;
     }
 
@@ -207,7 +223,10 @@ class File
      */
     public function getDate()
     {
-        return $this->date;
+        if (!empty($this->date)) {
+            return $this->date->format('d/m/Y');
+        }
+        return null;
     }
 
     /**
@@ -237,5 +256,30 @@ class File
     public function __toString() {
         return $this->path.$this->fileName;
     }
+
+    /**
+     * Get additionalInfo
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+    
+    /**
+     * 
+     * @param type $type
+     * @return $this
+     */
+    public function setType($type){
+        $this->type = $type;
+        return $this;
+    }
+    
+    public function getFile(){
+        return $this->file;
+    }
+    
 }
 

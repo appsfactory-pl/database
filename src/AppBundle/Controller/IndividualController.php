@@ -18,6 +18,8 @@ use AppBundle\Entity\Business;
 use AppBundle\Entity\Individual;
 use AppBundle\Entity\IndividualIndividual;
 use AppBundle\Form\IndividualIndividualType;
+use AppBundle\Form\FileType;
+use AppBundle\Entity\File;
 
 class IndividualController extends Controller {
 
@@ -121,11 +123,34 @@ class IndividualController extends Controller {
             $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
 
+        $file = new File();
+        $file->setIndividual($individual);
+
+        $fileForm = $this->createForm(FileType::class,$file);
+        $fileForm->handleRequest($request);
+        if($fileForm->isSubmitted() && $fileForm->isValid()){
+            $uploadedFile = $fileForm['file']->getData();
+            $newFileName = $individual->getId().'_'.$uploadedFile->getClientOriginalName();
+            $path = '/files/';
+            $dir = $_SERVER['DOCUMENT_ROOT'].$path;
+            $uploadedFile->move($dir, $newFileName);
+//            var_dump($uploadedFile);
+            $data = $fileForm->getData();
+            $data->setPath($path);
+            $data->setFileName($newFileName);
+            $data->setIndividual($individual);
+            $data->setAdded(new \DateTime());
+            $em->persist($data);
+            $em->flush();
+        }
+        
+        $filesRepo = $em->getRepository('AppBundle:File');
+        $files = $filesRepo->findByIndividual($individual);
 
         $repoBusiness = $em->getRepository('AppBundle:BusinessIndividual');
         $business = $repoBusiness->findByIndividual($individual);
         $individual2 = $em->getRepository('AppBundle:IndividualIndividual')->findByIndividual($individual);
-
+        
         return $this->render('AppBundle:Individual:show.html.twig', array(
                     // ...
                     'individual' => $individual,
@@ -133,6 +158,8 @@ class IndividualController extends Controller {
                     'business' => $business,
                     'form' => $form->createView(),
                     'form2' => $form2->createView(),
+                    'fileForm' => $fileForm->createView(),
+                    'files' => $files,
         ));
     }
 
