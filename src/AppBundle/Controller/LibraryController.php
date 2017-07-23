@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\FileTypeType;
 use AppBundle\Form\StatusType;
 use AppBundle\Form\DisengegementReasonType;
+use AppBundle\Form\LegalFormType;
 
 class LibraryController extends Controller {
 
@@ -228,6 +229,62 @@ class LibraryController extends Controller {
             return $this->redirectToRoute('app_library_disengegementreason');
         }
         return $this->render('AppBundle:Library:disengegement_reason_edit.html.twig', array(
+                    // ...
+                    'form' => $form->createView(),
+        ));
+    }
+
+    
+    /**
+     * @Route("/library/legal-form")
+     */
+    public function legalFormAction(EntityManagerInterface $em) {
+        $repo = $em->getRepository('AppBundle:LegalForm');
+        $forms = $repo->findAll();
+        return $this->render('AppBundle:Library:legal_form.html.twig', array(
+                    // ...
+                    'forms' => $forms,
+        ));
+    }
+
+    /**
+     * @Route("/library/legal-form-add")
+     */
+    public function legalFormAddAction(Request $request) {
+        $form = $this->createForm(LegalFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $status = $form->getData();
+            $em->persist($status);
+            $em->flush();
+            return $this->redirectToRoute('app_library_legalform');
+        }
+        return $this->render('AppBundle:Library:legal_form_add.html.twig', array(
+                    // ...
+                    'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/library/legal-form-edit/{id}")
+     */
+    public function legalFormEditAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:LegalForm');
+        $status = $repo->find($id);
+        if (empty($status)) {
+            return $this->redirectToRoute('app_library_legalform');
+        }
+        $form = $this->createForm(LegalFormType::class, $status);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $status = $form->getData();
+            $em->persist($status);
+            $em->flush();
+            return $this->redirectToRoute('app_library_legalform');
+        }
+        return $this->render('AppBundle:Library:legal_form_edit.html.twig', array(
                     // ...
                     'form' => $form->createView(),
         ));

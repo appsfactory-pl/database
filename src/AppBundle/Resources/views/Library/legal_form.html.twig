@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Legal Forms{% endblock %}
+{% block header %}Legal Forms List{% endblock %}
+
+{% block body %}
+    {% if forms is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for form in forms %}
+                            <tr>
+                                <td>{{ form.id }}</td>
+                                <td>{{ form.name }}</td>
+                                <td>
+                                    <a href="{{ path('app_library_legalformedit',{'id':form.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
