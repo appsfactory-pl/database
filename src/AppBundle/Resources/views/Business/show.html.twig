@@ -24,6 +24,10 @@
                             <td class="">{{ business.getId2 }}</td>
                         </tr>
                         <tr>
+                            <td class="">Legal Form</td>
+                            <td class="">{{ business.getLegalForm.getName }}</td>
+                        </tr>
+                        <tr>
                             <td class="">Business Name</td>
                             <td class="">{{ business.getName }}</td>
                         </tr>
@@ -36,8 +40,28 @@
                             <td class="">{{ business.getPostcode }}</td>
                         </tr>
                         <tr>
+                            <td class="">Date Moved In</td>
+                            <td class="">{{ business.getDateMovedIn }}</td>
+                        </tr>
+                        <tr>
                             <td class="">Date of Incorporation</td>
                             <td class="">{{ business.getDoi }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Date of Cessation</td>
+                            <td class="">{{ business.getDoc }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Beta Page Link</td>
+                            <td class="">{{ business.getBetaPageLink }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Telephone</td>
+                            <td class="">{{ business.getTelephone }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Email</td>
+                            <td class="">{{ business.getEmail }}</td>
                         </tr>
                         <tr>
                             <td class="">Company number</td>
@@ -60,12 +84,48 @@
                             <td class="">{{ business.getAccoff }}</td>
                         </tr>
                         <tr>
+                            <td class="">Accounts Office</td>
+                            <td class="">{{ business.getAccountsOffice }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Webfilling Email</td>
+                            <td class="">{{ business.getWebfillingEmail }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Webfilling Password</td>
+                            <td class="">{{ business.getWebfillingPassword }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Authentication Code</td>
+                            <td class="">{{ business.getAuthenticationCode }}</td>
+                        </tr>
+                        <tr>
                             <td class="">Bank account details</td>
                             <td class="">{{ business.getAccount|raw}}</td>
                         </tr>
                         <tr>
                             <td class="">Notes</td>
                             <td class="">{{ business.getNotes|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Disengaged</td>
+                            <td class="">{{ business.getDateDisengaged }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Disengagement Reason</td>
+                            <td class="">{{ business.getDisengegementReason.getName }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Archived</td>
+                            <td class="">{{ business.getArchived }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Archive Number</td>
+                            <td class="">{{ business.getArchiveNumber }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">Client Archive Note</td>
+                            <td class="">{{ business.getArchiveNote }}</td>
                         </tr>
                     </tbody>
                 </table>
