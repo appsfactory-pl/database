@@ -15,6 +15,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use AppBundle\Entity\Business;
 use AppBundle\Entity\Individual;
 use AppBundle\Entity\PersonTypes;
+use AppBundle\Form\FileType;
 
 class BusinessController extends Controller {
 
@@ -101,6 +102,28 @@ class BusinessController extends Controller {
             $em->flush();
             $this->redirectToRoute('app_business_show', ['id' => $id]);
         }
+        
+        $fileForm = $this->createForm(FileType::class);
+        $fileForm->handleRequest($request);
+        if($fileForm->isSubmitted() && $fileForm->isValid()){
+            $uploadedFile = $fileForm['file']->getData();
+            $newFileName = $business->getId().'_business_'.$uploadedFile->getClientOriginalName();
+            $path = '/files/';
+            $dir = $_SERVER['DOCUMENT_ROOT'].$path;
+            $uploadedFile->move($dir, $newFileName);
+//            var_dump($uploadedFile);
+            $data = $fileForm->getData();
+            $data->setPath($path);
+            $data->setFileName($newFileName);
+            $data->setBusiness($business);
+            $data->setAdded(new \DateTime());
+            $em->persist($data);
+            $em->flush();
+        }
+        $filesRepo = $em->getRepository('AppBundle:File');
+        $files = $filesRepo->findByBusiness($business);
+
+        
         $repoIndividual = $em->getRepository('AppBundle:BusinessIndividual');
         $individuals = $repoIndividual->findByBusiness($business);
         return $this->render('AppBundle:Business:show.html.twig', array(
@@ -108,6 +131,8 @@ class BusinessController extends Controller {
                     'business' => $business,
                     'individuals' => $individuals,
                     'form' => $form->createView(),
+                    'fileForm' => $fileForm->createView(),
+                    'files' => $files,
         ));
     }
 

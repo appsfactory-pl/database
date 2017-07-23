@@ -163,8 +163,8 @@
                                         <a href="{{ path('app_business_removeindividual',{'id':individual.getId}) }}" class="btn btn-danger btn-xs">
                                             <i class="icon icon-remove"></i>
                                         </a>
-                                        
-{#                                        {{ individual.getId }}#}
+
+                                        {#                                        {{ individual.getId }}#}
                                     </td>
                                 </tr>                            
                             {% endfor %}
@@ -198,6 +198,77 @@
                     </div>
                     {{ form_end(form) }}
                 </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                    <h5>Files</h5>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Additional Info</th>
+                            <th>File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if files is not empty %}
+                            {% for file in files %}
+                                <tr>
+                                    <td>{{ file.getId }}</td>
+                                    <td>{{ file.getType.getName }}</td>
+                                    <td>{{ file.getDate }}</td>
+                                    <td>{{ file.getAdditionalInfo }}</td>
+                                    <td>
+                                        <a href="{{ file.getPath }}{{ file.getFileName }}" target="_blank" class="btn btn-primary">
+                                            <i class="icon icon-file"></i>
+                                        </a>
+                                    </td>
+                                </tr>                            
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+
+
+                <h3>Add file</h3>
+                {{ form_start(fileForm,{'attr':{'class':'form-horizontal'}}) }}
+                <div class="control-group">
+                    {{ form_label(fileForm.file,'File',{'label_attr':{'class':'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(fileForm.file,{'attr':{'placeholder':'File','class':''}}) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(fileForm.type,'Type',{'label_attr':{'class':'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(fileForm.type,{'attr':{'placeholder':'Type','class':''}}) }}
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(fileForm.date,'Date',{'label_attr':{'class':'control-label'}}) }}
+                    <div class="controls">
+                        {#                            {{ form_widget(fileForm.date,{'attr':{'placeholder':'Date','class':''}}) }}#}
+                        <div class="input-append date">
+                            {{ form_widget(fileForm.date,{'attr':{'placeholder':'Date','class':'datepicker'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    {{ form_label(fileForm.additionalInfo,'Additional Info',{'label_attr':{'class':'control-label'}}) }}
+                    <div class="controls">
+                        {{ form_widget(fileForm.additionalInfo,{'attr':{'placeholder':'Additional Info','class':''}}) }}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-success" value="Save">
+                </div>
+                {{ form_end(fileForm) }}
+
+
             </div>
         </div>
     </div>
