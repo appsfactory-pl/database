@@ -170,8 +170,11 @@ class AddressHistory
      */
     public function setDateMovedIn($dateMovedIn)
     {
-        $this->dateMovedIn = $dateMovedIn;
-
+        if (strstr($dateMovedIn, '/')) {
+            $date = explode('/', $dateMovedIn);
+            $dateMovedIn = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        $this->dateMovedIn = new \DateTime($dateMovedIn);
         return $this;
     }
 
@@ -182,7 +185,11 @@ class AddressHistory
      */
     public function getDateMovedIn()
     {
-        return $this->dateMovedIn;
+        if (!empty($this->dateMovedIn)) {
+            return $this->dateMovedIn->format('d/m/Y');
+        }
+        return null;
     }
+
 }
 

@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AddressHistoryType extends AbstractType
 {
@@ -16,7 +17,7 @@ class AddressHistoryType extends AbstractType
     {
         $builder->add('address')
                 ->add('postcode')
-                ->add('dateMovedIn')
+                ->add('dateMovedIn', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"]])
                 ->add('business', HiddenType::class)
                 ->add('individual', HiddenType::class);
     }

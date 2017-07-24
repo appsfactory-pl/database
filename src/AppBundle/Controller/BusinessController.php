@@ -16,6 +16,7 @@ use AppBundle\Entity\Business;
 use AppBundle\Entity\Individual;
 use AppBundle\Entity\PersonTypes;
 use AppBundle\Form\FileType;
+use AppBundle\Form\AddressHistoryType;
 
 class BusinessController extends Controller {
 
@@ -119,10 +120,23 @@ class BusinessController extends Controller {
             $data->setAdded(new \DateTime());
             $em->persist($data);
             $em->flush();
+            return $this->redirectToRoute('app_business_show', ['id' => $id]);
         }
         $filesRepo = $em->getRepository('AppBundle:File');
         $files = $filesRepo->findByBusiness($business);
+        
+        $addressHistoryForm = $this->createForm(AddressHistoryType::class);
+        $addressHistoryForm->handleRequest($request);
+        $addressHistoryRepo = $em->getRepository('AppBundle:AddressHistory');
+        $addressHistory = $addressHistoryRepo->findByBusiness($business);
 
+        if($addressHistoryForm->isSubmitted() && $addressHistoryForm->isValid()){
+            $data = $addressHistoryForm->getData();
+            $data->setBusiness($business);
+            $em->persist($data);
+            $em->flush();
+            return $this->redirectToRoute('app_business_show', ['id' => $id]);
+        }
         
         $repoIndividual = $em->getRepository('AppBundle:BusinessIndividual');
         $individuals = $repoIndividual->findByBusiness($business);
@@ -133,6 +147,8 @@ class BusinessController extends Controller {
                     'form' => $form->createView(),
                     'fileForm' => $fileForm->createView(),
                     'files' => $files,
+                    'addressHistoryForm' => $addressHistoryForm->createView(),
+                    'addressHistory' => $addressHistory,
         ));
     }
 

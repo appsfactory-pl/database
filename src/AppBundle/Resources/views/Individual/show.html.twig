@@ -241,9 +241,9 @@
                     {{ form_end(form2) }}
                 </div>
                 <div class="widget-box">
-                <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
-                    <h5>Files</h5>
-                </div>
+                    <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                        <h5>Files</h5>
+                    </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -308,6 +308,64 @@
                         <input type="submit" class="btn btn-success" value="Save">
                     </div>
                     {{ form_end(fileForm) }}
+
+
+                </div>
+
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                        <h5>Address History</h5>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th>Postcode</th>
+                                <th>Date Moved In</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if addressHistory is not empty %}
+                                {% for item in addressHistory %}
+                                    <tr>
+                                        <td>{{ item.address }}</td>
+                                        <td>{{ item.postcode }}</td>
+                                        <td>{{ item.dateMovedIn }}</td>
+                                    </tr>                            
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+
+                    <h3>Add Address</h3>
+                    {{ form_start(addressHistoryForm,{'attr':{'class':'form-horizontal'}}) }}
+                    <div class="control-group">
+                        {{ form_label(addressHistoryForm.address,'Address',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(addressHistoryForm.address,{'attr':{'placeholder':'Address','class':''}}) }}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        {{ form_label(addressHistoryForm.postcode,'Postcode',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            {{ form_widget(addressHistoryForm.postcode,{'attr':{'placeholder':'Postcode','class':''}}) }}
+                        </div>
+                    </div>
+                        
+                    <div class="control-group">
+                        {{ form_label(addressHistoryForm.dateMovedIn,'Date Moved In',{'label_attr':{'class':'control-label'}}) }}
+                        <div class="controls">
+                            <div class="input-append date">
+                                {{ form_widget(addressHistoryForm.dateMovedIn,{'attr':{'placeholder':'Date Moved In','class':'datepicker'}}) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-success" value="Save">
+                    </div>
+                    {{ form_end(addressHistoryForm) }}
 
 
                 </div>

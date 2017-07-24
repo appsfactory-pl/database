@@ -20,6 +20,7 @@ use AppBundle\Entity\IndividualIndividual;
 use AppBundle\Form\IndividualIndividualType;
 use AppBundle\Form\FileType;
 use AppBundle\Entity\File;
+use AppBundle\Form\AddressHistoryType;
 
 class IndividualController extends Controller {
 
@@ -142,6 +143,17 @@ class IndividualController extends Controller {
             $data->setAdded(new \DateTime());
             $em->persist($data);
             $em->flush();
+            return $this->redirectToRoute('app_individual_show', ['id' => $id]);
+        }
+        
+        $addressHistoryForm = $this->createForm(AddressHistoryType::class);
+        $addressHistoryForm->handleRequest($request);
+        if($addressHistoryForm->isSubmitted() && $addressHistoryForm->isValid()){
+            $data = $addressHistoryForm->getData();
+            $data->setIndividual($individual);
+            $em->persist($data);
+            $em->flush();
+            return $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
         
         $filesRepo = $em->getRepository('AppBundle:File');
@@ -150,6 +162,8 @@ class IndividualController extends Controller {
         $repoBusiness = $em->getRepository('AppBundle:BusinessIndividual');
         $business = $repoBusiness->findByIndividual($individual);
         $individual2 = $em->getRepository('AppBundle:IndividualIndividual')->findByIndividual($individual);
+        $addressHistoryRepo = $em->getRepository('AppBundle:AddressHistory');
+        $addressHistory = $addressHistoryRepo->findByIndividual($individual);
         
         return $this->render('AppBundle:Individual:show.html.twig', array(
                     // ...
@@ -160,6 +174,8 @@ class IndividualController extends Controller {
                     'form2' => $form2->createView(),
                     'fileForm' => $fileForm->createView(),
                     'files' => $files,
+                    'addressHistoryForm' => $addressHistoryForm->createView(),
+                    'addressHistory' => $addressHistory,
         ));
     }
 
