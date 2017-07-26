@@ -34,6 +34,7 @@ class IndividualType extends AbstractType
                 ->add('dateMovedIn', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"]])
                 ->add('nin')
                 ->add('utr')
+                ->add('bankAccountDetails')
                 ->add('notes', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12']])
                 ->add('dateDisengaged', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"],'required'=>false])
                 ->add('disengegementReason')

@@ -17,6 +17,7 @@ class BusinessType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('id2')
+                ->add('status')
                 ->add('legalForm')
                 ->add('name')
                 ->add('address')

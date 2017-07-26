@@ -208,6 +208,13 @@ class Individual {
      * @ORM\Column(name="archive_note",type="string", length=255, nullable=true)
      */
     private $archiveNote;
+    
+    /**
+     *
+     * @var string
+     * @ORM\Column(name="bank_account_details",type="string", length=255, nullable=true)
+     */
+    private $bankAccountDetails;
 
     /**
      * Get id
@@ -799,6 +806,24 @@ class Individual {
      */
     public function setArchiveNote($archiveNote){
         $this->archiveNote = $archiveNote;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getBankAccountDetails(){
+        return $this->bankAccountDetails;
+    }
+    
+    /**
+     * 
+     * @param type $bankAccountDetails
+     * @return $this
+     */
+    public function setBankAccountDetails($bankAccountDetails){
+        $this->bankAccountDetails = $bankAccountDetails;
         return $this;
     }
 

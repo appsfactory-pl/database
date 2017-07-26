@@ -29,6 +29,13 @@ class Business {
     private $id2;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Status")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     */
+    protected $status;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -734,4 +741,21 @@ class Business {
         return $this;
     }
     
+    /**
+     * 
+     * @param type $status
+     */
+    public function setStatus($status) {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return type
+     */
+    public function getStatus() {
+        return $this->status;
+    }
+
 }
