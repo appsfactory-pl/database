@@ -31,7 +31,7 @@ class Individual {
     /**
      * @var int
      *
-     * @ORM\Column(name="id2", type="integer")
+     * @ORM\Column(name="id2", type="integer",nullable=true)
      */
     private $id2;
 
@@ -160,6 +160,14 @@ class Individual {
     protected $maritialStatus;
 
     /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="e_signature_password",type="string", length=64, nullable=true)
+     */
+    private $eSignaturePassword;
+
+    /**
      * @var string
      * 
      * @ORM\Column(name="notes", type="text", nullable=true)
@@ -208,7 +216,7 @@ class Individual {
      * @ORM\Column(name="archive_note",type="string", length=255, nullable=true)
      */
     private $archiveNote;
-    
+
     /**
      *
      * @var string
@@ -790,12 +798,12 @@ class Individual {
         $this->archiveNumber = $archiveNumber;
         return $this;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getArchiveNote(){
+    public function getArchiveNote() {
         return $this->archiveNote;
     }
 
@@ -804,25 +812,25 @@ class Individual {
      * @param type $archiveNote
      * @return $this
      */
-    public function setArchiveNote($archiveNote){
+    public function setArchiveNote($archiveNote) {
         $this->archiveNote = $archiveNote;
         return $this;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public function getBankAccountDetails(){
+    public function getBankAccountDetails() {
         return $this->bankAccountDetails;
     }
-    
+
     /**
      * 
      * @param type $bankAccountDetails
      * @return $this
      */
-    public function setBankAccountDetails($bankAccountDetails){
+    public function setBankAccountDetails($bankAccountDetails) {
         $this->bankAccountDetails = $bankAccountDetails;
         return $this;
     }
@@ -833,6 +841,24 @@ class Individual {
      */
     public function __toString() {
         return 'ID: ' . $this->id . ' ' . $this->forename . ' ' . $this->lastname . ' ' . $this->email;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getESignaturePassword() {
+        return $this->eSignaturePassword;
+    }
+
+    /**
+     * 
+     * @param type $eSignaturePassword
+     * @return $this
+     */
+    public function setESignaturePassword($eSignaturePassword) {
+        $this->eSignaturePassword = $eSignaturePassword;
+        return $this;
     }
 
 }

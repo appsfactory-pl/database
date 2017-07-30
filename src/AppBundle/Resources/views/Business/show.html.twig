@@ -57,7 +57,11 @@
                         </tr>
                         <tr>
                             <td class="">Beta Page Link</td>
-                            <td class="">{{ business.getBetaPageLink }}</td>
+                            <td class="">
+                                <a href="{{ business.getBetaPageLink }}" target="_blank">
+                                    {{ business.getBetaPageLink }}
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="">Telephone</td>
@@ -105,7 +109,11 @@
                         </tr>
                         <tr>
                             <td class="">Bank account details</td>
-                            <td class="">{{ business.getAccount|raw}}</td>
+                            <td class="">{{ business.getAccount|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td class="">e-Signature Password</td>
+                            <td class="">{{ business.eSignaturePassword }}</td>
                         </tr>
                         <tr>
                             <td class="">Notes</td>

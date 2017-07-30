@@ -163,6 +163,13 @@
                             </div>
                         </div>
 
+                        <div class="control-group">
+                            {{ form_label(form.eSignaturePassword,'e-Signature Password',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.eSignaturePassword,{'attr':{'placeholder':'e-Signature Password','class':''}}) }}
+                            </div>
+                        </div>
+
                         <div class="control-group" style="height: 280px;">
                             {{ form_label(form.notes,'Notes',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">

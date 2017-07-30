@@ -62,18 +62,27 @@
     </div>
     <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard2</a>
         <ul>
+            <li class="submenu">
+                <a href="#">
+                    <i class="icon icon-folder-open"></i> <span>Individual</span>
+                </a>
+                <ul>
+                    <li><a href="{{ path('app_individual_list') }}">List</a></li>
+                    <li><a href="{{ path('app_individual_add') }}">Add Person</a></li>
+                    <li><a href="{{ path('app_individual_import') }}">Import</a></li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#">
+                    <i class="icon icon-folder-open"></i> <span>Business</span>
+                </a>
+                <ul>
+                    <li><a href="{{ path('app_business_list') }}">List</a></li>
+                    <li><a href="{{ path('app_business_add') }}">Add Company</a></li>
+                    <li><a href="{{ path('app_business_import') }}">Import</a></li>  
+                </ul>
+            </li>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <li class="submenu">
-                    <a href="#">
-                        <i class="icon icon-user" aria-hidden="true"></i> <span>Users</span> 
-                    </a>
-                    <ul>
-                        <li><a href="{{ path('app_user_list') }}">List</a></li>
-                        <li><a href="{{ path('app_user_add') }}">Add new</a></li>
-                        <li><a href="{{ path('app_user_showlog') }}">Show logins</a></li>
-                    </ul>
-                </li>
-
                 <li class="submenu">
                     <a href="#">
                         <i class="icon icon-user" aria-hidden="true"></i> <span>Library</span> 
@@ -89,31 +98,21 @@
                         <li><a href="{{ path('app_library_legalformadd') }}">Add Legal Form</a></li>
                         <li><a href="{{ path('app_library_disengegementreason') }}">Disengagement Reasons List</a></li>
                         <li><a href="{{ path('app_library_disengegementreasonadd') }}">Add Disengagement Reason</a></li>
+                        <li><a href="{{ path('app_individual_types') }}">Connections List</a></li>                
+                        <li><a href="{{ path('app_individual_addtype') }}">Add Connection</a></li>                
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#">
+                        <i class="icon icon-user" aria-hidden="true"></i> <span>Users</span> 
+                    </a>
+                    <ul>
+                        <li><a href="{{ path('app_user_list') }}">List</a></li>
+                        <li><a href="{{ path('app_user_add') }}">Add new</a></li>
+                        <li><a href="{{ path('app_user_showlog') }}">Show logins</a></li>
                     </ul>
                 </li>
             {% endif %}
-            <li class="submenu">
-                <a href="#">
-                    <i class="icon icon-folder-open"></i> <span>Business</span>
-                </a>
-                <ul>
-                    <li><a href="{{ path('app_business_list') }}">List</a></li>
-                    <li><a href="{{ path('app_business_add') }}">Add Company</a></li>
-                    <li><a href="{{ path('app_business_import') }}">Import</a></li>  
-                </ul>
-            </li>
-            <li class="submenu">
-                <a href="#">
-                    <i class="icon icon-folder-open"></i> <span>Individual</span>
-                </a>
-                <ul>
-                    <li><a href="{{ path('app_individual_list') }}">List</a></li>
-                    <li><a href="{{ path('app_individual_add') }}">Add Person</a></li>
-                    <li><a href="{{ path('app_individual_import') }}">Import</a></li>                
-                    <li><a href="{{ path('app_individual_types') }}">Types</a></li>                
-                    <li><a href="{{ path('app_individual_addtype') }}">Add type</a></li>                
-                </ul>
-            </li>
         </ul>
     </div>
     <div id="content">

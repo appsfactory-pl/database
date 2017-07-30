@@ -24,7 +24,7 @@ class Business {
     /**
      * @var int
      *
-     * @ORM\Column(name="id2", type="integer")
+     * @ORM\Column(name="id2", type="integer", nullable=true)
      */
     private $id2;
 
@@ -111,6 +111,14 @@ class Business {
      * @ORM\Column(name="account", type="string", length=255, nullable=true)
      */
     private $account;
+    
+    /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="e_signature_password",type="string", length=64, nullable=true)
+     */
+    private $eSignaturePassword;
 
     /**
      * @var string
@@ -756,6 +764,24 @@ class Business {
      */
     public function getStatus() {
         return $this->status;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public function getESignaturePassword(){
+        return $this->eSignaturePassword;
+    }
+    
+    /**
+     * 
+     * @param type $eSignaturePassword
+     * @return $this
+     */
+    public function setESignaturePassword($eSignaturePassword){
+        $this->eSignaturePassword = $eSignaturePassword;
+        return $this;
     }
 
 }
