@@ -36,7 +36,7 @@ class IndividualType extends AbstractType
                 ->add('utr')
                 ->add('bankAccountDetails')
                 ->add('eSignaturePassword')
-                ->add('notes', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12']])
+                ->add('notes', TextareaType::class, ['attr' => ['class' => 'textarea_editor span12'],'required'=>false])
                 ->add('dateDisengaged', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"],'required'=>false])
                 ->add('disengegementReason')
                 ->add('archived', TextType::class, ['attr' => ['class' => 'span11', 'data-date-format' => "dd/mm/yyyy"],'required'=>false])
