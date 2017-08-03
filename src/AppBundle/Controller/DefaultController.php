@@ -77,4 +77,24 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @Route("/advanced-search",name="advanced-search")
+     */
+    public function advancedSearchAction(Request $request){
+        return $this->render('default/advanced_search.html.twig',[
+
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/expired-ids",name="expired-ids")
+     */
+    public function expiredIdsAction(Request $request){
+        return $this->render('default/expired_ids.html.twig',[
+
+        ]);
+    }
+
 }

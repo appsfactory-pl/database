@@ -81,6 +81,15 @@
                     <li><a href="{{ path('app_business_import') }}">Import</a></li>  
                 </ul>
             </li>
+            <li class="submenu">
+                <a href="#">
+                    <i class="icon icon-folder-open"></i> <span>Search</span>
+                </a>
+                <ul>
+                    <li><a href="{{ path('advanced-search') }}">Advanced</a></li>
+                    <li><a href="{{ path('expired-ids') }}">Expired IDs</a></li>
+                </ul>
+            </li>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li class="submenu">
                     <a href="#">
