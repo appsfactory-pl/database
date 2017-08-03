@@ -55,22 +55,22 @@ class File
      * @ORM\Column(name="additionalInfo", type="string", length=255, nullable=true)
      */
     private $additionalInfo;
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Business")
      * @ORM\JoinColumn(name="business_id", referencedColumnName="id")
      */
     protected $business;
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Individual")
      * @ORM\JoinColumn(name="individual_id", referencedColumnName="id")
      */
     protected $individual;
-    
+
     /**
      *
-     * @var type 
+     * @var type
      */
     public $file;
 
@@ -90,40 +90,44 @@ class File
     {
         return $this->id;
     }
-    
+
     /**
-     * 
+     *
      * @param type $business
      * @return $this
      */
-    public function setBusiness($business){
+    public function setBusiness($business)
+    {
         $this->business = $business;
         return $this;
     }
-    
+
     /**
-     * 
+     *
      * @return type
      */
-    public function getBusiness(){
+    public function getBusiness()
+    {
         return $this->business;
     }
-    
+
     /**
-     * 
+     *
      * @param type $individual
      * @return $this
      */
-    public function setIndividual($individual){
+    public function setIndividual($individual)
+    {
         $this->individual = $individual;
         return $this;
     }
 
     /**
-     * 
+     *
      * @return type
      */
-    public function getIndividual(){
+    public function getIndividual()
+    {
         return $this->individual;
     }
 
@@ -252,9 +256,10 @@ class File
     {
         return $this->additionalInfo;
     }
-    
-    public function __toString() {
-        return $this->path.$this->fileName;
+
+    public function __toString()
+    {
+        return $this->path . $this->fileName;
     }
 
     /**
@@ -266,20 +271,22 @@ class File
     {
         return $this->type;
     }
-    
+
     /**
-     * 
+     *
      * @param type $type
      * @return $this
      */
-    public function setType($type){
+    public function setType($type)
+    {
         $this->type = $type;
         return $this;
     }
-    
-    public function getFile(){
+
+    public function getFile()
+    {
         return $this->file;
     }
-    
+
 }
 

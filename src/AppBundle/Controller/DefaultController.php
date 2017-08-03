@@ -82,6 +82,7 @@ class DefaultController extends Controller
      * @Route("/advanced-search",name="advanced-search")
      */
     public function advancedSearchAction(Request $request){
+
         return $this->render('default/advanced_search.html.twig',[
 
         ]);
@@ -92,6 +93,18 @@ class DefaultController extends Controller
      * @Route("/expired-ids",name="expired-ids")
      */
     public function expiredIdsAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $repoFiles = $em->getRepository('AppBundle:File');
+
+        $query = $repoFiles->createQueryBuilder('f')
+            ->join('AppBundle:FileType','t')
+            ->where('t.name = :type')
+            ->setParameter('type','ID')
+            ->andWhere('f.date > :date')
+            ->setParameter('date',new \DateTime())
+            ->getQuery()
+        ;
+        $files = $query->getResult();
         return $this->render('default/expired_ids.html.twig',[
 
         ]);
