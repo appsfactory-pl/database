@@ -6,32 +6,35 @@
 {% block body %}
     {% if business is not empty %}
         <div class="widget-box">
-            <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                 <h5>Data table</h5>
             </div>
             <div class="widget-content nopadding">
                 <table class="table table-bordered data-table">
                     <thead>
-                        <tr>
-                            <th>ID 2</th>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Postcode</th>
-                            <th>Actions</th>
-                        </tr>
+                    <tr>
+                        <th>ID 2</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Postcode</th>
+                        <th>Actions</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {% for item in business %}
-                            <tr>
-                                <td>{{ item.id2 }}</td>
-                                <td>{{ item.name }}</td>
-                                <td>{{ item.address }}</td>
-                                <td>{{ item.postcode }}</td>
-                                <td>
-                                    <a href="{{ path('app_business_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
-                                    <a href="{{ path('app_business_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i class="icon icon-file"></i></a>
-                                </td>
-                            {% endfor %}
+                    {% for item in business %}
+                        <tr>
+                            <td>{{ item.id2 }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.address }}</td>
+                            <td>{{ item.postcode }}</td>
+                            <td>
+                                <a href="{{ path('app_business_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i
+                                            class="icon icon-edit"></i></a>
+                                <a href="{{ path('app_business_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i
+                                            class="icon icon-file"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

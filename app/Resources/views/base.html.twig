@@ -31,8 +31,7 @@
     <div id="header">
         <h1><a href="/">Home page</a></h1>
     </div>
-    <!--close-Header-part--> 
-
+    <!--close-Header-part-->
     <!--top-Header-menu-->
     <div id="user-nav" class="navbar navbar-inverse">
         <ul class="nav">
@@ -117,7 +116,7 @@
     </div>
     <div id="content">
         <div id="content-header">
-            <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+            <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
             <h1>{% block header %}{% endblock %}</h1>
             {% for label, messages in app.flashes(['warning', 'error', 'success']) %}
                 {% for message in messages %}

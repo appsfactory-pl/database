@@ -5,7 +5,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
-                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
                         <h5>Find Individual / Business</h5>
                     </div>
                     <div class="widget-content nopadding">
@@ -22,11 +22,82 @@
                         {{ form_end(form) }}
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    {% if individuals is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>ID 2</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Postcode</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in individuals %}
+                    <tr>
+                        <td>{{ item.id2 }}</td>
+                        <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
+                        <td>{{ item.address }}</td>
+                        <td>{{ item.postcode }}</td>
+                        <td>
+                            <a href="{{ path('app_individual_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i
+                                        class="icon icon-edit"></i></a>
+                            <a href="{{ path('app_individual_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i
+                                        class="icon icon-file"></i></a>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 
+    {% if businesses is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>ID 2</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Postcode</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in businesses %}
+                        <tr>
+                            <td>{{ item.id2 }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.address }}</td>
+                            <td>{{ item.postcode }}</td>
+                            <td>
+                                <a href="{{ path('app_business_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i
+                                            class="icon icon-edit"></i></a>
+                                <a href="{{ path('app_business_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i
+                                            class="icon icon-file"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
