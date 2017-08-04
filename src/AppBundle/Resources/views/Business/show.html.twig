@@ -125,7 +125,7 @@
                         </tr>
                         <tr>
                             <td class="">Disengagement Reason</td>
-                            <td class="">{{ business.getDisengegementReason.getName }}</td>
+                            <td class="">{% if business.getDisengegementReason is not empty %}{{ business.getDisengegementReason.getName }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="">Client Archived</td>
