@@ -222,7 +222,7 @@
                             <th>Type</th>
                             <th>Date</th>
                             <th>Additional Info</th>
-                            <th>File</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -236,6 +236,9 @@
                                     <td>
                                         <a href="{{ file.getPath }}{{ file.getFileName }}" target="_blank" class="btn btn-primary">
                                             <i class="icon icon-file"></i>
+                                        </a>
+                                        <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger btn-xs">
+                                            <i class="icon icon-remove"></i>
                                         </a>
                                     </td>
                                 </tr>                            

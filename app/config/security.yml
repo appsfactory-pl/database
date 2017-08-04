@@ -32,5 +32,6 @@ security:
         - { path: ^/search, role: ROLE_USER }
         - { path: ^/individual, role: ROLE_USER }
         - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/file, role: ROLE_SUPER_ADMIN }
         - { path: ^/user, role: ROLE_SUPER_ADMIN }
 

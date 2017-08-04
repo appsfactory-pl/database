@@ -177,4 +177,26 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @Route("/file/delete/{id}",name="file-delete")
+     */
+    public function deleteFileAction(Request $request,$id){
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:File');
+        $file = $repo->find($id);
+        unlink($_SERVER['DOCUMENT_ROOT'].'/'.$file->getPath().'/'.$file->getFileName());
+        $individual = $file->getIndividual();
+        $business = $file->getBusiness();
+        $em->remove($file);
+        $em->flush();
+        if (!empty($individual)) {
+            return $this->redirectToRoute('app_individual_show', ['id' => $individual->getId()]);
+        } elseif (!empty($business)) {
+            return $this->redirectToRoute('app_business_show', ['id' => $business->getId()]);
+        }
+
+    }
+
 }
