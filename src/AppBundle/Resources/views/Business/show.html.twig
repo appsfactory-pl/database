@@ -292,6 +292,7 @@
                                 <th>Address</th>
                                 <th>Postcode</th>
                                 <th>Date Moved In</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -301,7 +302,15 @@
                                         <td>{{ item.address }}</td>
                                         <td>{{ item.postcode }}</td>
                                         <td>{{ item.dateMovedIn }}</td>
-                                    </tr>                            
+                                        <td>
+                                            <a href="{{ path('edit-address-history',{'id':item.getId}) }}" class="btn btn-primary btn-xs">
+                                                <i class="icon icon-edit"></i>
+                                            </a>
+                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                                <i class="icon icon-remove"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 {% endfor %}
                             {% endif %}
                         </tbody>
