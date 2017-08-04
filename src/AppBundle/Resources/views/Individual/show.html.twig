@@ -105,7 +105,7 @@
                         </tr>
                         <tr>
                             <td class="">Disengagement Reason</td>
-                            <td class="">{{ individual.getDisengegementReason.getName }}</td>
+                            <td class="">{% if individual.disengegementReason.getName is defined %}{{ individual.getDisengegementReason.getName }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="">Client Archived</td>
@@ -334,6 +334,7 @@
                                 <th>Address</th>
                                 <th>Postcode</th>
                                 <th>Date Moved In</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -343,12 +344,19 @@
                                         <td>{{ item.address }}</td>
                                         <td>{{ item.postcode }}</td>
                                         <td>{{ item.dateMovedIn }}</td>
+                                        <td>
+                                            <a href="{{ path('edit-address-history',{'id':item.getId}) }}" class="btn btn-primary btn-xs">
+                                                <i class="icon icon-edit"></i>
+                                            </a>
+                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                                <i class="icon icon-remove"></i>
+                                            </a>
+                                        </td>
                                     </tr>                            
                                 {% endfor %}
                             {% endif %}
                         </tbody>
                     </table>
-
 
                     <h3>Add Address</h3>
                     {{ form_start(addressHistoryForm,{'attr':{'class':'form-horizontal'}}) }}
@@ -378,7 +386,6 @@
                         <input type="submit" class="btn btn-success" value="Save">
                     </div>
                     {{ form_end(addressHistoryForm) }}
-
 
                 </div>
             </div>

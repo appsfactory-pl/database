@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\AddressHistoryType;
 use AppBundle\Form\SearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -79,35 +80,101 @@ class DefaultController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/advanced-search",name="advanced-search")
+     * @Route("/search/advanced",name="advanced-search")
      */
-    public function advancedSearchAction(Request $request){
-
-        return $this->render('default/advanced_search.html.twig',[
-
+    public function advancedSearchAction(Request $request)
+    {
+        $individuals = [];
+        $business = [];
+        return $this->render('default/advanced_search.html.twig', [
+            'business' => $business,
+            'individuals' => $individuals,
         ]);
     }
 
     /**
      * @param Request $request
-     * @Route("/expired-ids",name="expired-ids")
+     * @Route("/search/expired-ids",name="expired-ids")
      */
-    public function expiredIdsAction(Request $request){
+    public function expiredIdsAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $repoFiles = $em->getRepository('AppBundle:File');
 
         $query = $repoFiles->createQueryBuilder('f')
-            ->join('AppBundle:FileType','t')
+            ->join('AppBundle:FileType', 't')
             ->where('t.name = :type')
-            ->setParameter('type','ID')
+            ->setParameter('type', 'ID')
             ->andWhere('f.date > :date')
-            ->setParameter('date',new \DateTime())
-            ->getQuery()
-        ;
+            ->setParameter('date', new \DateTime())
+            ->getQuery();
         $files = $query->getResult();
-        return $this->render('default/expired_ids.html.twig',[
-
+        $ids = [];
+        foreach ($files as $file) {
+            $ids[] = $file->getIndividual()->getId();
+        }
+        $repoIndividual = $em->getRepository('AppBundle:Individual');
+        $query = $repoIndividual->createQueryBuilder('i')
+            ->where('NOT i.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery();
+        $individuals = $query->getResult();
+        return $this->render('default/expired_ids.html.twig', [
+            'individuals' => $individuals,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @Route("/individual/edit-address-history/{id}", name="edit-address-history")
+     */
+    public function editAddressHistoryAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $historyRepo = $em->getRepository('AppBundle:AddressHistory');
+        $address = $historyRepo->find($id);
+        $individual = $address->getIndividual();
+        $business = $address->getBusiness();
+        $form = $this->createForm(AddressHistoryType::class, $address);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $data->setIndividual($individual);
+            $data->setBusiness($business);
+            $em->persist($address);
+            $em->flush();
+            if (!empty($individual)) {
+                return $this->redirectToRoute('app_individual_show', ['id' => $individual->getId()]);
+            } elseif (!empty($business)) {
+                return $this->redirectToRoute('app_business_show', ['id' => $business->getId()]);
+            }
+
+        }
+        return $this->render('default/edit_address_history.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @Route("/individual/delete-address-history/{id}", name="delete-address-history")
+     */
+    public function deleteAddressHistoryAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:AddressHistory');
+        $address = $repo->find($id);
+        $individual = $address->getIndividual();
+        $business = $address->getBusiness();
+        $em->remove($address);
+        $em->flush();
+        if (!empty($individual)) {
+            return $this->redirectToRoute('app_individual_show', ['id' => $individual->getId()]);
+        } elseif (!empty($business)) {
+            return $this->redirectToRoute('app_business_show', ['id' => $business->getId()]);
+        }
     }
 
 }

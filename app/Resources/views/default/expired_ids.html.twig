@@ -1,8 +1,44 @@
 {% extends 'base.html.twig' %}
 {% block header %}Expired IDs{% endblock %}
 {% block body %}
-
+    {% if individuals is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>Individual</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>ID 2</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Postcode</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in individuals %}
+                    <tr>
+                        <td>{{ item.id2 }}</td>
+                        <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
+                        <td>{{ item.address }}</td>
+                        <td>{{ item.postcode }}</td>
+                        <td>
+                            <a href="{{ path('app_individual_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i
+                                        class="icon icon-edit"></i></a>
+                            <a href="{{ path('app_individual_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i
+                                        class="icon icon-file"></i></a>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
+
 {% block stylesheets %}
 
 {% endblock %}
