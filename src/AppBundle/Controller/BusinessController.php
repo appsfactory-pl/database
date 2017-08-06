@@ -289,7 +289,7 @@ class BusinessController extends Controller {
             }
 
             if (!empty($data->getLegalForm())) {
-                $query->where('b.legalForm=:legalForm')
+                $query->andWhere('b.legalForm=:legalForm')
                         ->setParameter('legalForm', $data->getLegalForm());
             }
 
