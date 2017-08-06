@@ -127,13 +127,13 @@ class IndividualController extends Controller {
         $file = new File();
         $file->setIndividual($individual);
 
-        $fileForm = $this->createForm(FileType::class,$file);
+        $fileForm = $this->createForm(FileType::class, $file);
         $fileForm->handleRequest($request);
-        if($fileForm->isSubmitted() && $fileForm->isValid()){
+        if ($fileForm->isSubmitted() && $fileForm->isValid()) {
             $uploadedFile = $fileForm['file']->getData();
-            $newFileName = $individual->getId().'_'.$uploadedFile->getClientOriginalName();
+            $newFileName = $individual->getId() . '_' . $uploadedFile->getClientOriginalName();
             $path = '/files/';
-            $dir = $_SERVER['DOCUMENT_ROOT'].$path;
+            $dir = $_SERVER['DOCUMENT_ROOT'] . $path;
             $uploadedFile->move($dir, $newFileName);
 //            var_dump($uploadedFile);
             $data = $fileForm->getData();
@@ -145,17 +145,17 @@ class IndividualController extends Controller {
             $em->flush();
             return $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
-        
+
         $addressHistoryForm = $this->createForm(AddressHistoryType::class);
         $addressHistoryForm->handleRequest($request);
-        if($addressHistoryForm->isSubmitted() && $addressHistoryForm->isValid()){
+        if ($addressHistoryForm->isSubmitted() && $addressHistoryForm->isValid()) {
             $data = $addressHistoryForm->getData();
             $data->setIndividual($individual);
             $em->persist($data);
             $em->flush();
             return $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
-        
+
         $filesRepo = $em->getRepository('AppBundle:File');
         $files = $filesRepo->findByIndividual($individual);
 
@@ -164,7 +164,7 @@ class IndividualController extends Controller {
         $individual2 = $em->getRepository('AppBundle:IndividualIndividual')->findByIndividual($individual);
         $addressHistoryRepo = $em->getRepository('AppBundle:AddressHistory');
         $addressHistory = $addressHistoryRepo->findByIndividual($individual);
-        
+
         return $this->render('AppBundle:Individual:show.html.twig', array(
                     // ...
                     'individual' => $individual,
@@ -216,7 +216,7 @@ class IndividualController extends Controller {
                 foreach ($data as $k => $item) {
                     $individual_id = $item['ID_I'];
                     if (empty($individual_id)) {
-                        $this->addFlash('error', 'No individual ID. '. serialize($item));
+                        $this->addFlash('error', 'No individual ID. ' . serialize($item));
                         $this->redirectToRoute('app_individual_import');
                     }
                     $individual = $individual_repo->findOneById2($individual_id);
@@ -232,7 +232,7 @@ class IndividualController extends Controller {
                     if (!isset($item['title']) || !isset($item['forename']) || !isset($item['email'])) {
                         continue;
                     }
-                    if (!isset($item['notes wth children'])){
+                    if (!isset($item['notes wth children'])) {
                         $item['notes wth children'] = null;
                     }
                     $individual->setTitle($item['title']);
@@ -327,7 +327,6 @@ class IndividualController extends Controller {
                         $em->persist($business_individual);
                         $em->flush();
                     }
-
                 }
                 $this->addFlash('success', 'Data imported successfuly.');
                 $this->redirectToRoute('app_individual_import');
@@ -411,6 +410,115 @@ class IndividualController extends Controller {
         $em->remove($ii);
         $em->flush();
         return $this->redirectToRoute('app_individual_show', ['id' => $individual_id]);
+    }
+
+    /**
+     * 
+     * @param Request $request
+     * @Route("/individual/advanced-search",name="individual_advanced_search")
+     */
+    public function advancedSearchAction(Request $request) {
+        $form = $this->createForm(\AppBundle\Form\IndividualSearchType::class);
+        $form->handleRequest($request);
+        $individuals = [];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository("AppBundle:Individual");
+            $query = $repo->createQueryBuilder('i');
+            $data = $form->getData();
+//            var_dump($data);
+            if (!empty($data->getStatus())) {
+                $query->where('i.status=:status')
+                        ->setParameter('status', $data->getStatus());
+            }
+            if (!empty($data->getDobFrom())) {
+                $query->andWhere('i.dob> = :dob_from')
+                        ->setParameter('dob_from', $data->getDobFrom());
+            }
+            if (!empty($data->getDobTo())) {
+                $query->andWhere('i.dob <= :dob_to')
+                        ->setParameter('dob_to', $data->getDobTo());
+            }
+
+            if (!empty($data->getDateDisengagedFrom())) {
+                $query->andWhere('i.dateDisengaged> = :dateDisengagedFrom')
+                        ->setParameter('dateDisengagedFrom', $data->getDateDisengagedFrom());
+            }
+            if (!empty($data->getDateDisengagedTo())) {
+                $query->andWhere('i.dateDisengaged <= :dateDisengagedTo')
+                        ->setParameter('dateDisengagedTo', $data->getDateDisengagedTo());
+            }
+            if (!empty($data->getDisengegementReason())) {
+                $query->andWhere('i.disengegementReason = :disengegementReason')
+                        ->setParameter('disengegementReason', $data->getDisengegementReason());
+            }
+            if (!empty($data->getMaritialStatus())) {
+                $query->andWhere('i.maritialStatus = :maritialStatus')
+                        ->setParameter('maritialStatus', $data->getMaritialStatus());
+            }
+
+            if (!empty($data->getArchivedFrom())) {
+                $query->andWhere('i.archived> = :dateArchivedFrom')
+                        ->setParameter('dateArchivedFrom', $data->getArchivedFrom());
+            }
+            if (!empty($data->getArchivedTo())) {
+                $query->andWhere('i.dateDisengaged <= :dateArchivedTo')
+                        ->setParameter('dateArchivedTo', $data->getArchivedTo());
+            }
+            if (!empty($data->getConnections())) {
+                $businessToIndividualRepo = $em->getRepository('AppBundle:BusinessIndividual');
+                $IndividualToIndividualRepo = $em->getRepository('AppBundle:IndividualIndividual');
+                $cB = $businessToIndividualRepo->findAll();
+                $cI = $IndividualToIndividualRepo->findAll();
+                $ids = [0];
+                if (!empty($cB)) {
+                    foreach ($cB as $item) {
+                        if (!empty($item->getIndividual()) && !in_array($item->getIndividual()->getId(), $ids)) {
+                            $ids[] = $item->getIndividual()->getId();
+                        }
+                    }
+                }
+                if (!empty($cI)) {
+                    foreach ($cI as $item) {
+                        if (!empty($item->getIndividual()) && !in_array($item->getIndividual()->getId(), $ids)) {
+                            $ids[] = $item->getIndividual()->getId();
+                        }
+                    }
+                }
+                $query->andWhere('i.id IN (:ids)')
+                        ->setParameter('ids', $ids);
+            }
+            if (!empty($data->getProofOfAddress())) {
+                $repoFiles = $em->getRepository('AppBundle:File');
+                $repoFileType = $em->getRepository('AppBundle:FileType');
+                $fileType = $repoFileType->findOneByName('Proof Of Address');
+                $qq = $repoFiles->createQueryBuilder('f')
+                        ->where('f.type = :type')
+                        ->setParameter('type', $fileType)
+                        ->getQuery();
+                $files = $qq->getResult();
+                $ids = [0];
+                foreach ($files as $file) {
+                    if (!empty($file->getIndividual())) {
+                        $ids[] = $file->getIndividual()->getId();
+                    }
+                }
+                if ($data->getProofOfAddress() == 'yes') {
+                    $query->andWhere('i.id IN (:ids)')
+                            ->setParameter('ids', $ids);
+                } else {
+                    $query->andWhere('NOT i.id IN (:ids)')
+                            ->setParameter('ids', $ids);
+                }
+            }
+            $q = $query->getQuery();
+            $individuals = $q->getResult();
+        }
+
+        return $this->render('AppBundle:Individual:advanced-search.html.twig', [
+                    'form' => $form->createView(),
+                    'individuals' => $individuals,
+        ]);
     }
 
 }

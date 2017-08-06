@@ -1,0 +1,223 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Individual Advanced Search{% endblock %}
+{% block header %}Individual Advanced Search{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        {#        <hr>#}
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Edit Person</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                        <div class="control-group">
+                            {{ form_label(form.status,'Status',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.status,{'attr':{'placeholder':'Status','class':''}}) }}
+                            </div>
+                        </div>
+                        {#                        <div class="control-group">
+                                                    {{ form_label(form.id2,'Old ID',{'label_attr':{'class':'control-label'}}) }}
+                                                    <div class="controls">
+                                                        {{ form_widget(form.id2,{'attr':{'placeholder':'Old ID','class':''}}) }}
+                                                    </div>
+                                                </div>
+                        #}
+                        {#<div class="control-group">
+                            {{ form_label(form.title,'Title',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.title,{'attr':{'placeholder':'Title','class':''}}) }}
+                            </div>
+                        </div>#}
+{#                        <div class="control-group">
+                            {{ form_label(form.forename,'First Name',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.forename,{'attr':{'placeholder':'First Name','class':''}}) }}
+                            </div>
+                        </div>#}
+                        <div class="control-group">
+                            {{ form_label(form.dobFrom,'Date of Birth',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dobFrom,{'attr':{'placeholder':'From','class':'datepicker'}}) }}
+                                </div>
+                                <div class="input-append date">
+                                    {{ form_widget(form.dobTo,{'attr':{'placeholder':'To','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.maritialStatus,'Maritial Status',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.maritialStatus,{'attr':{'placeholder':'Maritial Status','class':''}}) }}
+                            </div>
+                        </div>
+{#                        <div class="control-group">
+                            {{ form_label(form.phone,'Telephone',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.phone,{'attr':{'placeholder':'Phone','class':''}}) }}
+                            </div>
+                        </div>#}
+                        {#<div class="control-group">
+                            {{ form_label(form.phone2,'Telephone 2',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.phone2,{'attr':{'placeholder':'Phone 2','class':''}}) }}
+                            </div>
+                        </div>#}
+                        {#<div class="control-group">
+                            {{ form_label(form.email,'email',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.email,{'attr':{'placeholder':'Email','class':''}}) }}
+                            </div>
+                        </div>#}
+                        {#<div class="control-group">
+                            {{ form_label(form.address,'Address',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.address,{'attr':{'placeholder':'Address','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.postcode,'Postcode',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.postcode,{'attr':{'placeholder':'Postcode'}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.dateMovedIn,'Date Moved In',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateMovedIn,{'attr':{'placeholder':'Date Moved In','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.nin,'NIN',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.nin,{'attr':{'placeholder':'NIN'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.utr,'UTR',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.utr,{'attr':{'placeholder':'UTR','class':''}}) }}
+                            </div>
+                        </div>#}
+
+{#                        <div class="control-group">
+                            {{ form_label(form.bankAccountDetails,'Bank Account Details',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.bankAccountDetails,{'attr':{'placeholder':'Bank Account Details','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.eSignaturePassword,'e-Signature Password',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.eSignaturePassword,{'attr':{'placeholder':'e-Signature Password','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group" style="height: 280px;">
+                            {{ form_label(form.notes,'Notes',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.notes,{'attr':{'placeholder':'Type Text...','style':'height:180px;'}}) }}
+                            </div>
+                        </div>#}
+
+                        <div class="control-group">
+                            {{ form_label(form.dateDisengagedFrom,'Client Disengaged',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateDisengagedFrom,{'attr':{'placeholder':'From','class':'datepicker'}}) }}
+                                </div>
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateDisengagedTo,{'attr':{'placeholder':'To','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.disengegementReason,'Disengagement Reason',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.disengegementReason,{'attr':{'placeholder':'Disengagement Reason','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.archivedFrom,'Client Archived',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.archivedFrom,{'attr':{'placeholder':'From','class':'datepicker'}}) }}
+                                </div>
+                                <div class="input-append date">
+                                    {{ form_widget(form.archivedTo,{'attr':{'placeholder':'To','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.connections,'Has Connections',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.connections,{'attr':{'class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.proofOfAddress,'Proof od Address',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.proofOfAddress,{'attr':{'placeholder':'Proof of Address','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="submit" class="btn btn-success" value="Search">
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% if individuals is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>Individual</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th>ID 2</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Postcode</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in individuals %}
+                            <tr>
+                                <td>{{ item.id2 }}</td>
+                                <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
+                                <td>{{ item.address }}</td>
+                                <td>{{ item.postcode }}</td>
+                                <td>
+                                    <a href="{{ path('app_individual_edit',{'id':item.id}) }}"
+                                       class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                    <a href="{{ path('app_individual_show',{'id':item.id}) }}"
+                                       class="btn btn-success btn-xs"><i class="icon icon-file"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

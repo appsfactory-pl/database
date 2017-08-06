@@ -223,7 +223,17 @@ class Individual {
      * @ORM\Column(name="bank_account_details",type="string", length=255, nullable=true)
      */
     private $bankAccountDetails;
+    
+    public $dobFrom;
+    public $dobTo;
+    public $dateDisengagedFrom;
+    public $dateDisengagedTo;
+    public $connections;
+    public $proofOfAddress;
+    public $archivedFrom;
+    public $archivedTo;
 
+    
     /**
      * Get id
      *
@@ -861,4 +871,65 @@ class Individual {
         return $this;
     }
 
+    public function getDobFrom(){
+        if (strstr($this->dobFrom, '/')) {
+            $date = explode('/', $this->dobFrom);
+            $this->dobFrom = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+
+        return $this->dobFrom;
+    }
+    
+    public function getDobTo(){
+        if (strstr($this->dobTo, '/')) {
+            $date = explode('/', $this->dobTo);
+            $this->dobTo = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+
+        return $this->dobTo;
+    }
+    
+    public function getDateDisengagedFrom(){
+        if (strstr($this->dateDisengagedFrom, '/')) {
+            $date = explode('/', $this->dateDisengagedFrom);
+            $this->dateDisengagedFrom = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+
+        return $this->dateDisengagedFrom;
+    }
+    
+    public function getDateDisengagedTo(){
+        if (strstr($this->dateDisengagedTo, '/')) {
+            $date = explode('/', $this->dateDisengagedTo);
+            $this->dateDisengagedTo = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+
+        return $this->dateDisengagedTo;
+    }
+    
+    public function getConnections(){
+        return $this->connections;
+    }
+    
+    public function getProofOfAddress(){
+        return $this->proofOfAddress;
+    }
+    
+    public function getArchivedFrom(){
+        if (strstr($this->archivedFrom, '/')) {
+            $date = explode('/', $this->archivedFrom);
+            $this->archivedFrom = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+
+        return $this->archivedFrom;
+    }
+    
+    public function getArchivedTO(){
+        if (strstr($this->archivedTo, '/')) {
+            $date = explode('/', $this->archivedTo);
+            $this->archivedTo = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+
+        return $this->archivedTo;
+    }
 }

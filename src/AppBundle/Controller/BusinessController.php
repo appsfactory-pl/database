@@ -17,6 +17,7 @@ use AppBundle\Entity\Individual;
 use AppBundle\Entity\PersonTypes;
 use AppBundle\Form\FileType;
 use AppBundle\Form\AddressHistoryType;
+use AppBundle\Form\BusinessSearchType;
 
 class BusinessController extends Controller {
 
@@ -265,6 +266,24 @@ class BusinessController extends Controller {
         }
         return $this->render('AppBundle:Business:import.html.twig', [
         ]);
+    }
+
+    /**
+     * 
+     * @param Request $request
+     * @Route("/business/advanced-search",name="business_advanced_search")
+     */
+    public function advancedSearchAction(Request $request){
+        $form = $this->createForm(BusinessSearchType::class);
+        $form->handleRequest($request);
+        $business = [];
+        $em = $this->getDoctrine()->getManager();
+        
+        return $this->render('AppBundle:Business:advanced-search.html.twig',[
+            'form' => $form->createView(),
+            'business' => $business,
+        ]);
+
     }
 
 }
