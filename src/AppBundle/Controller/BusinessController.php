@@ -277,7 +277,83 @@ class BusinessController extends Controller {
         $form = $this->createForm(BusinessSearchType::class);
         $form->handleRequest($request);
         $business = [];
-        $em = $this->getDoctrine()->getManager();
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository("AppBundle:Business");
+            $query = $repo->createQueryBuilder('b');
+            $data = $form->getData();
+            if (!empty($data->getStatus())) {
+                $query->where('b.status=:status')
+                        ->setParameter('status', $data->getStatus());
+            }
+
+            if (!empty($data->getLegalForm())) {
+                $query->where('b.legalForm=:legalForm')
+                        ->setParameter('legalForm', $data->getLegalForm());
+            }
+
+            if (!empty($data->getDateDisengagedFrom())) {
+                $query->andWhere('b.dateDisengaged> = :dateDisengagedFrom')
+                        ->setParameter('dateDisengagedFrom', $data->getDateDisengagedFrom());
+            }
+            if (!empty($data->getDateDisengagedTo())) {
+                $query->andWhere('b.dateDisengaged <= :dateDisengagedTo')
+                        ->setParameter('dateDisengagedTo', $data->getDateDisengagedTo());
+            }
+            if (!empty($data->getDisengegementReason())) {
+                $query->andWhere('b.disengegementReason = :disengegementReason')
+                        ->setParameter('disengegementReason', $data->getDisengegementReason());
+            }
+
+            if (!empty($data->getArchivedFrom())) {
+                $query->andWhere('b.archived> = :dateArchivedFrom')
+                        ->setParameter('dateArchivedFrom', $data->getArchivedFrom());
+            }
+            if (!empty($data->getArchivedTo())) {
+                $query->andWhere('b.dateDisengaged <= :dateArchivedTo')
+                        ->setParameter('dateArchivedTo', $data->getArchivedTo());
+            }
+            if (!empty($data->getConnections())) {
+                $businessToIndividualRepo = $em->getRepository('AppBundle:BusinessIndividual');
+                $cI = $businessToIndividualRepo->findAll();
+                $ids = [0];
+                if (!empty($cI)) {
+                    foreach ($cI as $item) {
+                        if (!empty($item->getBusiness()) && !in_array($item->getBusiness()->getId(), $ids)) {
+                            $ids[] = $item->getBusiness()->getId();
+                        }
+                    }
+                }
+                $query->andWhere('b.id IN (:ids)')
+                        ->setParameter('ids', $ids);
+            }
+            if (!empty($data->getProofOfAddress())) {
+                $repoFiles = $em->getRepository('AppBundle:File');
+                $repoFileType = $em->getRepository('AppBundle:FileType');
+                $fileType = $repoFileType->findOneByName('Proof Of Address');
+                $qq = $repoFiles->createQueryBuilder('f')
+                        ->where('f.type = :type')
+                        ->setParameter('type', $fileType)
+                        ->getQuery();
+                $files = $qq->getResult();
+                $ids = [0];
+                foreach ($files as $file) {
+                    if (!empty($file->getBusiness())) {
+                        $ids[] = $file->getBusiness()->getId();
+                    }
+                }
+                if ($data->getProofOfAddress() == 'yes') {
+                    $query->andWhere('b.id IN (:ids)')
+                            ->setParameter('ids', $ids);
+                } else {
+                    $query->andWhere('NOT b.id IN (:ids)')
+                            ->setParameter('ids', $ids);
+                }
+            }
+            $q = $query->getQuery();
+            $business = $q->getResult();
+        }
         
         return $this->render('AppBundle:Business:advanced-search.html.twig',[
             'form' => $form->createView(),

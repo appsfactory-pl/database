@@ -4,6 +4,78 @@
 {% block header %}Business Advanced Search{% endblock %}
 
 {% block body %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Advanced Search</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                        <div class="control-group">
+                            {{ form_label(form.status,'Status',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.status,{'attr':{'placeholder':'Status','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.legalForm,'Legal Form',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.legalForm,{'attr':{'placeholder':'Legal Form','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.dateDisengagedFrom,'Client Disengaged',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateDisengagedFrom,{'attr':{'placeholder':'From','class':'datepicker'}}) }}
+                                </div>
+                                <div class="input-append date">
+                                    {{ form_widget(form.dateDisengagedTo,{'attr':{'placeholder':'To','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.disengegementReason,'Disengagement Reason',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.disengegementReason,{'attr':{'placeholder':'Disengagement Reason','class':''}}) }}
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            {{ form_label(form.archivedFrom,'Client Archived',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                <div class="input-append date">
+                                    {{ form_widget(form.archivedFrom,{'attr':{'placeholder':'From','class':'datepicker'}}) }}
+                                </div>
+                                <div class="input-append date">
+                                    {{ form_widget(form.archivedTo,{'attr':{'placeholder':'To','class':'datepicker'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.connections,'Has Connections',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.connections,{'attr':{'class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            {{ form_label(form.proofOfAddress,'Proof od Address',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.proofOfAddress,{'attr':{'placeholder':'Proof of Address','class':''}}) }}
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" class="btn btn-success" value="Search">
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     {% if business is not empty %}
         <div class="widget-box">
             <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
