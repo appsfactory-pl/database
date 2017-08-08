@@ -36,21 +36,11 @@
     <div id="user-nav" class="navbar navbar-inverse">
         <ul class="nav">
             <li  class="dropdown" id="profile-messages" >
-                <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle">
+                <a href="#">
                     <i class="icon icon-user"></i>  <span class="text">
                         {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
-                    </span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="icon-check"></i> My Tasks</a></li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="{{ path('fos_user_security_logout') }}">
-                            <i class="icon-key"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
-                    </li>
-                </ul>
+                    </span>
+                </a>
             </li>
             <li class="">
                 <a title="Logout" href="{{ path('fos_user_security_logout') }}">
@@ -70,6 +60,7 @@
                     <li><a href="{{ path('app_individual_list') }}">List</a></li>
                     <li><a href="{{ path('app_individual_add') }}">Add Person</a></li>
                     <li><a href="{{ path('app_individual_import') }}">Import</a></li>
+                    <li><a href="{{ path('expired-ids') }}">Expired IDs</a></li>
                 </ul>
             </li>
             <li class="submenu">
@@ -81,15 +72,6 @@
                     <li><a href="{{ path('app_business_list') }}">List</a></li>
                     <li><a href="{{ path('app_business_add') }}">Add Company</a></li>
                     <li><a href="{{ path('app_business_import') }}">Import</a></li>  
-                </ul>
-            </li>
-            <li class="submenu">
-                <a href="#">
-                    <i class="icon icon-folder-open"></i> <span>Search</span>
-                </a>
-                <ul>
-                    <li><a href="{{ path('advanced-search') }}">Advanced</a></li>
-                    <li><a href="{{ path('expired-ids') }}">Expired IDs</a></li>
                 </ul>
             </li>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
