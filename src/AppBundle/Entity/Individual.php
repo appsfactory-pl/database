@@ -233,6 +233,8 @@ class Individual {
     public $archivedFrom;
     public $archivedTo;
     public $string;
+    public $expiresTill;
+    public $noId;
 
     
     /**
@@ -930,11 +932,22 @@ class Individual {
             $date = explode('/', $this->archivedTo);
             $this->archivedTo = $date[2] . '-' . $date[1] . '-' . $date[0];
         }
-
         return $this->archivedTo;
     }
 
     public function getString(){
         return $this->string;
+    }
+
+    public function getNoId(){
+        return $this->noId;
+    }
+
+    public function getExpiresTill(){
+        if (strstr($this->expiresTill, '/')) {
+            $date = explode('/', $this->expiresTill);
+            $this->expiresTill = $date[2] . '-' . $date[1] . '-' . $date[0];
+        }
+        return $this->expiresTill;
     }
 }
