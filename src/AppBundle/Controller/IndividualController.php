@@ -22,21 +22,23 @@ use AppBundle\Form\FileType;
 use AppBundle\Entity\File;
 use AppBundle\Form\AddressHistoryType;
 
-class IndividualController extends Controller {
+class IndividualController extends Controller
+{
 
     /**
      * @Route("/individual")
      */
-    public function indexAction() {
-        return $this->render('AppBundle:Individual:index.html.twig', array(
-                        // ...
+    public function indexAction()
+    {
+        return $this->render('AppBundle:Individual:index.html.twig', array(// ...
         ));
     }
 
     /**
      * @Route("/individual/add")
      */
-    public function addAction(Request $request) {
+    public function addAction(Request $request)
+    {
         $form = $this->createForm(IndividualType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,15 +54,16 @@ class IndividualController extends Controller {
             return $this->redirectToRoute('app_individual_list');
         }
         return $this->render('AppBundle:Individual:add.html.twig', array(
-                    // ...
-                    'form' => $form->createView(),
+            // ...
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * @Route("/individual/edit/{id}")
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Individual');
         $individual = $repo->find($id);
@@ -76,27 +79,29 @@ class IndividualController extends Controller {
             return $this->redirectToRoute('app_individual_show', ['id' => $id]);
         }
         return $this->render('AppBundle:Individual:edit.html.twig', array(
-                    'form' => $form->createView(),
-                        // ...
+            'form' => $form->createView(),
+            // ...
         ));
     }
 
     /**
      * @Route("/individual/list")
      */
-    public function listAction(EntityManagerInterface $em) {
+    public function listAction(EntityManagerInterface $em)
+    {
         $repo = $em->getRepository('AppBundle:Individual');
         $individuals = $repo->createQueryBuilder('i')->orderBy('i.id', 'DESC')->getQuery()->getResult();
         return $this->render('AppBundle:Individual:list.html.twig', array(
-                    'individuals' => $individuals,
-                        // ...
+            'individuals' => $individuals,
+            // ...
         ));
     }
 
     /**
      * @Route("/individual/show/{id}")
      */
-    public function showAction(Request $request, $id) {
+    public function showAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Individual');
         $individual = $repo->find($id);
@@ -166,26 +171,27 @@ class IndividualController extends Controller {
         $addressHistory = $addressHistoryRepo->findByIndividual($individual);
 
         return $this->render('AppBundle:Individual:show.html.twig', array(
-                    // ...
-                    'individual' => $individual,
-                    'individual2' => $individual2,
-                    'business' => $business,
-                    'form' => $form->createView(),
-                    'form2' => $form2->createView(),
-                    'fileForm' => $fileForm->createView(),
-                    'files' => $files,
-                    'addressHistoryForm' => $addressHistoryForm->createView(),
-                    'addressHistory' => $addressHistory,
+            // ...
+            'individual' => $individual,
+            'individual2' => $individual2,
+            'business' => $business,
+            'form' => $form->createView(),
+            'form2' => $form2->createView(),
+            'fileForm' => $fileForm->createView(),
+            'files' => $files,
+            'addressHistoryForm' => $addressHistoryForm->createView(),
+            'addressHistory' => $addressHistory,
         ));
     }
 
     /**
-     * 
+     *
      * @Route("/individual/remove-business/{id}")
      * @param Request $request
      * @param type $id
      */
-    public function removeBusiness(Request $request, $id) {
+    public function removeBusiness(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $bi = $em->getRepository('AppBundle:BusinessIndividual')->find($id);
         $individual_id = $bi->getIndividual()->getId();
@@ -197,7 +203,8 @@ class IndividualController extends Controller {
     /**
      * @Route("/individual/import")
      */
-    public function importAction() {
+    public function importAction()
+    {
 
         if (!empty($_FILES['xls-file']['tmp_name'])) {
             $filename = $_SERVER['DOCUMENT_ROOT'] . '/import/' . $_FILES['xls-file']['name'];
@@ -336,29 +343,30 @@ class IndividualController extends Controller {
             }
         }
 
-        return $this->render('AppBundle:Individual:import.html.twig', array(
-                        // ...
+        return $this->render('AppBundle:Individual:import.html.twig', array(// ...
         ));
     }
 
     /**
-     * 
+     *
      * @Route("/individual/types")
      */
-    public function typesAction(EntityManagerInterface $em) {
+    public function typesAction(EntityManagerInterface $em)
+    {
         $repository = $em->getRepository('AppBundle:PersonTypes');
         $types = $repository->findAll();
         return $this->render('AppBundle:Individual:types.html.twig', array(
-                    'types' => $types,
-                        // ...
+            'types' => $types,
+            // ...
         ));
     }
 
     /**
-     * 
+     *
      * @Route("/individual/add-type")
      */
-    public function addTypeAction(Request $request) {
+    public function addTypeAction(Request $request)
+    {
         $form = $this->createForm(PersonTypesType::class);
         $em = $this->getDoctrine()->getManager();
         $form->handleRequest($request);
@@ -370,18 +378,19 @@ class IndividualController extends Controller {
             return $this->redirectToRoute('app_individual_types');
         }
         return $this->render('AppBundle:Individual:add-type.html.twig', array(
-                    'form' => $form->createView(),
-                        // ...
+            'form' => $form->createView(),
+            // ...
         ));
     }
 
     /**
-     * 
+     *
      * @param Request $request
      * @param type $id
      * @Route("/individual/edit-type/{id}")
      */
-    public function editTypeAction(Request $request, $id) {
+    public function editTypeAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:PersonTypes');
         $type = $repository->find($id);
@@ -394,16 +403,17 @@ class IndividualController extends Controller {
             return $this->redirectToRoute('app_individual_types');
         }
         return $this->render('AppBundle:Individual:edit-type.html.twig', array(
-                    'form' => $form->createView(),
-                        // ...
+            'form' => $form->createView(),
+            // ...
         ));
     }
 
     /**
-     * 
+     *
      * @Route("/individual/remove-individual/{id}")
      */
-    public function removeIndividualAction(Request $request, $id) {
+    public function removeIndividualAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $ii = $em->getRepository("AppBundle:IndividualIndividual")->find($id);
         $individual_id = $ii->getIndividual()->getId();
@@ -413,11 +423,12 @@ class IndividualController extends Controller {
     }
 
     /**
-     * 
+     *
      * @param Request $request
      * @Route("/individual/advanced-search",name="individual_advanced_search")
      */
-    public function advancedSearchAction(Request $request) {
+    public function advancedSearchAction(Request $request)
+    {
         $form = $this->createForm(\AppBundle\Form\IndividualSearchType::class);
         $form->handleRequest($request);
         $individuals = [];
@@ -426,44 +437,60 @@ class IndividualController extends Controller {
             $repo = $em->getRepository("AppBundle:Individual");
             $query = $repo->createQueryBuilder('i');
             $data = $form->getData();
+            $string = $data->getString();
+            $query->andWhere('i.forename LIKE :data_like 
+            OR i.id2 = :data_int 
+            OR i.lastname LIKE :data_like 
+            OR i.maidenname LIKE :data_like 
+            OR i.phone LIKE :data_like 
+            OR i.email LIKE :data_like 
+            OR i.address LIKE :data_like 
+            OR i.postcode LIKE :data_like
+            OR i.nin LIKE :data_like
+            OR i.utr LIKE :data_like
+            OR i.bankAccountDetails LIKE :data_like
+            OR i.notes LIKE :data_like
+            OR i.archiveNote LIKE :data_like')
+                ->setParameter('data_like', '%' . $string . '%')
+                ->setParameter('data_int', (int)$string);
 //            var_dump($data);
             if (!empty($data->getStatus())) {
-                $query->where('i.status=:status')
-                        ->setParameter('status', $data->getStatus());
+                $query->andWhere('i.status=:status')
+                    ->setParameter('status', $data->getStatus());
             }
             if (!empty($data->getDobFrom())) {
                 $query->andWhere('i.dob> = :dob_from')
-                        ->setParameter('dob_from', $data->getDobFrom());
+                    ->setParameter('dob_from', $data->getDobFrom());
             }
             if (!empty($data->getDobTo())) {
                 $query->andWhere('i.dob <= :dob_to')
-                        ->setParameter('dob_to', $data->getDobTo());
+                    ->setParameter('dob_to', $data->getDobTo());
             }
 
             if (!empty($data->getDateDisengagedFrom())) {
                 $query->andWhere('i.dateDisengaged> = :dateDisengagedFrom')
-                        ->setParameter('dateDisengagedFrom', $data->getDateDisengagedFrom());
+                    ->setParameter('dateDisengagedFrom', $data->getDateDisengagedFrom());
             }
             if (!empty($data->getDateDisengagedTo())) {
                 $query->andWhere('i.dateDisengaged <= :dateDisengagedTo')
-                        ->setParameter('dateDisengagedTo', $data->getDateDisengagedTo());
+                    ->setParameter('dateDisengagedTo', $data->getDateDisengagedTo());
             }
             if (!empty($data->getDisengegementReason())) {
                 $query->andWhere('i.disengegementReason = :disengegementReason')
-                        ->setParameter('disengegementReason', $data->getDisengegementReason());
+                    ->setParameter('disengegementReason', $data->getDisengegementReason());
             }
             if (!empty($data->getMaritialStatus())) {
                 $query->andWhere('i.maritialStatus = :maritialStatus')
-                        ->setParameter('maritialStatus', $data->getMaritialStatus());
+                    ->setParameter('maritialStatus', $data->getMaritialStatus());
             }
 
             if (!empty($data->getArchivedFrom())) {
                 $query->andWhere('i.archived> = :dateArchivedFrom')
-                        ->setParameter('dateArchivedFrom', $data->getArchivedFrom());
+                    ->setParameter('dateArchivedFrom', $data->getArchivedFrom());
             }
             if (!empty($data->getArchivedTo())) {
                 $query->andWhere('i.dateDisengaged <= :dateArchivedTo')
-                        ->setParameter('dateArchivedTo', $data->getArchivedTo());
+                    ->setParameter('dateArchivedTo', $data->getArchivedTo());
             }
             if (!empty($data->getConnections())) {
                 $businessToIndividualRepo = $em->getRepository('AppBundle:BusinessIndividual');
@@ -486,16 +513,16 @@ class IndividualController extends Controller {
                     }
                 }
                 $query->andWhere('i.id IN (:ids)')
-                        ->setParameter('ids', $ids);
+                    ->setParameter('ids', $ids);
             }
             if (!empty($data->getProofOfAddress())) {
                 $repoFiles = $em->getRepository('AppBundle:File');
                 $repoFileType = $em->getRepository('AppBundle:FileType');
                 $fileType = $repoFileType->findOneByName('Proof Of Address');
                 $qq = $repoFiles->createQueryBuilder('f')
-                        ->where('f.type = :type')
-                        ->setParameter('type', $fileType)
-                        ->getQuery();
+                    ->where('f.type = :type')
+                    ->setParameter('type', $fileType)
+                    ->getQuery();
                 $files = $qq->getResult();
                 $ids = [0];
                 foreach ($files as $file) {
@@ -505,10 +532,10 @@ class IndividualController extends Controller {
                 }
                 if ($data->getProofOfAddress() == 'yes') {
                     $query->andWhere('i.id IN (:ids)')
-                            ->setParameter('ids', $ids);
+                        ->setParameter('ids', $ids);
                 } else {
                     $query->andWhere('NOT i.id IN (:ids)')
-                            ->setParameter('ids', $ids);
+                        ->setParameter('ids', $ids);
                 }
             }
             $q = $query->getQuery();
@@ -516,8 +543,8 @@ class IndividualController extends Controller {
         }
 
         return $this->render('AppBundle:Individual:advanced-search.html.twig', [
-                    'form' => $form->createView(),
-                    'individuals' => $individuals,
+            'form' => $form->createView(),
+            'individuals' => $individuals,
         ]);
     }
 

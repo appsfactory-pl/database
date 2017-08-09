@@ -12,7 +12,13 @@
                         <h5>Advanced Search</h5>
                     </div>
                     <div class="widget-content nopadding">
-                        {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
+                        {{ form_start(form,{'attr':{'class':'form-horizontal','id':'appbundle_business'}}) }}
+                        <div class="control-group">
+                            {{ form_label(form.string,'Search for a phrase…',{'label_attr':{'class':'control-label'}}) }}
+                            <div class="controls">
+                                {{ form_widget(form.string,{'attr':{'placeholder':'','class':''}}) }}
+                            </div>
+                        </div>
                         <div class="control-group">
                             {{ form_label(form.status,'Status',{'label_attr':{'class':'control-label'}}) }}
                             <div class="controls">
@@ -68,6 +74,7 @@
                         </div>
                         <div class="form-actions">
                             <input type="submit" class="btn btn-success" value="Search">
+                            <a class="btn btn-danger" href="{{ path('business_advanced_search') }}">Reset</a>
                         </div>
                         {{ form_end(form) }}
                     </div>

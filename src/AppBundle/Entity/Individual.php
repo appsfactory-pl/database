@@ -232,6 +232,7 @@ class Individual {
     public $proofOfAddress;
     public $archivedFrom;
     public $archivedTo;
+    public $string;
 
     
     /**
@@ -931,5 +932,9 @@ class Individual {
         }
 
         return $this->archivedTo;
+    }
+
+    public function getString(){
+        return $this->string;
     }
 }

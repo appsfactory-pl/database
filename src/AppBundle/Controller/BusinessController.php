@@ -19,33 +19,36 @@ use AppBundle\Form\FileType;
 use AppBundle\Form\AddressHistoryType;
 use AppBundle\Form\BusinessSearchType;
 
-class BusinessController extends Controller {
+class BusinessController extends Controller
+{
 
     /**
      * @Route("/business")
      */
-    public function indexAction() {
-        return $this->render('AppBundle:Business:index.html.twig', array(
-                        // ...
+    public function indexAction()
+    {
+        return $this->render('AppBundle:Business:index.html.twig', array(// ...
         ));
     }
 
     /**
      * @Route("/business/list")
      */
-    public function listAction(EntityManagerInterface $em) {
+    public function listAction(EntityManagerInterface $em)
+    {
         $repository = $em->getRepository('AppBundle:Business');
         $business = $repository->createQueryBuilder('b')->orderBy('b.id', 'DESC')->getQuery()->getResult();
         return $this->render('AppBundle:Business:list.html.twig', array(
-                    // ...
-                    'business' => $business,
+            // ...
+            'business' => $business,
         ));
     }
 
     /**
      * @Route("/business/edit/{id}")
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Business');
         $business = $repo->find($id);
@@ -59,15 +62,16 @@ class BusinessController extends Controller {
         }
 
         return $this->render('AppBundle:Business:edit.html.twig', array(
-                    // ...
-                    'form' => $form->createView(),
+            // ...
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * @Route("/business/add")
      */
-    public function addAction(Request $request) {
+    public function addAction(Request $request)
+    {
         $form = $this->createForm(BusinessType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,15 +82,16 @@ class BusinessController extends Controller {
             return $this->redirectToRoute('app_business_list');
         }
         return $this->render('AppBundle:Business:add.html.twig', array(
-                    'form' => $form->createView(),
-                        // ...
+            'form' => $form->createView(),
+            // ...
         ));
     }
 
     /**
      * @Route("/business/show/{id}")
      */
-    public function showAction(Request $request, $id) {
+    public function showAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Business');
         $business = $repo->find($id);
@@ -104,14 +109,14 @@ class BusinessController extends Controller {
             $em->flush();
             $this->redirectToRoute('app_business_show', ['id' => $id]);
         }
-        
+
         $fileForm = $this->createForm(FileType::class);
         $fileForm->handleRequest($request);
-        if($fileForm->isSubmitted() && $fileForm->isValid()){
+        if ($fileForm->isSubmitted() && $fileForm->isValid()) {
             $uploadedFile = $fileForm['file']->getData();
-            $newFileName = $business->getId().'_business_'.$uploadedFile->getClientOriginalName();
+            $newFileName = $business->getId() . '_business_' . $uploadedFile->getClientOriginalName();
             $path = '/files/';
-            $dir = $_SERVER['DOCUMENT_ROOT'].$path;
+            $dir = $_SERVER['DOCUMENT_ROOT'] . $path;
             $uploadedFile->move($dir, $newFileName);
 //            var_dump($uploadedFile);
             $data = $fileForm->getData();
@@ -125,41 +130,42 @@ class BusinessController extends Controller {
         }
         $filesRepo = $em->getRepository('AppBundle:File');
         $files = $filesRepo->findByBusiness($business);
-        
+
         $addressHistoryForm = $this->createForm(AddressHistoryType::class);
         $addressHistoryForm->handleRequest($request);
         $addressHistoryRepo = $em->getRepository('AppBundle:AddressHistory');
         $addressHistory = $addressHistoryRepo->findByBusiness($business);
 
-        if($addressHistoryForm->isSubmitted() && $addressHistoryForm->isValid()){
+        if ($addressHistoryForm->isSubmitted() && $addressHistoryForm->isValid()) {
             $data = $addressHistoryForm->getData();
             $data->setBusiness($business);
             $em->persist($data);
             $em->flush();
             return $this->redirectToRoute('app_business_show', ['id' => $id]);
         }
-        
+
         $repoIndividual = $em->getRepository('AppBundle:BusinessIndividual');
         $individuals = $repoIndividual->findByBusiness($business);
         return $this->render('AppBundle:Business:show.html.twig', array(
-                    // ...
-                    'business' => $business,
-                    'individuals' => $individuals,
-                    'form' => $form->createView(),
-                    'fileForm' => $fileForm->createView(),
-                    'files' => $files,
-                    'addressHistoryForm' => $addressHistoryForm->createView(),
-                    'addressHistory' => $addressHistory,
+            // ...
+            'business' => $business,
+            'individuals' => $individuals,
+            'form' => $form->createView(),
+            'fileForm' => $fileForm->createView(),
+            'files' => $files,
+            'addressHistoryForm' => $addressHistoryForm->createView(),
+            'addressHistory' => $addressHistory,
         ));
     }
 
     /**
-     * 
+     *
      * @Route("/business/remove-individual/{id}")
      * @param Request $request
      * @param type $id
      */
-    public function removeIndividual(Request $request, $id) {
+    public function removeIndividual(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
         $bi = $em->getRepository('AppBundle:BusinessIndividual')->find($id);
         $business_id = $bi->getBusiness()->getId();
@@ -169,10 +175,11 @@ class BusinessController extends Controller {
     }
 
     /**
-     * 
+     *
      * @Route("/business/import")
      */
-    public function importAction(Request $request) {
+    public function importAction(Request $request)
+    {
 
         if (!empty($_FILES['xls-file']['tmp_name'])) {
             $filename = $_SERVER['DOCUMENT_ROOT'] . '/import/' . $_FILES['xls-file']['name'];
@@ -269,50 +276,70 @@ class BusinessController extends Controller {
     }
 
     /**
-     * 
+     *
      * @param Request $request
      * @Route("/business/advanced-search",name="business_advanced_search")
      */
-    public function advancedSearchAction(Request $request){
+    public function advancedSearchAction(Request $request)
+    {
         $form = $this->createForm(BusinessSearchType::class);
         $form->handleRequest($request);
         $business = [];
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository("AppBundle:Business");
             $query = $repo->createQueryBuilder('b');
             $data = $form->getData();
+            $string = $data->getString();
+
+            $query->andWhere('b.id2 = :data_int 
+            OR b.name LIKE :data_like 
+            OR b.cno LIKE :data_like 
+            OR b.telephone LIKE :data_like 
+            OR b.email LIKE :data_like 
+            OR b.address LIKE :data_like 
+            OR b.postcode LIKE :data_like
+            OR b.vat LIKE :data_like
+            OR b.utr LIKE :data_like
+            OR b.epaye LIKE :data_like
+            OR b.accoff LIKE :data_like
+            OR b.archiveNote LIKE :data_like
+            OR b.notes LIKE :data_like
+            OR b.accountsOffice LIKE :data_like
+            ')
+                ->setParameter('data_like', '%' . $string . '%')
+                ->setParameter('data_int', (int)$string);
             if (!empty($data->getStatus())) {
-                $query->where('b.status=:status')
-                        ->setParameter('status', $data->getStatus());
+                $query->andWhere('b.status=:status')
+                    ->setParameter('status', $data->getStatus());
             }
 
             if (!empty($data->getLegalForm())) {
                 $query->andWhere('b.legalForm=:legalForm')
-                        ->setParameter('legalForm', $data->getLegalForm());
+                    ->setParameter('legalForm', $data->getLegalForm());
             }
 
             if (!empty($data->getDateDisengagedFrom())) {
                 $query->andWhere('b.dateDisengaged> = :dateDisengagedFrom')
-                        ->setParameter('dateDisengagedFrom', $data->getDateDisengagedFrom());
+                    ->setParameter('dateDisengagedFrom', $data->getDateDisengagedFrom());
             }
             if (!empty($data->getDateDisengagedTo())) {
                 $query->andWhere('b.dateDisengaged <= :dateDisengagedTo')
-                        ->setParameter('dateDisengagedTo', $data->getDateDisengagedTo());
+                    ->setParameter('dateDisengagedTo', $data->getDateDisengagedTo());
             }
             if (!empty($data->getDisengegementReason())) {
                 $query->andWhere('b.disengegementReason = :disengegementReason')
-                        ->setParameter('disengegementReason', $data->getDisengegementReason());
+                    ->setParameter('disengegementReason', $data->getDisengegementReason());
             }
 
             if (!empty($data->getArchivedFrom())) {
                 $query->andWhere('b.archived> = :dateArchivedFrom')
-                        ->setParameter('dateArchivedFrom', $data->getArchivedFrom());
+                    ->setParameter('dateArchivedFrom', $data->getArchivedFrom());
             }
             if (!empty($data->getArchivedTo())) {
                 $query->andWhere('b.dateDisengaged <= :dateArchivedTo')
-                        ->setParameter('dateArchivedTo', $data->getArchivedTo());
+                    ->setParameter('dateArchivedTo', $data->getArchivedTo());
             }
             if (!empty($data->getConnections())) {
                 $businessToIndividualRepo = $em->getRepository('AppBundle:BusinessIndividual');
@@ -326,16 +353,16 @@ class BusinessController extends Controller {
                     }
                 }
                 $query->andWhere('b.id IN (:ids)')
-                        ->setParameter('ids', $ids);
+                    ->setParameter('ids', $ids);
             }
             if (!empty($data->getProofOfAddress())) {
                 $repoFiles = $em->getRepository('AppBundle:File');
                 $repoFileType = $em->getRepository('AppBundle:FileType');
                 $fileType = $repoFileType->findOneByName('Proof Of Address');
                 $qq = $repoFiles->createQueryBuilder('f')
-                        ->where('f.type = :type')
-                        ->setParameter('type', $fileType)
-                        ->getQuery();
+                    ->where('f.type = :type')
+                    ->setParameter('type', $fileType)
+                    ->getQuery();
                 $files = $qq->getResult();
                 $ids = [0];
                 foreach ($files as $file) {
@@ -345,17 +372,17 @@ class BusinessController extends Controller {
                 }
                 if ($data->getProofOfAddress() == 'yes') {
                     $query->andWhere('b.id IN (:ids)')
-                            ->setParameter('ids', $ids);
+                        ->setParameter('ids', $ids);
                 } else {
                     $query->andWhere('NOT b.id IN (:ids)')
-                            ->setParameter('ids', $ids);
+                        ->setParameter('ids', $ids);
                 }
             }
             $q = $query->getQuery();
             $business = $q->getResult();
         }
-        
-        return $this->render('AppBundle:Business:advanced-search.html.twig',[
+
+        return $this->render('AppBundle:Business:advanced-search.html.twig', [
             'form' => $form->createView(),
             'business' => $business,
         ]);

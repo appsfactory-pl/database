@@ -18,7 +18,7 @@ class IndividualSearchType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-//                ->add('id2')
+                ->add('string',TextType::class)
                 ->add('status')
 //                ->add('title')
 //                ->add('forename')

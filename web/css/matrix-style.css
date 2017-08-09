@@ -1273,10 +1273,10 @@ form {
 }
 /* Responsive design */
 @media (max-width: 480px) {
-#header h1 {
-	top: 10px; left:5px;
-	margin: 3px auto;
-}
+/*#header h1 {*/
+	/*top: 10px; left:5px;*/
+	/*margin: 3px auto;*/
+/*}*/
 #user-nav {
 	position: relative;
 	left: auto;
@@ -1464,9 +1464,9 @@ form {
 body {
 	background:#49CCED
 }
-#header h1 {
-	top:10px; left:35px;
-}
+/*#header h1 {*/
+	/*top:10px; left:35px;*/
+/*}*/
 #search {
 	top:5px
 }

@@ -237,6 +237,7 @@ class Business {
     public $proofOfAddress;
     public $archivedFrom;
     public $archivedTo;
+    public $string;
 
     
     /**
@@ -834,5 +835,9 @@ class Business {
         }
 
         return $this->archivedTo;
+    }
+
+    public function getString(){
+        return $this->string;
     }
 }
