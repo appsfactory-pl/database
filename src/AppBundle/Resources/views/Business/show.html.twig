@@ -37,7 +37,10 @@
                         </tr>
                         <tr>
                             <td class="">Address</td>
-                            <td class="">{{ business.getAddress }}</td>
+                            <td class="">
+                                {{ business.getAddress }}
+                                <a href="{{ path('business_add_address',{'id':business.getId}) }}" class="btn-xs btn-primary" style="float: right;">Add new</a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="">Postcode</td>

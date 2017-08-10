@@ -69,7 +69,10 @@
                         </tr>
                         <tr>
                             <td class="">Address</td>
-                            <td class="">{{ individual.getAddress }}</td>
+                            <td class="">
+                                {{ individual.getAddress }}
+                                <a href="{{ path('individual_add_address',{'id':individual.getId}) }}" class="btn-xs btn-primary" style="float: right;">Add new</a>
+                            </td>
                         </tr>
                         <tr>
                             <td class="">Postcode</td>
@@ -149,10 +152,10 @@
                                     <td>{{ item.getBusiness.getPostcode }}</td>
                                     <td>{{ item.getType }}</td>
                                     <td>
-                                        <a href="{{ path('app_business_show',{'id':item.getBusiness.getId}) }}" class="btn btn-success btn-xs">
+                                        <a href="{{ path('app_business_show',{'id':item.getBusiness.getId}) }}" class="btn btn-success">
                                             <i class="icon icon-file"></i>
                                         </a>
-                                        <a href="{{ path('app_individual_removebusiness',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                        <a href="{{ path('app_individual_removebusiness',{'id':item.getId}) }}" class="btn btn-danger">
                                             <i class="icon icon-remove"></i>
                                         </a>
 
@@ -212,10 +215,10 @@
                                         <td>{{ item.getIndividual2.getPostcode }}</td>
                                         <td>{{ item.getType }}</td>
                                         <td>
-                                            <a href="{{ path('app_individual_show',{'id':item.getIndividual2.getId}) }}" class="btn btn-success btn-xs">
+                                            <a href="{{ path('app_individual_show',{'id':item.getIndividual2.getId}) }}" class="btn btn-success">
                                                 <i class="icon icon-file"></i>
                                             </a>
-                                            <a href="{{ path('app_individual_removeindividual',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                            <a href="{{ path('app_individual_removeindividual',{'id':item.getId}) }}" class="btn btn-danger">
                                                 <i class="icon icon-remove"></i>
                                             </a>
 
@@ -278,7 +281,7 @@
                                             <a href="{{ file.getPath }}{{ file.getFileName }}" target="_blank" class="btn btn-primary">
                                                 <i class="icon icon-file"></i>
                                             </a>
-                                            <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger btn-xs">
+                                            <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger">
                                                 <i class="icon icon-remove"></i>
                                             </a>
                                         </td>
@@ -348,10 +351,10 @@
                                         <td>{{ item.postcode }}</td>
                                         <td>{{ item.dateMovedIn }}</td>
                                         <td>
-                                            <a href="{{ path('edit-address-history',{'id':item.getId}) }}" class="btn btn-primary btn-xs">
+                                            <a href="{{ path('edit-address-history',{'id':item.getId}) }}" class="btn btn-primary">
                                                 <i class="icon icon-edit"></i>
                                             </a>
-                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger">
                                                 <i class="icon icon-remove"></i>
                                             </a>
                                         </td>

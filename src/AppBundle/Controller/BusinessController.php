@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AddressHistory;
+use AppBundle\Form\BusinessAddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Form\BusinessType;
@@ -389,4 +391,35 @@ class BusinessController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param string $id
+     * @Route("/business/add-address/{id}", name="business_add_address")
+     */
+    public function addAddressAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Business');
+        $business = $repo->find($id);
+        $addressHistory = new AddressHistory();
+        $addressHistory->setAddress($business->getAddress());
+        $addressHistory->setBusiness($business);
+        $addressHistory->setPostcode($business->getPostcode());
+        $addressHistory->setDateMovedIn($business->getDateMovedIn());
+
+        $form = $this->createForm(BusinessAddressType::class, $business);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($addressHistory);
+            $em->flush();
+            $data = $form->getData();
+            $em->persist($data);
+            $em->flush();
+            return $this->redirectToRoute('app_business_show',['id'=>$id]);
+        }
+        return $this->render('@App/Business/add_address.html.twig',[
+            'form' => $form->createView(),
+        ]);
+
+    }
 }

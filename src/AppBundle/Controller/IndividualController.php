@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AddressHistory;
+use AppBundle\Form\IndividualAddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -545,6 +547,36 @@ class IndividualController extends Controller
         return $this->render('AppBundle:Individual:advanced-search.html.twig', [
             'form' => $form->createView(),
             'individuals' => $individuals,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @Route("/individual/add-address/{id}",name="individual_add_address")
+     */
+    public function addAddressAction(Request $request,$id){
+        $em = $this->getDoctrine()->getManager();
+        $individualRepo = $em->getRepository('AppBundle:Individual');
+        $individual = $individualRepo->find($id);
+        $addressHistory = new AddressHistory();
+        $addressHistory->setAddress($individual->getAddress());
+        $addressHistory->setIndividual($individual);
+        $addressHistory->setPostcode($individual->getPostcode());
+        $addressHistory->setDateMovedIn($individual->getDateMovedIn());
+
+        $form = $this->createForm(IndividualAddressType::class,$individual);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($addressHistory);
+            $em->flush();
+            $data = $form->getData();
+            $em->persist($data);
+            $em->flush();
+            return $this->redirectToRoute('app_individual_show',['id'=>$id]);
+        }
+        return $this->render('@App/Individual/add_address.html.twig',[
+            'form'=>$form->createView(),
         ]);
     }
 
