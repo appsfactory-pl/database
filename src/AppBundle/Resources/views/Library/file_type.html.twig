@@ -25,6 +25,7 @@
                                 <td>{{ type.name }}</td>
                                 <td>
                                     <a href="{{ path('app_library_filetypeedit',{'id':type.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                    <a href="{{ path('file_type_delete',{'id':type.id}) }}" class="btn btn-danger"><i class="icon icon-remove"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

@@ -25,6 +25,7 @@
                                 <td>{{ status.name }}</td>
                                 <td>
                                     <a href="{{ path('app_library_statusedit',{'id':status.id}) }}" class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
+                                    <a href="{{ path('status_delete',{'id':status.id}) }}" class="btn btn-danger"><i class="icon icon-remove"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

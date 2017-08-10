@@ -46,6 +46,151 @@ class LibraryController extends Controller {
     }
 
     /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/library/maritial-status-delete/{id}",name="maritial-status-delete")
+     */
+    public function maritialStatusDelete(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $statusRepo = $em->getRepository('AppBundle:MaritialStatus');
+        $status = $statusRepo->find($id);
+        $individualRepo = $em->getRepository('AppBundle:Individual');
+        $individual = $individualRepo->findOneByMaritialStatus($status);
+        if (!empty($individual)) {
+            $this->addFlash('error', 'You can\'t delete this status.');
+            return $this->redirectToRoute('app_library_maritialstatus');
+        } else {
+            $em->remove($status);
+            $em->flush();
+            $this->addFlash('success', 'Status deleted successfully.');
+            return $this->redirectToRoute('app_library_maritialstatus');
+        }
+    }
+
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/library/file-type-delete/{id}",name="file_type_delete")
+     */
+    public function fileTypeDeleteAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+        $typeRepo = $em->getRepository('AppBundle:FileType');
+        $type = $typeRepo->find($id);
+        $fileRepo = $em->getRepository('AppBundle:File');
+        $file = $fileRepo->findOneByType($type);
+        if (!empty($file)) {
+            $this->addFlash('error', 'You can\'t delete this type.');
+            return $this->redirectToRoute('app_library_filetype');
+        } else {
+            $em->remove($type);
+            $em->flush();
+            $this->addFlash('success', 'Type deleted successfully.');
+            return $this->redirectToRoute('app_library_filetype');
+        }
+    }
+    
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/library/status-delete/{id}",name="status_delete")
+     */
+    public function statusDeleteAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $statusRepo = $em->getRepository('AppBundle:Status');
+        $status = $statusRepo->find($id);
+        $individualRepo = $em->getRepository('AppBundle:Individual');
+        $individual = $individualRepo->findOneByStatus($status);
+        $businessRepo = $em->getRepository('AppBundle:Business');
+        $business = $businessRepo->findOneByStatus($status);
+        if (!empty($business) || !empty($individual)){
+            $this->addFlash('error', 'You can\'t delete this status');
+            return $this->redirectToRoute('app_library_status');
+        } else {
+            $em->remove($status);
+            $em->flush();
+            $this->addFlash('success', 'Status successfully deleted.');
+            return $this->redirectToRoute('app_library_status');
+        }
+    }
+    
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/library/legal-form-delete/{id}",name="legal_form_delete")
+     */
+    public function legalFormDeleteAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $formRepo = $em->getRepository('AppBundle:LegalForm');
+        $legalForm = $formRepo->find($id);
+        $businessRepo = $em->getRepository('AppBundle:Business');
+        $business = $businessRepo->findOneByLegalForm($legalForm);
+        if(!empty($business)){
+            $this->addFlash('error', "You can't delete this legal form.");
+            return $this->redirectToRoute('app_library_legalform');
+        } else {
+            $em->remove($legalForm);
+            $em->flush();
+            $this->addFlash('success', 'Legal form successfully deleted.');
+            return $this->redirectToRoute('app_library_legalform');
+        }
+    }
+    
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/library/disengegement-reason-delete/{id}", name="disengegement_reason_delete")
+     */
+    public function disengegementReasonDeleteAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $reasonRepo = $em->getRepository('AppBundle:DisengegementReason');
+        $reason = $reasonRepo->find($id);
+        $businessRepo = $em->getRepository('AppBundle:Business');
+        $business = $businessRepo->findOneByDisengegementReason($reason);
+        $individualRepo = $em->getRepository('AppBundle:Individual');
+        $individual = $individualRepo->findOneByDisengegementReason($reason);
+        if(!empty($business) || !empty($individual)){
+            $this->addFlash('error', "You can't delete this reason.");
+            return $this->redirectToRoute('app_library_disengegementreason');
+        } else {
+            $em->remove($reason);
+            $em->flush();
+            $this->addFlash('success', 'Reason form successfully deleted.');
+            return $this->redirectToRoute('app_library_disengegementreason');
+        }
+        
+    }
+    
+    /**
+     * 
+     * @param Request $request
+     * @param type $id
+     * @Route("/library/connection-type-delete/{id}",name="connection_type_delete")
+     */
+    public function connectionTypeDeleteAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $typeRepo = $em->getRepository('AppBundle:PersonTypes');
+        $type = $typeRepo->find($id);
+        $iiRepo = $em->getRepository('AppBundle:IndividualIndividual');
+        $ii = $iiRepo->findOneByType($type);
+        $biRepo = $em->getRepository('AppBundle:BusinessIndividual');
+        $bi = $biRepo->findOneByType($type);
+        if(!empty($ii) || !empty($bi)){
+            $this->addFlash('error', 'You can\'t delete this connection type.');
+            return $this->redirectToRoute('app_individual_types');
+        } else {
+            $em->remove($type);
+            $em->flush();
+            $this->addFlash('success', 'Connection type removed successfully.');
+            return $this->redirectToRoute('app_individual_types');
+        }
+    }
+
+    /**
      * @Route("/library/maritial-status-edit/{id}")
      */
     public function maritialStatusEditAction(Request $request, $id) {
@@ -234,7 +379,6 @@ class LibraryController extends Controller {
         ));
     }
 
-    
     /**
      * @Route("/library/legal-form")
      */
