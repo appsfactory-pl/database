@@ -17,7 +17,7 @@ class BusinessSearchType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
 //                ->add('id2')
-                ->add('string',TextType::class)
+                ->add('string',TextType::class,['attr'=>[],'required'=>FALSE])
                 ->add('status')
                 ->add('legalForm')
 //                ->add('name')
