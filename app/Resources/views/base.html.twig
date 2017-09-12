@@ -56,9 +56,9 @@
                     <i class="icon icon-folder-open"></i> <span>Individual</span>
                 </a>
                 <ul>
+                    <li><a href="{{ path('app_individual_add') }}">Add Person</a></li>
                     <li><a href="{{ path('individual_advanced_search') }}">Advanced Search</a></li>
                     <li><a href="{{ path('app_individual_list') }}">List</a></li>
-                    <li><a href="{{ path('app_individual_add') }}">Add Person</a></li>
                     <li><a href="{{ path('app_individual_import') }}">Import</a></li>
                     <li><a href="{{ path('expired-ids') }}">Expired IDs</a></li>
                 </ul>
@@ -68,9 +68,9 @@
                     <i class="icon icon-folder-open"></i> <span>Business</span>
                 </a>
                 <ul>
+                    <li><a href="{{ path('app_business_add') }}">Add Company</a></li>
                     <li><a href="{{ path('business_advanced_search') }}">Advanced Search</a></li>
                     <li><a href="{{ path('app_business_list') }}">List</a></li>
-                    <li><a href="{{ path('app_business_add') }}">Add Company</a></li>
                     <li><a href="{{ path('app_business_import') }}">Import</a></li>  
                 </ul>
             </li>
@@ -161,6 +161,7 @@
 <script src="js/wysihtml5-0.3.0.js"></script> 
 <script src="js/jquery.peity.min.js"></script> 
 <script src="js/bootstrap-wysihtml5.js"></script> 
+<script src="js/global.js"></script> 
 <script type="text/javascript">
     // This function is called from the pop-up menus to transfer to
     // a different page. Ignore if the value returned is a null string:
@@ -190,6 +191,16 @@
     $('.datepicker').datepicker({
         required: false
     });
+    $('.confirm').click(function () {
+        console.log(1111);
+        var element = $(this);
+        if (confirm('Are you sure you want to delete [ITEM]?')) {
+            document.localtion.href = element.attr('href');
+        } else {
+            return false;
+        }
+    });
+
 </script>
 </body>
 </html>

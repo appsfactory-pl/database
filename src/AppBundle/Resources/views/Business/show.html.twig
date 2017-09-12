@@ -21,7 +21,7 @@
                         </tr>
                         <tr>
                             <td class="">Status</td>
-                            <td class="">{{ business.getStatus.getName }}</td>
+                            <td class="">{% if business.getStatus is not empty %}{{ business.getStatus.getName }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="">Old ID</td>
@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <td class="">Legal Form</td>
-                            <td class="">{{ business.getLegalForm.getName }}</td>
+                            <td class="">{% if business.getLegalForm is not empty %}{{ business.getLegalForm.getName }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="">Business Name</td>
@@ -76,7 +76,7 @@
                         </tr>
                         <tr>
                             <td class="">Company number</td>
-                            <td class="">{{ business.getCno }}</td>
+                            <td class="">{{ "%08d"|format(business.getCno) }}</td>
                         </tr>
                         <tr>
                             <td class="">UTR</td>
@@ -175,7 +175,7 @@
                                         <a href="{{ path('app_individual_show',{'id':individual.getIndividual.getId}) }}" class="btn btn-success btn-xs">
                                             <i class="icon icon-file"></i>
                                         </a>
-                                        <a href="{{ path('app_business_removeindividual',{'id':individual.getId}) }}" class="btn btn-danger btn-xs">
+                                        <a href="{{ path('app_business_removeindividual',{'id':individual.getId}) }}" class="btn btn-danger btn-xs confirm">
                                             <i class="icon icon-remove"></i>
                                         </a>
 
@@ -189,7 +189,7 @@
                 <div class="widget-content nopadding">
                     <h3>Add individual</h3>
                     {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
-                    <div class="control-group">
+                    <div class="control-group" style="display: none;">
                         {{ form_label(form.business,'Business',{'label_attr':{'class':'control-label'}}) }}
                         <div class="controls">
                             {{ form_widget(form.business,{'attr':{'placeholder':'Business','class':''}}) }}
@@ -240,7 +240,7 @@
                                         <a href="{{ file.getPath }}{{ file.getFileName }}" target="_blank" class="btn btn-primary">
                                             <i class="icon icon-file"></i>
                                         </a>
-                                        <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger btn-xs">
+                                        <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger btn-xs confirm">
                                             <i class="icon icon-remove"></i>
                                         </a>
                                     </td>
@@ -312,7 +312,7 @@
                                             <a href="{{ path('edit-address-history',{'id':item.getId}) }}" class="btn btn-primary btn-xs">
                                                 <i class="icon icon-edit"></i>
                                             </a>
-                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs">
+                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs confirm">
                                                 <i class="icon icon-remove"></i>
                                             </a>
                                         </td>
