@@ -21,7 +21,7 @@
                         </tr>
                         <tr>
                             <td class="">Status</td>
-                            <td class="">{{ individual.getStatus.getName }}</td>
+                            <td class="">{% if individual.getStatus is not empty %}{{ individual.getStatus.getName }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="">Old ID</td>
@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <td class="">Maritial Status</td>
-                            <td class="">{{ individual.getMaritialStatus.getName }}</td>
+                            <td class="">{% if individual.getMaritialStatus is not empty %}{{ individual.getMaritialStatus.getName }}{% endif %}</td>
                         </tr>
                         <tr>
                             <td class="">Telephone</td>
