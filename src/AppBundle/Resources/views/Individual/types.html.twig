@@ -25,7 +25,7 @@
                                 <td>{{ type.name }}</td>
                                 <td>
                                     <a href="{{ path('app_individual_edittype',{'id':type.id}) }}" class="btn btn-primary"><i class="icon icon-edit"></i></a>
-                                    <a href="{{ path('connection_type_delete',{'id':type.id}) }}" class="btn btn-danger confirm"><i class="icon icon-remove"></i></a>
+                                    <a href="{{ path('connection_type_delete',{'id':type.id}) }}" class="btn btn-danger confirm" name="library entry"><i class="icon icon-remove"></i></a>
                                 </td>
                             {% endfor %}
                     </tbody>

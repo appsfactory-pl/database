@@ -175,7 +175,7 @@
                                         <a href="{{ path('app_individual_show',{'id':individual.getIndividual.getId}) }}" class="btn btn-success btn-xs">
                                             <i class="icon icon-file"></i>
                                         </a>
-                                        <a href="{{ path('app_business_removeindividual',{'id':individual.getId}) }}" class="btn btn-danger btn-xs confirm">
+                                        <a href="{{ path('app_business_removeindividual',{'id':individual.getId}) }}" class="btn btn-danger btn-xs confirm" name="connection">
                                             <i class="icon icon-remove"></i>
                                         </a>
 
@@ -240,7 +240,7 @@
                                         <a href="{{ file.getPath }}{{ file.getFileName }}" target="_blank" class="btn btn-primary">
                                             <i class="icon icon-file"></i>
                                         </a>
-                                        <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger btn-xs confirm">
+                                        <a href="{{ path('file-delete',{'id':file.getId}) }}" class="btn btn-danger btn-xs confirm" name="file">
                                             <i class="icon icon-remove"></i>
                                         </a>
                                     </td>
@@ -312,7 +312,7 @@
                                             <a href="{{ path('edit-address-history',{'id':item.getId}) }}" class="btn btn-primary btn-xs">
                                                 <i class="icon icon-edit"></i>
                                             </a>
-                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs confirm">
+                                            <a href="{{ path('delete-address-history',{'id':item.getId}) }}" class="btn btn-danger btn-xs confirm" name="address">
                                                 <i class="icon icon-remove"></i>
                                             </a>
                                         </td>

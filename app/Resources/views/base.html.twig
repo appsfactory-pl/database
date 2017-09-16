@@ -192,9 +192,9 @@
         required: false
     });
     $('.confirm').click(function () {
-        console.log(1111);
         var element = $(this);
-        if (confirm('Are you sure you want to delete [ITEM]?')) {
+        var item_name = element.attr('name');
+        if (confirm('Are you sure you want to delete ' + item_name + '?')) {
             document.localtion.href = element.attr('href');
         } else {
             return false;
