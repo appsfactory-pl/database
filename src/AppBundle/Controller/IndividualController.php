@@ -554,6 +554,7 @@ class IndividualController extends Controller
      * @param Request $request
      * @param int $id
      * @Route("/individual/add-address/{id}",name="individual_add_address")
+     * @return string
      */
     public function addAddressAction(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
@@ -580,4 +581,20 @@ class IndividualController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @Route("/individual/remove/{id}", name="individual_remove")
+     * @return object
+     */
+    public function removeAction(Request $request,$id){
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Individual');
+        $individual = $repo->find($id);
+        if (!empty($individual)){
+            $em->remove($individual);
+            $em->flush();
+        }
+        return $this->redirectToRoute('app_individual_list');
+    }
 }

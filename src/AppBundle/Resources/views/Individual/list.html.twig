@@ -13,25 +13,30 @@
                 <table class="table table-bordered data-table">
                     <thead>
                     <tr>
-                        <th>ID 2</th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Postcode</th>
+                        <th>Phone</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in individuals %}
                         <tr>
-                            <td>{{ item.id2 }}</td>
+                            <td>{{ item.id }}</td>
                             <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
                             <td>{{ item.address }}</td>
                             <td>{{ item.postcode }}</td>
+                            <td>{{ item.phone }}<br>{{ item.phone2 }}</td>
                             <td>
                                 <a href="{{ path('app_individual_edit',{'id':item.id}) }}"
                                    class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
                                 <a href="{{ path('app_individual_show',{'id':item.id}) }}"
                                    class="btn btn-success btn-xs"><i class="icon icon-file"></i></a>
+                                <a href="{{ path('individual_remove',{'id': item.id}) }}" class="confirm btn btn-danger btn-xs">
+                                    <i class="icon icon-remove"></i>
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
