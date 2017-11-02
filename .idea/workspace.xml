@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af331645-510a-41fb-837b-2a9bbd70b634" name="Default" comment="expired ids">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+    <list default="true" id="af331645-510a-41fb-837b-2a9bbd70b634" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/remove.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/list.html.twig" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/list.html.twig" />
@@ -17,23 +17,70 @@
   <component name="ComposerSettings" synchronizationState="DONT_SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="IndividualController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IndividualController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="436" column="55" lean-forward="false" selection-start-line="436" selection-start-column="55" selection-end-line="436" selection-end-column="55" />
+            <state relative-caret-position="167">
+              <caret line="638" column="67" lean-forward="true" selection-start-line="638" selection-start-column="67" selection-end-line="638" selection-end-column="67" />
+              <folding>
+                <element signature="e#2245#2267#1#PHP" expanded="true" />
+                <element signature="e#3607#3629#1#PHP" expanded="true" />
+                <element signature="e#6090#6106#1#PHP" expanded="true" />
+                <element signature="e#6213#6243#1#PHP" expanded="true" />
+                <element signature="e#6354#6386#1#PHP" expanded="true" />
+                <element signature="e#6469#6495#1#PHP" expanded="true" />
+                <element signature="e#7375#7405#1#PHP" expanded="true" />
+                <element signature="e#8064#8084#1#PHP" expanded="true" />
+                <element signature="e#8150#8180#1#PHP" expanded="true" />
+                <element signature="e#8237#8259#1#PHP" expanded="true" />
+                <element signature="e#8327#8359#1#PHP" expanded="true" />
+                <element signature="e#8418#8441#1#PHP" expanded="true" />
+                <element signature="e#17048#17071#1#PHP" expanded="true" />
+                <element signature="e#17862#17894#1#PHP" expanded="true" />
+                <element signature="e#18601#18623#1#PHP" expanded="true" />
+                <element signature="e#21491#21521#1#PHP" expanded="true" />
+                <element signature="e#21589#21621#1#PHP" expanded="true" />
+                <element signature="e#22650#22666#1#PHP" expanded="true" />
+                <element signature="e#22720#22740#1#PHP" expanded="true" />
+                <element signature="e#24228#24250#1#PHP" expanded="true" />
+                <element signature="e#25458#25480#1#PHP" expanded="true" />
+                <element signature="e#25614#25644#1#PHP" expanded="true" />
+                <element signature="e#25706#25738#1#PHP" expanded="true" />
+                <element signature="e#26222#26256#0#PHP" expanded="true" />
+                <element signature="e#26743#26765#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="remove.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/remove.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="499">
+              <caret line="60" column="79" lean-forward="false" selection-start-line="60" selection-start-column="79" selection-end-line="60" selection-end-column="79" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/list.html.twig">
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+            <state relative-caret-position="102">
+              <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -54,6 +101,7 @@
       <find>btn-</find>
       <find>btn-x</find>
       <find>actio</find>
+      <find>gran</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,8 +145,9 @@
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/add_address.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/BusinessController.php" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/list.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/remove.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php" />
       </list>
     </option>
   </component>
@@ -155,7 +204,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1440" />
+    <option name="width" value="1396" />
     <option name="height" value="819" />
   </component>
   <component name="ProjectView">
@@ -194,6 +243,19 @@
             <path>
               <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
               <item name="symfony3" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony3" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony3" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -208,6 +270,30 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony3" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony3" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="symfony3" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Individual" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="symfony3" type="b2602c69:ProjectViewProjectNode" />
@@ -344,7 +430,8 @@
       <workItem from="1509388047874" duration="2982000" />
       <workItem from="1509472380195" duration="1016000" />
       <workItem from="1509528757554" duration="1259000" />
-      <workItem from="1509552523426" duration="2849000" />
+      <workItem from="1509552523426" duration="3030000" />
+      <workItem from="1509645197752" duration="5751000" />
     </task>
     <task id="LOCAL-00001" summary="wyszukiwarka">
       <created>1501599647564</created>
@@ -430,11 +517,18 @@
       <option name="project" value="LOCAL" />
       <updated>1502289529124</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="zmiany przed uruchomieniem">
+      <created>1509557799034</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1509557799034</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88860000" />
+    <option name="totallyTimeSpent" value="94792000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -446,21 +540,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="819" extended-state="0" />
+    <frame x="0" y="23" width="1396" height="819" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22174536" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293944" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22451994" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293944" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -484,7 +578,8 @@
     <MESSAGE value="usuwanie plikow" />
     <MESSAGE value="advanced search" />
     <MESSAGE value="expired ids" />
-    <option name="LAST_COMMIT_MESSAGE" value="expired ids" />
+    <MESSAGE value="zmiany przed uruchomieniem" />
+    <option name="LAST_COMMIT_MESSAGE" value="zmiany przed uruchomieniem" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -493,13 +588,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -676,13 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="101" column="79" lean-forward="false" selection-start-line="101" selection-start-column="79" selection-end-line="101" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/Business/advanced-search.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-272">
@@ -694,13 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="1467" column="0" lean-forward="false" selection-start-line="1467" selection-start-column="0" selection-end-line="1467" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -851,19 +925,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/default/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="436" column="55" lean-forward="false" selection-start-line="436" selection-start-column="55" selection-end-line="436" selection-end-column="55" />
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/list.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        <state relative-caret-position="39">
+          <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/views/Individual/remove.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="60" column="79" lean-forward="false" selection-start-line="60" selection-start-column="79" selection-end-line="60" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/IndividualController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="638" column="67" lean-forward="true" selection-start-line="638" selection-start-column="67" selection-end-line="638" selection-end-column="67" />
+          <folding>
+            <element signature="e#2245#2267#1#PHP" expanded="true" />
+            <element signature="e#3607#3629#1#PHP" expanded="true" />
+            <element signature="e#6090#6106#1#PHP" expanded="true" />
+            <element signature="e#6213#6243#1#PHP" expanded="true" />
+            <element signature="e#6354#6386#1#PHP" expanded="true" />
+            <element signature="e#6469#6495#1#PHP" expanded="true" />
+            <element signature="e#7375#7405#1#PHP" expanded="true" />
+            <element signature="e#8064#8084#1#PHP" expanded="true" />
+            <element signature="e#8150#8180#1#PHP" expanded="true" />
+            <element signature="e#8237#8259#1#PHP" expanded="true" />
+            <element signature="e#8327#8359#1#PHP" expanded="true" />
+            <element signature="e#8418#8441#1#PHP" expanded="true" />
+            <element signature="e#17048#17071#1#PHP" expanded="true" />
+            <element signature="e#17862#17894#1#PHP" expanded="true" />
+            <element signature="e#18601#18623#1#PHP" expanded="true" />
+            <element signature="e#21491#21521#1#PHP" expanded="true" />
+            <element signature="e#21589#21621#1#PHP" expanded="true" />
+            <element signature="e#22650#22666#1#PHP" expanded="true" />
+            <element signature="e#22720#22740#1#PHP" expanded="true" />
+            <element signature="e#24228#24250#1#PHP" expanded="true" />
+            <element signature="e#25458#25480#1#PHP" expanded="true" />
+            <element signature="e#25614#25644#1#PHP" expanded="true" />
+            <element signature="e#25706#25738#1#PHP" expanded="true" />
+            <element signature="e#26222#26256#0#PHP" expanded="true" />
+            <element signature="e#26743#26765#1#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

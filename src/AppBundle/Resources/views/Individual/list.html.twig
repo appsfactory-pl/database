@@ -34,9 +34,12 @@
                                    class="btn btn-primary btn-xs"><i class="icon icon-edit"></i></a>
                                 <a href="{{ path('app_individual_show',{'id':item.id}) }}"
                                    class="btn btn-success btn-xs"><i class="icon icon-file"></i></a>
-                                <a href="{{ path('individual_remove',{'id': item.id}) }}" class="confirm btn btn-danger btn-xs">
-                                    <i class="icon icon-remove"></i>
-                                </a>
+                                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                    <a href="{{ path('individual_remove',{'id': item.id}) }}"
+                                       class="confirm btn btn-danger btn-xs">
+                                        <i class="icon icon-remove"></i>
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

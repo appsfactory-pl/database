@@ -1,0 +1,73 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Individual List{% endblock %}
+{% block header %}Individual List{% endblock %}
+
+{% block body %}
+    {% if connectionsI is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Name2</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in connectionsI %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.individual.forename }} {{ item.individual.middlename }} {{ item.individual.lastname }}</td>
+                            <td>{{ item.individual2.forename }} {{ item.individual2.middlename }} {{ item.individual2.lastname }}</td>
+                            <td>
+                                <a href="{{ path('app_individual_removeindividual',{'id': item.id}) }}"
+                                   class="confirm btn btn-danger btn-xs">
+                                    <i class="icon icon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+    {% if connectionsB is not empty %}
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                <h5>Data table</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <table class="table table-bordered data-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in connectionsB %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.business.name }}</td>
+                            <td>
+                                <a href="{{ path('app_individual_removebusiness',{'id': item.id}) }}"
+                                   class="confirm btn btn-danger btn-xs">
+                                    <i class="icon icon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

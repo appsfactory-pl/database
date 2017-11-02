@@ -3,26 +3,26 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AddressHistory;
-use AppBundle\Form\IndividualAddressType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
-use AppBundle\Entity\PersonTypes;
-use AppBundle\Form\PersonTypesType;
-use AppBundle\Form\IndividualType;
-use AppBundle\Entity\BusinessIndividual;
-use AppBundle\Form\BusinessIndividualType;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\CsvEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use AppBundle\Entity\Business;
+use AppBundle\Entity\BusinessIndividual;
+use AppBundle\Entity\File;
 use AppBundle\Entity\Individual;
 use AppBundle\Entity\IndividualIndividual;
-use AppBundle\Form\IndividualIndividualType;
-use AppBundle\Form\FileType;
-use AppBundle\Entity\File;
+use AppBundle\Entity\PersonTypes;
 use AppBundle\Form\AddressHistoryType;
+use AppBundle\Form\BusinessIndividualType;
+use AppBundle\Form\FileType;
+use AppBundle\Form\IndividualAddressType;
+use AppBundle\Form\IndividualIndividualType;
+use AppBundle\Form\IndividualType;
+use AppBundle\Form\PersonTypesType;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class IndividualController extends Controller
 {
@@ -592,9 +592,77 @@ class IndividualController extends Controller
         $repo = $em->getRepository('AppBundle:Individual');
         $individual = $repo->find($id);
         if (!empty($individual)){
+            $repoBusinessIndividual = $em->getRepository('AppBundle:BusinessIndividual');
+            $repoIndividualIndividual = $em->getRepository('AppBundle:IndividualIndividual');
+            $connectionsB = $repoBusinessIndividual->findByIndividual($individual);
+            $connectionsI = $repoIndividualIndividual->createQueryBuilder('ii')
+                ->where('ii.individual = :i')
+                ->orWhere('ii.individual2 = :i')
+                ->setParameter('i',$individual)
+                ->getQuery()
+                ->getResult()
+            ;
+            if(!empty($connectionsB) || !empty($connectionsI)){
+                return $this->render('@App/Individual/remove.html.twig',[
+                    'connectionsB' => $connectionsB,
+                    'connectionsI' => $connectionsI,
+                ]);
+            }
             $em->remove($individual);
             $em->flush();
         }
         return $this->redirectToRoute('app_individual_list');
+    }
+
+    /**
+     * @Route("/individual/add-zeros", name="individual_add_zeros")
+     */
+    public function addZeros(){
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Individual');
+        $individuals = $repo->createQueryBuilder('i')
+            ->where('i.phone NOT LIKE :p')
+            ->andWhere('i.phone != :p2')
+            ->andWhere('i.phone != :p3')
+            ->setParameter('p','0%')
+            ->setParameter('p2','-')
+            ->setParameter('p3','')
+            ->setMaxResults(500)
+            ->getQuery()
+            ->getResult()
+            ;
+        $i = 0;
+        if(!empty($individuals)){
+            foreach ($individuals as $individual){
+                $i++;
+                $phone = $this->addZero($individual->getPhone());
+                $phone2 = $this->addZero($individual->getPhone2());
+                $individual->setPhone($phone);
+                $individual->setPhone2($phone2);
+                $em->persist($individual);
+                $em->flush();
+            }
+        }
+        echo $i;
+        die;
+    }
+
+    /**
+     * @param $phone
+     * @return mixed|string
+     */
+    private function addZero($phone){
+        $phone = preg_replace('/\D/','',$phone);
+        $fl = substr($phone,0,1);
+        if($fl != 0){
+            if(strlen($phone)>10){
+                $phone = '00'.$phone;
+            } elseif(strlen($phone)<7){
+                $phone = '';
+            } else {
+                $phone = '0'.$phone;
+            }
+        }
+        return $phone;
     }
 }
