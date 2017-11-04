@@ -82,6 +82,7 @@ class IndividualController extends Controller
         }
         return $this->render('AppBundle:Individual:edit.html.twig', array(
             'form' => $form->createView(),
+            'individual' => $individual,
             // ...
         ));
     }

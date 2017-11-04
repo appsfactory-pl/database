@@ -11,6 +11,12 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
                         <h5>Edit Person</h5>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a href="{{ path('individual_remove',{'id': individual.id}) }}"
+                               class="confirm btn btn-danger btn-xs" style="float: right;">
+                                <i class="icon icon-remove"></i>
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="widget-content nopadding">
                         {{ form_start(form,{'attr':{'class':'form-horizontal'}}) }}
