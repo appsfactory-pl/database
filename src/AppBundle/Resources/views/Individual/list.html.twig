@@ -36,7 +36,7 @@
                                    class="btn btn-success btn-xs"><i class="icon icon-file"></i></a>
                                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                                     <a href="{{ path('individual_remove',{'id': item.id}) }}"
-                                       class="confirm btn btn-danger btn-xs">
+                                       class="confirm btn btn-danger btn-xs" name="this client">
                                         <i class="icon icon-remove"></i>
                                     </a>
                                 {% endif %}

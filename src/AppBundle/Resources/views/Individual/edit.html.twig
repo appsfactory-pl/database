@@ -13,7 +13,7 @@
                         <h5>Edit Person</h5>
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
                             <a href="{{ path('individual_remove',{'id': individual.id}) }}"
-                               class="confirm btn btn-danger btn-xs" style="float: right;">
+                               class="confirm btn btn-danger btn-xs" style="float: right;" name="this client">
                                 <i class="icon icon-remove"></i>
                             </a>
                         {% endif %}
