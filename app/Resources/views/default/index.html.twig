@@ -48,8 +48,14 @@
                     <tr>
                         <td>{{ item.id }}</td>
                         <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.phone }}<br />{{ item.phone2 }}</td>
+                        <td>
+                            {% if item.email is not empty %}
+                                <a href="mailto:{{ item.email }}">
+                                    {{ item.email }}
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td>{{ item.phone }}<br/>{{ item.phone2 }}</td>
                         <td>{{ item.address }}</td>
                         <td>{{ item.postcode }}</td>
                         <td>
@@ -88,7 +94,13 @@
                         <tr>
                             <td>{{ item.id }}</td>
                             <td>{{ item.name }}</td>
-                            <td>{{ item.email }}</td>
+                            <td>
+                                {% if item.email is not empty %}
+                                    <a href="mailto:{{ item.email }}">
+                                        {{ item.email }}
+                                    </a>
+                                {% endif %}
+                            </td>
                             <td>{{ item.address }}</td>
                             <td>{{ item.postcode }}</td>
                             <td>
