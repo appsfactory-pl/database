@@ -45,27 +45,29 @@
                     </thead>
                     <tbody>
                     {% for item in individuals %}
-                    <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
-                        <td>
-                            {% if item.email is not empty %}
-                                <a href="mailto:{{ item.email }}">
-                                    {{ item.email }}
-                                </a>
-                            {% endif %}
-                        </td>
-                        <td>{{ item.phone }}<br/>{{ item.phone2 }}</td>
-                        <td>{{ item.address }}</td>
-                        <td>{{ item.postcode }}</td>
-                        <td>
-                            <a href="{{ path('app_individual_edit',{'id':item.id}) }}" class="btn btn-primary btn-xs"><i
-                                        class="icon icon-edit"></i></a>
-                            <a href="{{ path('app_individual_show',{'id':item.id}) }}" class="btn btn-success btn-xs"><i
-                                        class="icon icon-file"></i></a>
-                        </td>
-                        {% endfor %}
-                    </tr>
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.forename }} {{ item.middlename }} {{ item.lastname }}</td>
+                            <td>
+                                {% if item.email is not empty %}
+                                    <a href="mailto:{{ item.email }}">
+                                        {{ item.email }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td>{{ item.phone }}<br/>{{ item.phone2 }}</td>
+                            <td>{{ item.address }}</td>
+                            <td>{{ item.postcode }}</td>
+                            <td>
+                                <a href="{{ path('app_individual_edit',{'id':item.id}) }}"
+                                   class="btn btn-primary btn-xs"><i
+                                            class="icon icon-edit"></i></a>
+                                <a href="{{ path('app_individual_show',{'id':item.id}) }}"
+                                   class="btn btn-success btn-xs"><i
+                                            class="icon icon-file"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

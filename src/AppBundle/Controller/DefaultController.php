@@ -78,6 +78,23 @@ class DefaultController extends Controller {
                     $query->setParameter('ids', $ids);
                 }
                 $businesses = $query->getQuery()->getResult();
+                if(!empty($businesses) && empty($individuals)){
+                    $businesIndividualRepo = $em->getRepository('AppBundle:BusinessIndividual');
+                    $bi = $businesIndividualRepo->findByBusiness($businesses);
+                    $ids = [];
+                    if(!empty($bi)) {
+                        foreach ($bi as $i){
+                            $ids[] = $i->getIndividual()->getId();
+                        }
+                    }
+                    if(!empty($ids)){
+                        $query = $individualRepo->createQueryBuilder('i')
+                            ->where('i.id LIKE :ids')
+                            ->setParameter('ids',$ids);
+                        $individuals = $query->getQuery()->getResult();
+
+                    }
+                }
             }
         }
         // replace this example code with whatever you need

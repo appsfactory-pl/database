@@ -192,19 +192,19 @@
                     <div class="control-group" style="display: none;">
                         {{ form_label(form.business,'Business',{'label_attr':{'class':'control-label'}}) }}
                         <div class="controls">
-                            {{ form_widget(form.business,{'attr':{'placeholder':'Business','class':''}}) }}
+                            {{ form_widget(form.business,{'attr':{'placeholder':'Business','class':'','required':true}}) }}
                         </div>
                     </div>
                     <div class="control-group">
                         {{ form_label(form.individual,'Individual',{'label_attr':{'class':'control-label'}}) }}
                         <div class="controls">
-                            {{ form_widget(form.individual,{'attr':{'placeholder':'Individual','class':''}}) }}
+                            {{ form_widget(form.individual,{'attr':{'placeholder':'Individual','class':'','required':true}}) }}
                         </div>
                     </div>
                     <div class="control-group">
                         {{ form_label(form.type,'Type',{'label_attr':{'class':'control-label'}}) }}
                         <div class="controls">
-                            {{ form_widget(form.type,{'attr':{'placeholder':'Type','class':''}}) }}
+                            {{ form_widget(form.type,{'attr':{'placeholder':'Type','class':'','required':true}}) }}
                         </div>
                     </div>
 
